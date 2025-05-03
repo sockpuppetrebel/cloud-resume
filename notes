@@ -1,0 +1,17 @@
+az storage blob service-properties update \
+  --account-name jtsresumehosting \
+  --static-website \
+  --index-document index.html \
+  --404-document 404.html
+
+az storage blob upload-batch `
+  --account-name jtsresumehosting `
+  --account-key +HE+tydE+W+szh5kAu+PwKt/4RGPAL9sMt8qJeKx29Mc9OpXCDqitbZTxZhCNZ7pb5g1PJw6Pp2/+AStrs+jDA==`
+  --destination '$web' `
+  --source .
+
+az storage blob upload-batch --account-name jtsresumehosting --account-key '+HE+tydE+W+szh5kAu+PwKt/4RGPAL9sMt8qJeKx29Mc9OpXCDqitbZTxZhCNZ7pb5g1PJw6Pp2/+AStrs+jDA==' --destination '$web' --source .
+
+
+az storage blob upload-batch --account-name jtsresumehosting --account-key '+HE+tydE+W+szh5kAu+PwKt/4RGPAL9sMt8qJeKx29Mc9OpXCDqitbZTxZhCNZ7pb5g1PJw6Pp2/+AStrs+jDA==' --destination '$web' --source . --overwrite
+overwrite command for updates^
