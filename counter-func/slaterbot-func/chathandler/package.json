@@ -1,16 +1,20 @@
 {
-  "name": "",
+  "name": "slaterbot-func",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/functions/*.js",
+  "main": "index.js",
   "scripts": {
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0"
+    "@azure/functions": "^4.0.0",
+    "openai": "^4.97.0"
   },
   "devDependencies": {
     "azure-functions-core-tools": "^4.x"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
