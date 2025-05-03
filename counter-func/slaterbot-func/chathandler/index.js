@@ -1,29 +1,49 @@
+// ChatHandler/index.js
 module.exports = async function (context, req) {
-  // If this is a preflight request, just return the headers
+  const allowedOrigin = 'https://jtsresumehosting.z5.web.core.windows.net';
+  const corsHeaders = {
+    'Access-Control-Allow-Origin' : allowedOrigin,
+    'Access-Control-Allow-Methods': 'POST,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type'
+  };
+
+  // 1) Handle preflight
   if (req.method === 'OPTIONS') {
     context.res = {
       status: 204,
-      headers: {
-        'Access-Control-Allow-Origin' : 'https://jtsresumehosting.z5.web.core.windows.net',
-        'Access-Control-Allow-Methods': 'POST,OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type'
-      }
+      headers: corsHeaders
     };
     return;
   }
 
-  // Your normal handler
-  const userMsg = req.body?.message || '';
-  // (…call OpenAI, etc…)
-  const aiReply = await callOpenAI(userMsg);
+  // 2) Only accept POST here
+  if (req.method !== 'POST') {
+    context.res = {
+      status: 405,
+      headers: corsHeaders,
+      body: 'Method Not Allowed'
+    };
+    return;
+  }
 
-  context.res = {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': 'https://jtsresumehosting.z5.web.core.windows.net',
-      'Access-Control-Allow-Methods': 'POST,OPTIONS'
-    },
-    body: { reply: aiReply }
-  };
+  // 3) Your normal GPT call logic
+  let userMsg = '';
+  try {
+    userMsg = req.body?.message || '';
+    // … call OpenAI, e.g. 
+    const aiReply = await callOpenAI(userMsg); 
+    context.res = {
+      status: 200,
+      headers: corsHeaders,
+      body: { reply: aiReply }
+    };
+  } catch (e) {
+    context.log.error(e);
+    context.res = {
+      status: 500,
+      headers: corsHeaders,
+      body: { error: e.message }
+    };
+  }
 };
 
