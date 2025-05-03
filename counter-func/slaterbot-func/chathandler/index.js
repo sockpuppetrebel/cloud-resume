@@ -1,85 +1,58 @@
-// ChatHandler/index.js
+const { Configuration, OpenAIApi } = require("openai");
+
+// CORS settings
+const allowedOrigin = "https://jtsresumehosting.z5.web.core.windows.net";
+const corsHeaders = {
+  "Access-Control-Allow-Origin": allowedOrigin,
+  "Access-Control-Allow-Methods": "POST,OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type"
+};
+
+// Wrap OpenAI call
+async function callOpenAI(message) {
+  const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
+  const openai = new OpenAIApi(configuration);
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: message }]
+  });
+  return response.data.choices[0].message.content;
+}
+
+// Azure Function handler
 module.exports = async function (context, req) {
-  const allowedOrigin = 'https://jtsresumehosting.z5.web.core.windows.net';
-  const corsHeaders = {
-    'Access-Control-Allow-Origin' : allowedOrigin,
-    'Access-Control-Allow-Methods': 'POST,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
-  };
+  context.log('⚡ Received request:', req.method, req.url);
 
-  // 1) Handle preflight
+  // Handle preflight
   if (req.method === 'OPTIONS') {
-    context.res = {
-      status: 204,
-      headers: corsHeaders
-    };
+    context.res = { status: 204, headers: corsHeaders };
     return;
   }
 
-  // 2) Only accept POST here
+  // Only POST allowed
   if (req.method !== 'POST') {
-    context.res = {
-      status: 405,
-      headers: corsHeaders,
-      body: 'Method Not Allowed'
-    };
+    context.res = { status: 405, headers: corsHeaders, body: 'Method Not Allowed' };
     return;
   }
 
-  // 3) Your normal GPT call logic
-  let userMsg = '';
   try {
-    userMsg = req.body?.message || '';
-    // … call OpenAI, e.g. 
-    const aiReply = await callOpenAI(userMsg); 
+    const userMessage = req.body?.message || '';
+    context.log('💬 User message:', userMessage);
+
+    const aiReply = await callOpenAI(userMessage);
+    context.log('🤖 AI reply:', aiReply);
+
     context.res = {
       status: 200,
       headers: corsHeaders,
       body: { reply: aiReply }
     };
-  } catch (e) {
-    context.log.error(e);
+  } catch (err) {
+    context.log.error('🚨 Error in function:', err);
     context.res = {
       status: 500,
       headers: corsHeaders,
-      body: { error: e.message }
-module.exports = async function (context, req) {
-  const allowedOrigin = 'https://jtsresumehosting.z5.web.core.windows.net';
-  const corsHeaders = {
-    'Access-Control-Allow-Origin' : allowedOrigin,
-    'Access-Control-Allow-Methods': 'POST,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
-  };
-
-  context.log('⚡️ Received HTTP trigger:', req.method, 'body=', req.body);
-
-  if (req.method === 'OPTIONS') {
-    context.log('↔️  Preflight (OPTIONS) request');
-    context.res = { status:204, headers: corsHeaders };
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    context.log('❌  Rejecting non-POST:', req.method);
-    context.res = { status:405, headers: corsHeaders, body: 'Method Not Allowed' };
-    return;
-  }
-
-  try {
-    const userMsg = req.body?.message || '';
-    context.log('💬  User message:', userMsg);
-
-    // callOpenAI should itself log as well
-    const aiReply = await callOpenAI(userMsg);
-    context.log('🤖  AI reply:', aiReply);
-
-    context.res = { status:200, headers: corsHeaders, body: { reply: aiReply } };
-  } catch (e) {
-    context.log.error('🚨  Handler error:', e);
-    context.res = { status:500, headers: corsHeaders, body:{ error:e.message } };
-  }
-};
-
+      body: { error: err.message }
     };
   }
 };
