@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "OPENAI_API_KEY": "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"
+  }
+}
+
