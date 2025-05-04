@@ -13,7 +13,9 @@ window.addEventListener('DOMContentLoaded', () => {
     replyPre.innerText = 'Loading…';
 
     try {
-      const url = 'https://slaterbot.azurewebsites.net/api/ChatHandler?code=GQFelT9d27Wt-p6cn8oqSrCxYMg6_A6Q480v-BcRGfWWAzFuOTEigw==';
+      const url = 'const url =
+  'https://slaterbot.azurewebsites.net/api/chathandler?code=GQFelT9d27Wt-p6cn8oqSrCxYMg6_A6Q480v-BcRGfWWAzFuOTEigw==';
+';
       const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
