@@ -1,47 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<header class="site-header">
-  <!-- LEFT: your photo -->
-  <div class="header-photo">
-    <img src="selfie.jpg" alt="Jason Slater" loading="lazy">
-  </div>
+<head>
+  <meta charset="UTF-8">
+  <title>Jason Slater</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
 
-  <!-- MIDDLE: your text -->
-  <div class="header-text">
-    <h1>Jason Slater</h1>
-    <p>AWS Solutions Architect Associate<br>System Administrator</p>
-    <p><a href="mailto:jasslater11@gmail.com">jasslater11@gmail.com</a></p>
-  </div>
-
-  <!-- RIGHT: PNW landscape -->
-  <div class="header-image">
-    <img src="pdxthings.jpg" alt="PNW landscape" loading="lazy">
-  </div>
-</header><body>
+  <!-- Header -->
   <header class="site-header">
+    <!-- LEFT: your selfie -->
+    <div class="header-photo">
+      <img src="selfie.jpg" alt="Jason Slater" loading="lazy">
+    </div>
+
+    <!-- CENTER: your info -->
     <div class="header-text">
       <h1>Jason Slater</h1>
       <p>AWS Solutions Architect Associate<br>System Administrator</p>
       <p><a href="mailto:jasslater11@gmail.com">jasslater11@gmail.com</a></p>
     </div>
+
+    <!-- RIGHT: PNW photo -->
     <div class="header-image">
-	<img src="pdxthings.jpg" alt="PNW landscape">
+      <img src="pdxthings.jpg" alt="PNW landscape" loading="lazy">
     </div>
   </header>
 
+  <!-- Main content -->
   <main class="site-main">
-    <section class="gpt-mini">
-      <div class="header">ChatGPT Mini</div>
-      <div class="history" id="history"></div>
-      <div class="input-area">
-        <input id="mini-prompt" type="text" placeholder="Ask me anything…">
-        <button id="mini-send">➤</button>
-      </div>
-    </section>
+    <p>Welcome to my interactive cloud resume. Ask me anything using the chatbot in the corner.</p>
   </main>
 
+  <!-- Fixed chatbot widget -->
+  <div class="gpt-mini floating-chat">
+    <div class="header">ChatGPT Mini</div>
+    <div class="history" id="history"></div>
+    <div class="input-area">
+      <input id="mini-prompt" type="text" placeholder="Ask me anything…">
+      <button id="mini-send">➤</button>
+    </div>
+  </div>
+
   <script src="chatbot.js" defer></script>
+
+  <style>
+    /* Floating Chat Widget Fix */
+    .floating-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+  </style>
 </body>
 </html>
-
-<!-- test -->
