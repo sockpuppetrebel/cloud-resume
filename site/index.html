@@ -2,110 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Jason Slater - Cloud Resume</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://slaterbot.azurewebsites.net;">
+  <title>Jason Slater – Cloud Resume</title>
+  <!-- CSP: only allow scripts from self, styles from self, and connect to your staging Function slot -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self';
+                 connect-src 'self' https://slaterbot-staging.azurewebsites.net;">
+  <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
-  <h1>Jason Slater - Cloud Resume</h1>
-  <p>AWS Solutions Architect Associate | System Administrator</p>
-  <p>Email: <a href="mailto:jasslater11@gmail.com">jasslater11@gmail.com</a></p>
+  <header>
+    <h1>Jason Slater – Cloud Resume</h1>
+    <p>AWS Solutions Architect Associate | System Administrator</p>
+    <p>Email: <a href="mailto:jasslater11@gmail.com">jasslater11@gmail.com</a></p>
+  </header>
 
-  <!-- GPT Chat Widget -->
-  <div id="gpt-demo" style="max-width:600px;margin:2rem auto;font-family:sans-serif">
-    <input
-      id="prompt"
-      type="text"
-      placeholder="Ask me anything…"
-      style="width:80%;padding:0.5rem;border:1px solid #ccc;border-radius:4px"
-    />
-    <button
-      id="send"
-      style="padding:0.5rem 1rem;margin-left:0.5rem;border:none;border-radius:4px;cursor:pointer"
-    >
-      Send
-    </button>
-    <pre
-      id="reply"
-      style="background:#f4f4f4;padding:1rem;border-radius:4px;margin-top:1rem;white-space:pre-wrap"
-    ></pre>
-  </div>
-  <style>
-    /* Container */
-    .gpt-mini {
-      display: flex;
-      flex-direction: column;
-      width: 320px;
-      height: 480px;
-      border-radius: 8px;
-      background: #121212;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      overflow: hidden;
-    }
-    /* Header */
-    .gpt-mini .header {
-      background: #0f0;
-      color: #000;
-      padding: 12px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-    /* Chat history area */
-    .gpt-mini .history {
-      flex: 1;
-      padding: 8px;
-      overflow-y: auto;
-      background: #1a1a1a;
-    }
-    .gpt-mini .message {
-      display: inline-block;
-      padding: 8px 12px;
-      margin: 6px 0;
-      max-width: 80%;
-      line-height: 1.4;
-    }
-    .gpt-mini .message.user {
-      background: #0a0;
-      color: #000;
-      border-radius: 12px 12px 0 12px;
-      align-self: flex-end;
-    }
-    .gpt-mini .message.bot {
-      background: #222;
-      color: #0f0;
-      border-radius: 12px 12px 12px 0;
-      align-self: flex-start;
-    }
-    /* Input area */
-    .gpt-mini .input-area {
-      display: flex;
-      border-top: 1px solid #333;
-      background: #121212;
-    }
-    .gpt-mini .input-area input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      background: #1a1a1a;
-      color: #0f0;
-      font-size: 0.95rem;
-    }
-    .gpt-mini .input-area button {
-      padding: 0 16px;
-      border: none;
-      background: #0a0;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .gpt-mini .input-area input:focus,
-    .gpt-mini .input-area button:focus {
-      outline: none;
-    }
-  </style>
-  <!-- External chatbot logic -->
+  <section class="gpt-mini">
+    <div class="header">ChatGPT Mini</div>
+    <div class="history" id="history"></div>
+    <div class="input-area">
+      <input id="mini-prompt" type="text" placeholder="Type a message…">
+      <button id="mini-send">➤</button>
+    </div>
+  </section>
+
+  <script src="chatbot.js" defer></script>
 </body>
 </html>
 
