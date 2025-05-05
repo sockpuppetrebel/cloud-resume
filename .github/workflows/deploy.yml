@@ -1,28 +1,25 @@
-name: Deploy Static Website to Azure
+name: Deploy to Azure Static Web Apps - Staging
 
 on:
   push:
     branches:
-      - main
+      - stage
 
 jobs:
-  upload-to-azure:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Install Azure CLI
-        run: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-      - name: Upload to Azure Blob Storage
-        run: |
-          az storage blob upload-batch \
-            --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
-            --account-key ${{ secrets.AZURE_STORAGE_KEY }} \
-            --destination '$web' \
-            --source . \
-            --overwrite
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_STAGE }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Auto-generated
+          action: "upload"
+          app_location: "site"       # path to your frontend (HTML/CSS/JS)
+          api_location: ""           # leave blank unless you have backend API in this repo
+          output_location: ""        # leave blank if you're not using a framework build (like React)
 
