@@ -1,80 +1,70 @@
-/* full-page black background & centering */
-body {
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-/* widget container */
+/* Mini-GPT widget in soft blue/green theme */
 .gpt-mini {
   display: flex;
   flex-direction: column;
   width: 320px;
   height: 480px;
-  background: #111;
-  border: 2px solid #0f0;
+  background: #eef6f7;
+  border: 2px solid #3b8e8c;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 0 16px #0f0;
-  font-family: Arial, sans-serif;
-  color: #0f0;
+  box-shadow: 0 4px 12px rgba(59,142,140,0.3);
+  margin: 2rem auto;
+  color: #044b61;
+  font-family: 'Segoe UI', sans-serif;
 }
-/* header bar */
 .gpt-mini .header {
-  background: #0f0;
-  color: #000;
-  text-align: center;
+  background: #3b8e8c;
+  color: #eef6f7;
   padding: 8px;
+  text-align: center;
   font-weight: bold;
 }
-/* scrollable chat history */
 .gpt-mini .history {
   flex: 1;
   padding: 8px;
   overflow-y: auto;
-  background: #080808;
+  background: #f0fafb;
 }
-/* message bubbles */
 .gpt-mini .message {
   display: inline-block;
   padding: 6px 10px;
   margin: 6px 0;
   max-width: 80%;
   line-height: 1.4;
+  border-radius: 12px;
 }
 .gpt-mini .message.user {
-  background: #060;
-  color: #fff;
+  background: #3b8e8c;
+  color: #eef6f7;
   align-self: flex-end;
   border-radius: 12px 12px 0 12px;
 }
 .gpt-mini .message.bot {
-  background: #222;
-  color: #0f0;
+  background: #eef6f7;
+  color: #044b61;
   align-self: flex-start;
   border-radius: 12px 12px 12px 0;
 }
-/* input bar */
 .gpt-mini .input-area {
   display: flex;
-  border-top: 2px solid #0f0;
+  border-top: 2px solid #3b8e8c;
+  background: #f0fafb;
 }
 .gpt-mini .input-area input {
   flex: 1;
   padding: 8px;
-  border: 1px solid #0f0;
+  border: 1px solid #3b8e8c;
   border-radius: 4px;
-  background: #000;
-  color: #0f0;
+  background: #fff;
+  color: #044b61;
   outline: none;
 }
 .gpt-mini .input-area button {
   margin-left: 4px;
   padding: 0 12px;
-  background: #0f0;
-  color: #000;
+  background: #3b8e8c;
+  color: #eef6f7;
   border: none;
   border-radius: 4px;
   cursor: pointer;
