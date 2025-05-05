@@ -1,38 +1,38 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const sendBtn = document.getElementById('send');
-  const promptInput = document.getElementById('prompt');
-  const replyPre = document.getElementById('reply');
+  const historyEl = document.getElementById('history');
+  const promptEl  = document.getElementById('mini-prompt');
+  const sendBtn   = document.getElementById('mini-send');
+
+  function appendMessage(who, text) {
+    const div = document.createElement('div');
+    div.className = 'message ' + who;
+    div.innerText = text;
+    historyEl.append(div);
+    historyEl.scrollTop = historyEl.scrollHeight;
+  }
 
   sendBtn.addEventListener('click', async () => {
-    const prompt = promptInput.value.trim();
-    if (!prompt) {
-      replyPre.innerText = 'Please enter a message.';
-      return;
-    }
-    replyPre.innerText = 'Loading...';
-
+    const msg = promptEl.value.trim();
+    if (!msg) return;
+    appendMessage('user', msg);
+    promptEl.value = '';
+    appendMessage('bot', '⏳ thinking...');
     try {
-      const url ='https://slaterbot-staging.azurewebsites.net/api/chathandler?code=GQFelT9d27Wt-p6cn8oqSrCxYMg6_A6Q480v-BcRGfWWAzFuOTEigw==';
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: prompt })
-      });
-
-      if (!response.ok) {
-        replyPre.innerText = `Error: ${response.status} ${response.statusText}`;
-        return;
-      }
-
-      const payload = await response.json();
-      const text =
-        payload.reply ||
-        (payload.choices && payload.choices[0] && payload.choices[0].message && payload.choices[0].message.content) ||
-        JSON.stringify(payload, null, 2);
-      replyPre.innerText = text;
+      const res = await fetch(
+        'https://slaterbot-staging.azurewebsites.net/api/chathandler?code=GQFelT9d27Wt-p6cn8oqSrCxYMg6_A6Q480v-BcRGfWWAzFuOTEigw==',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg })
+        }
+      );
+      const data = await res.json();
+      historyEl.lastChild.remove(); // remove “thinking…”
+      appendMessage('bot', data.reply || 'No response');
     } catch (err) {
+      historyEl.lastChild.remove();
+      appendMessage('bot', '⚠️ Error');
       console.error(err);
-      replyPre.innerText = 'Request failed. Check console for details.';
     }
   });
 });

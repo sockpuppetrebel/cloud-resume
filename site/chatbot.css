@@ -1,0 +1,83 @@
+/* full-page black background & centering */
+body {
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+/* widget container */
+.gpt-mini {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 480px;
+  background: #111;
+  border: 2px solid #0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 16px #0f0;
+  font-family: Arial, sans-serif;
+  color: #0f0;
+}
+/* header bar */
+.gpt-mini .header {
+  background: #0f0;
+  color: #000;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+}
+/* scrollable chat history */
+.gpt-mini .history {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  background: #080808;
+}
+/* message bubbles */
+.gpt-mini .message {
+  display: inline-block;
+  padding: 6px 10px;
+  margin: 6px 0;
+  max-width: 80%;
+  line-height: 1.4;
+}
+.gpt-mini .message.user {
+  background: #060;
+  color: #fff;
+  align-self: flex-end;
+  border-radius: 12px 12px 0 12px;
+}
+.gpt-mini .message.bot {
+  background: #222;
+  color: #0f0;
+  align-self: flex-start;
+  border-radius: 12px 12px 12px 0;
+}
+/* input bar */
+.gpt-mini .input-area {
+  display: flex;
+  border-top: 2px solid #0f0;
+}
+.gpt-mini .input-area input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #0f0;
+  border-radius: 4px;
+  background: #000;
+  color: #0f0;
+  outline: none;
+}
+.gpt-mini .input-area button {
+  margin-left: 4px;
+  padding: 0 12px;
+  background: #0f0;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+}
+
