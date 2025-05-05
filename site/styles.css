@@ -13,11 +13,26 @@ a:hover { text-decoration: underline; }
 /* Header */
 .site-header {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  flex-wrap: wrap;
   padding: 2rem;
   background: #dbeafe;
 }
+
+/* Selfie on the left */
+.header-photo {
+  flex: 0 0 120px;
+  margin-right: 1rem;
+}
+.header-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Header text in center */
 .header-text {
   flex: 1 1 300px;
 }
@@ -29,10 +44,12 @@ a:hover { text-decoration: underline; }
 .header-text p {
   margin: 0.25rem 0;
 }
+
+/* PNW image on the right */
 .header-image {
   flex: 0 0 200px;
+  margin-left: 1rem;
   text-align: center;
-  margin-top: 1rem;
 }
 .header-image img {
   max-width: 100%;
@@ -48,3 +65,4 @@ a:hover { text-decoration: underline; }
 }
 
 /* Link to download or other sections could go here */
+
