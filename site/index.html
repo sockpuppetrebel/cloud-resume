@@ -3,29 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Jason Slater – Cloud Resume</title>
-  <!-- CSP: only allow scripts from self, styles from self, and connect to your staging Function slot -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- CSP: allow scripts/styles from self, calls to staging slot -->
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self';
                  script-src 'self';
                  style-src 'self';
                  connect-src 'self' https://slaterbot-staging.azurewebsites.net;">
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
-  <header>
-    <h1>Jason Slater – Cloud Resume</h1>
-    <p>AWS Solutions Architect Associate | System Administrator</p>
-    <p>Email: <a href="mailto:jasslater11@gmail.com">jasslater11@gmail.com</a></p>
+  <header class="site-header">
+    <div class="header-text">
+      <h1>Jason Slater</h1>
+      <p>AWS Solutions Architect Associate<br>System Administrator</p>
+      <p><a href="mailto:jasslater11@gmail.com">jasslater11@gmail.com</a></p>
+    </div>
+    <div class="header-image">
+	<img src="pdxthings.jpg" alt="PNW landscape">
+    </div>
   </header>
 
-  <section class="gpt-mini">
-    <div class="header">ChatGPT Mini</div>
-    <div class="history" id="history"></div>
-    <div class="input-area">
-      <input id="mini-prompt" type="text" placeholder="Type a message…">
-      <button id="mini-send">➤</button>
-    </div>
-  </section>
+  <main class="site-main">
+    <section class="gpt-mini">
+      <div class="header">ChatGPT Mini</div>
+      <div class="history" id="history"></div>
+      <div class="input-area">
+        <input id="mini-prompt" type="text" placeholder="Ask me anything…">
+        <button id="mini-send">➤</button>
+      </div>
+    </section>
+  </main>
 
   <script src="chatbot.js" defer></script>
 </body>
