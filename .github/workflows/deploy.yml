@@ -1,4 +1,4 @@
-name: Deploy to Azure Static Web Apps - Main
+name: Deploy to Azure Blob Static Website
 
 on:
   push:
@@ -6,20 +6,24 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout source
         uses: actions/checkout@v3
 
-      - name: Deploy to Azure Static Web Apps
-        uses: Azure/static-web-apps-deploy@v1
+      - name: Login to Azure
+        uses: azure/login@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_STAGE }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Auto-generated
-          action: "upload"
-          app_location: "site"       # path to your frontend (HTML/CSS/JS)
-          api_location: ""           # leave blank unless you have backend API in this repo
-          output_location: ""        # leave blank if you're not using a framework build (like React)
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Upload to $web container
+        run: |
+          az storage blob upload-batch \
+            --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} \
+            --source site \
+            --destination '$web' \
+            --auth-mode login \
+            --overwrite
 
