@@ -23,7 +23,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        working-directory: counter-func
+        working-directory: ./counter-func/slaterbot-func
         run: npm install
 
       - name: Upload artifact
