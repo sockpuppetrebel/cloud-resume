@@ -40,8 +40,9 @@ jobs:
 
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
-        with:
+        with:  
           app-name: 'slaterbot'
-          package: '.'
+          slot-name: 'Production'
+          package: './counter-func/slaterbot-func'
 
 
