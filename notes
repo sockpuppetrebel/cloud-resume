@@ -1,17 +1,32 @@
+# Azure CLI Commands for Static Website Deployment
+
+# Enable static website hosting
 az storage blob service-properties update \
   --account-name jtsresumehosting \
   --static-website \
   --index-document index.html \
   --404-document 404.html
 
-az storage blob upload-batch `
-  --account-name jtsresumehosting `
-  --account-key +HE+tydE+W+szh5kAu+PwKt/4RGPAL9sMt8qJeKx29Mc9OpXCDqitbZTxZhCNZ7pb5g1PJw6Pp2/+AStrs+jDA==`
-  --destination '$web' `
+# Upload files to blob storage
+# NOTE: Use environment variable or Azure Key Vault for account key
+# export AZURE_STORAGE_KEY="your-storage-key"
+az storage blob upload-batch \
+  --account-name jtsresumehosting \
+  --account-key $AZURE_STORAGE_KEY \
+  --destination '$web' \
   --source .
 
-az storage blob upload-batch --account-name jtsresumehosting --account-key '+HE+tydE+W+szh5kAu+PwKt/4RGPAL9sMt8qJeKx29Mc9OpXCDqitbZTxZhCNZ7pb5g1PJw6Pp2/+AStrs+jDA==' --destination '$web' --source .
+# Upload with overwrite (for updates)
+az storage blob upload-batch \
+  --account-name jtsresumehosting \
+  --account-key $AZURE_STORAGE_KEY \
+  --destination '$web' \
+  --source . \
+  --overwrite
 
-
-az storage blob upload-batch --account-name jtsresumehosting --account-key '+HE+tydE+W+szh5kAu+PwKt/4RGPAL9sMt8qJeKx29Mc9OpXCDqitbZTxZhCNZ7pb5g1PJw6Pp2/+AStrs+jDA==' --destination '$web' --source . --overwrite
-overwrite command for updates^
+# IMPORTANT: NEVER commit storage keys to git!
+# Use one of these methods instead:
+# 1. Environment variables
+# 2. Azure Key Vault
+# 3. Managed Service Identity
+# 4. SAS tokens with limited scope
