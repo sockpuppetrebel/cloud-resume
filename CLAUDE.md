@@ -56,11 +56,13 @@
 - Never commit sensitive data or credentials
 - Use .gitignore for generated files and secrets
 
-## Git Push Rules
+## Git Push Rules - CRITICAL REMINDERS
 - **NEVER** attempt to push to GitHub directly due to SSH authentication requirements
-- When commits are ready to be pushed, **ALWAYS** prompt the user to push manually in a separate terminal window where their SSH key is available
+- **ALWAYS** remind the user to push after making commits - this is mandatory, not optional
+- After any git commit operation, **IMMEDIATELY** tell the user: "Please push the changes to GitHub in a separate terminal window using: `git push origin <branch-name>`"
 - **NEVER** recommend or suggest HTTPS authentication for Git operations - GitHub has deprecated password authentication for HTTPS
-- Example push prompt: "Please push the changes to GitHub in a separate terminal window using: `git push origin <branch-name>`"
+- When work sessions involve git commits, end the session by reminding about pending pushes
+- If multiple commits are made during a session, remind about pushing at the end of each logical work unit
 
 ## Terminal State Management
 - Always ensure bracket paste mode is disabled at session end
