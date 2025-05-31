@@ -34,6 +34,15 @@ jobs:
             --destination '$web' \
             --auth-mode login \
             --overwrite
+      
+      - name: Purge CDN cache
+        run: |
+          az cdn endpoint purge \
+            --name slatercloud \
+            --profile-name resumecdn \
+            --resource-group Hosting \
+            --content-paths "/*" \
+            --no-wait
 
   # Deploy Azure Function
   deploy-function:
