@@ -1,0 +1,68 @@
+/* Global resets & base */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  color: #102a43;
+  line-height: 1.5;
+}
+a { color: #1f7a8c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2rem;
+  background: #dbeafe;
+}
+
+/* Selfie on the left */
+.header-photo {
+  flex: 0 0 120px;
+  margin-right: 1rem;
+}
+.header-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Header text in center */
+.header-text {
+  flex: 1 1 300px;
+}
+.header-text h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+  color: #1e3a8a;
+}
+.header-text p {
+  margin: 0.25rem 0;
+}
+
+/* PNW image on the right */
+.header-image {
+  flex: 0 0 200px;
+  margin-left: 1rem;
+  text-align: center;
+}
+.header-image img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Main content area */
+.site-main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Link to download or other sections could go here */
+
