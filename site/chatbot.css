@@ -1,74 +1,182 @@
-/* Mini-GPT widget in soft blue/green theme */
+/* Floating Chat Widget - Dark Theme */
 .gpt-mini {
   display: flex;
   flex-direction: column;
-  width: 320px;
-  height: 480px;
-  background: #eef6f7;
-  border: 2px solid #3b8e8c;
-  border-radius: 8px;
+  width: 350px;
+  height: 500px;
+  background: var(--secondary-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(59,142,140,0.3);
-  margin: 2rem auto;
-  color: #044b61;
-  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(10px);
+  background: rgba(19, 27, 46, 0.95);
 }
+
+/* Floating position in corner */
+.floating-chat {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.floating-chat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(74, 158, 255, 0.3);
+}
+
 .gpt-mini .header {
-  background: #3b8e8c;
-  color: #eef6f7;
-  padding: 8px;
+  background: var(--gradient-1);
+  color: white;
+  padding: 12px 16px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
+
+.gpt-mini .header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-blue);
+  box-shadow: 0 0 10px rgba(74, 158, 255, 0.5);
+}
+
 .gpt-mini .history {
   flex: 1;
-  padding: 8px;
+  padding: 12px;
   overflow-y: auto;
-  background: #f0fafb;
+  background: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-blue) transparent;
 }
+
+.gpt-mini .history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gpt-mini .history::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gpt-mini .history::-webkit-scrollbar-thumb {
+  background: var(--accent-blue);
+  border-radius: 3px;
+}
+
 .gpt-mini .message {
   display: block;
-  padding: 6px 10px;
-  margin: 6px 0;
-  max-width: 80%;
+  padding: 8px 12px;
+  margin: 8px 0;
+  max-width: 85%;
   line-height: 1.4;
   border-radius: 12px;
   clear: both;
-}
-.gpt-mini .message.user {
-  background: #3b8e8c;
-  color: #eef6f7;
-  margin-left: auto;
-  border-radius: 12px 12px 0 12px;
-}
-.gpt-mini .message.bot {
-  background: #eef6f7;
-  color: #044b61;
-  margin-right: auto;
-  border-radius: 12px 12px 12px 0;
-}
-.gpt-mini .input-area {
-  display: flex;
-  border-top: 2px solid #3b8e8c;
-  background: #f0fafb;
-}
-.gpt-mini .input-area input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #3b8e8c;
-  border-radius: 4px;
-  background: #fff;
-  color: #044b61;
-  outline: none;
-}
-.gpt-mini .input-area button {
-  margin-left: 4px;
-  padding: 0 12px;
-  background: #3b8e8c;
-  color: #eef6f7;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  outline: none;
+  font-size: 0.85rem;
+  word-wrap: break-word;
 }
 
+.gpt-mini .message.user {
+  background: var(--gradient-1);
+  color: white;
+  margin-left: auto;
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.gpt-mini .message.bot {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  margin-right: auto;
+  border-radius: 18px 18px 18px 4px;
+  border: 1px solid var(--border-color);
+}
+
+.gpt-mini .input-area {
+  display: flex;
+  padding: 12px;
+  background: rgba(10, 15, 28, 0.8);
+  border-top: 1px solid var(--border-color);
+  gap: 8px;
+}
+
+.gpt-mini .input-area input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--primary-dark);
+  color: var(--text-primary);
+  outline: none;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.gpt-mini .input-area input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.2);
+}
+
+.gpt-mini .input-area input::placeholder {
+  color: var(--text-secondary);
+}
+
+.gpt-mini .input-area button {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-1);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.gpt-mini .input-area button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+.gpt-mini .input-area button:active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gpt-mini {
+    width: 300px;
+    height: 450px;
+  }
+  
+  .floating-chat {
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gpt-mini {
+    width: 280px;
+    height: 400px;
+  }
+  
+  .floating-chat {
+    bottom: 10px;
+    right: 10px;
+  }
+}
