@@ -14,7 +14,6 @@ jobs:
   deploy-website:
     runs-on: ubuntu-latest
     name: Deploy Static Website
-    if: contains(github.event.head_commit.modified, 'site/') || contains(github.event.head_commit.added, 'site/')
     
     steps:
       - name: Checkout repository
@@ -40,7 +39,6 @@ jobs:
   deploy-function:
     runs-on: ubuntu-latest
     name: Deploy Azure Function
-    if: contains(github.event.head_commit.modified, 'counter-func/') || contains(github.event.head_commit.added, 'counter-func/')
     
     steps:
       - name: Checkout repository
