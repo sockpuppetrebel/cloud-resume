@@ -98,10 +98,20 @@ body {
 }
 
 .nav-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--accent-blue);
   text-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
+  padding: 8px 16px;
+  border: 1px solid var(--accent-blue);
+  border-radius: 20px;
+  background: rgba(74, 158, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.nav-logo:hover {
+  background: rgba(74, 158, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 .nav-links {
