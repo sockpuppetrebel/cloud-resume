@@ -1,24 +1,47 @@
-name: Deploy Slaterbot Function App
+name: Deploy Cloud Resume
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'counter-func/slaterbot-func/**'
 
 permissions:
   id-token: write
   contents: read
 
 jobs:
-  build-and-deploy:
+  # Deploy static website to Azure Blob Storage
+  deploy-website:
     runs-on: ubuntu-latest
-    name: Build and Deploy Azure Function
-    defaults:
-      run:
-        working-directory: ./counter-func/slaterbot-func
+    name: Deploy Static Website
+    if: contains(github.event.head_commit.modified, 'site/') || contains(github.event.head_commit.added, 'site/')
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_04AC9A0E97AB43D990B2BB04CBA2EBA9 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_426505E5B8D047D49E23CD34400365EA }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_79BA3DE4A9FE47AB99A0E03642265D06 }}
+
+      - name: Upload site folder to $web container
+        run: |
+          az storage blob upload-batch \
+            --account-name jtsresumehosting \
+            --source site \
+            --destination '$web' \
+            --auth-mode login \
+            --overwrite
+
+  # Deploy Azure Function
+  deploy-function:
+    runs-on: ubuntu-latest
+    name: Deploy Azure Function
+    if: contains(github.event.head_commit.modified, 'counter-func/') || contains(github.event.head_commit.added, 'counter-func/')
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,7 +52,8 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        working-directory: ./counter-func/slaterbot-func
+        run: npm ci
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -40,7 +64,7 @@ jobs:
 
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
-        with:  
+        with:
           app-name: 'slaterbot'
           slot-name: 'Production'
           package: './counter-func/slaterbot-func'
