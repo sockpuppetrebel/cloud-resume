@@ -7,7 +7,8 @@ window.addEventListener('DOMContentLoaded', () => {
   function appendMessage(who, text) {
     const div = document.createElement('div');
     div.className = 'message ' + who;
-    div.innerText = text;
+    // Replace \n with <br> for proper line breaks
+    div.innerHTML = text.replace(/\n/g, '<br>');
     historyEl.append(div);
     historyEl.scrollTop = historyEl.scrollHeight;
   }
@@ -35,9 +36,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Display random greeting on load
   function showGreeting() {
+    console.log('Showing greeting...');
     const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
-    appendMessage('bot', `${randomGreeting}\n\n${randomFact}\n\nAsk me anything about Jason's experience!`);
+    const message = `${randomGreeting}\n\n${randomFact}\n\nAsk me anything about Jason's experience!`;
+    console.log('Greeting message:', message);
+    appendMessage('bot', message);
   }
 
   const API_URL =
