@@ -2,38 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Jason Slater</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jason Slater - Cloud Architect</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="chatbot.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Hero Section with Mountain/Forest Background -->
+  <section class="hero">
+    <div class="hero-background">
+      <div class="hero-overlay"></div>
+    </div>
+    
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo">JS</div>
+        <div class="nav-links">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
 
-  <!-- Header -->
-  <header class="site-header">
-    <!-- LEFT: your selfie -->
-    <div class="header-photo">
-      <img src="selfie.jpg" alt="Jason Slater" loading="lazy">
+    <div class="hero-content">
+      <div class="profile-section">
+        <img src="selfie.jpg" alt="Jason Slater" class="profile-img">
+      </div>
+      <h1 class="hero-title">Jason Slater</h1>
+      <p class="hero-subtitle">Cloud Architect • AWS Solutions Expert</p>
+      <p class="hero-description">Building scalable cloud solutions in the Pacific Northwest</p>
+      
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="scrollToSection('experience')">View Experience</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('contact')">Get in Touch</button>
+      </div>
     </div>
 
-    <!-- CENTER: your info -->
-    <div class="header-text">
-      <h1>Jason Slater</h1>
-      <p>AWS Solutions Architect Associate<br>System Administrator</p>
-      <p><a href="mailto:jasslater11@gmail.com">jasslater11@gmail.com</a></p>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
     </div>
+  </section>
 
-    <!-- RIGHT: PNW photo -->
-    <div class="header-image">
-      <img src="pdxthings.jpg" alt="PNW landscape" loading="lazy">
+  <!-- About Section -->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <p>AWS Solutions Architect Associate with a passion for building robust cloud infrastructure. 
+        Based in the Pacific Northwest, I combine technical expertise with a love for nature and innovation.</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>5+</h3>
+            <p>Years Experience</p>
+          </div>
+          <div class="stat-card">
+            <h3>20+</h3>
+            <p>Cloud Projects</p>
+          </div>
+          <div class="stat-card">
+            <h3>99.9%</h3>
+            <p>Uptime Achievement</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <!-- Main content -->
-  <main class="site-main">
-    <p>Welcome to my first stab at an interactive cloud resume. I am working on customizing my AI assistant further :).</p>
-  </main>
+  <!-- Experience Section -->
+  <section id="experience" class="section experience-section">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2020 - Present</div>
+          <div class="timeline-content">
+            <h3>Senior Cloud Architect</h3>
+            <p>Designing and implementing enterprise cloud solutions</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2018 - 2020</div>
+          <div class="timeline-content">
+            <h3>System Administrator</h3>
+            <p>Managing infrastructure and ensuring system reliability</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Fixed chatbot widget -->
+  <!-- Skills Section -->
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">☁️</div>
+          <h3>Cloud Platforms</h3>
+          <p>AWS, Azure, Infrastructure as Code</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🔧</div>
+          <h3>DevOps</h3>
+          <p>CI/CD, Docker, Kubernetes</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🔒</div>
+          <h3>Security</h3>
+          <p>IAM, Network Security, Compliance</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">📊</div>
+          <h3>Monitoring</h3>
+          <p>CloudWatch, Application Insights</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="contact-content">
+        <p>I'm always interested in discussing cloud architecture and new opportunities.</p>
+        <a href="mailto:jasslater11@gmail.com" class="btn btn-primary">Send Email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chatbot -->
   <div class="gpt-mini floating-chat">
     <div class="header">Resume AI by Jason</div>
     <div class="history" id="history"></div>
@@ -44,16 +147,10 @@
   </div>
 
   <script src="chatbot.js" defer></script>
-
-  <style>
-    /* Floating Chat Widget Fix */
-    .floating-chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
+  <script>
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
     }
-  </style>
+  </script>
 </body>
 </html>
-
