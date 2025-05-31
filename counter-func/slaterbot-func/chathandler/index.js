@@ -13,7 +13,7 @@ if (typeof OpenAIpkg.OpenAI === 'function') {
 }
 
 // CORS settings
-const allowedOrigin = "https://jtsresumehosting.z5.web.core.windows.net";
+const allowedOrigin = "https://slater.cloud";
 const corsHeaders = {
   "Access-Control-Allow-Origin": allowedOrigin,
   "Access-Control-Allow-Methods": "POST,OPTIONS",
