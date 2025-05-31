@@ -3,7 +3,7 @@ name: Deploy to Azure Static Web Apps - Staging
 on:
   push:
     branches:
-      - stage
+      - staging
 
 jobs:
   build-and-deploy:
