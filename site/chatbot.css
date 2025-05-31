@@ -27,23 +27,24 @@
   background: #f0fafb;
 }
 .gpt-mini .message {
-  display: inline-block;
+  display: block;
   padding: 6px 10px;
   margin: 6px 0;
   max-width: 80%;
   line-height: 1.4;
   border-radius: 12px;
+  clear: both;
 }
 .gpt-mini .message.user {
   background: #3b8e8c;
   color: #eef6f7;
-  align-self: flex-end;
+  margin-left: auto;
   border-radius: 12px 12px 0 12px;
 }
 .gpt-mini .message.bot {
   background: #eef6f7;
   color: #044b61;
-  align-self: flex-start;
+  margin-right: auto;
   border-radius: 12px 12px 12px 0;
 }
 .gpt-mini .input-area {
