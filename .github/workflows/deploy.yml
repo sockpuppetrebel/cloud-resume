@@ -4,10 +4,18 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Allow manual triggering
 
 permissions:
   id-token: write
   contents: read
+
+env:
+  AZURE_STORAGE_ACCOUNT: jtsresumehosting
+  AZURE_CDN_ENDPOINT: slatercloud
+  AZURE_CDN_PROFILE: resumecdn
+  AZURE_RESOURCE_GROUP: Hosting
+  AZURE_FUNCTION_APP: slaterbot
 
 jobs:
   # Deploy static website to Azure Blob Storage
@@ -26,28 +34,56 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_426505E5B8D047D49E23CD34400365EA }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_79BA3DE4A9FE47AB99A0E03642265D06 }}
 
+      - name: Verify Azure login
+        run: |
+          echo "Verifying Azure login..."
+          az account show
+          echo "Current subscription:"
+          az account show --query '{Name:name, ID:id}' -o table
+
       - name: Upload site folder to $web container
         run: |
+          echo "Uploading site files to Azure Blob Storage..."
           az storage blob upload-batch \
-            --account-name jtsresumehosting \
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
             --source site \
             --destination '$web' \
             --auth-mode login \
-            --overwrite
+            --overwrite \
+            --pattern "*" || {
+              echo "Failed to upload files to storage"
+              exit 1
+            }
+          echo "Upload completed successfully"
       
+      - name: Verify storage upload
+        run: |
+          echo "Verifying files in storage container..."
+          file_count=$(az storage blob list \
+            --account-name ${{ env.AZURE_STORAGE_ACCOUNT }} \
+            --container-name '$web' \
+            --auth-mode login \
+            --query "length(@)" -o tsv)
+          echo "Found $file_count files in storage container"
+          
       - name: Purge CDN cache
         run: |
+          echo "Purging CDN cache..."
           az cdn endpoint purge \
-            --name slatercloud \
-            --profile-name resumecdn \
-            --resource-group Hosting \
+            --name ${{ env.AZURE_CDN_ENDPOINT }} \
+            --profile-name ${{ env.AZURE_CDN_PROFILE }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
             --content-paths "/*" \
-            --no-wait
+            --no-wait || {
+              echo "Warning: CDN purge failed, but continuing deployment"
+            }
+          echo "CDN purge initiated"
 
   # Deploy Azure Function
   deploy-function:
     runs-on: ubuntu-latest
     name: Deploy Azure Function
+    needs: deploy-website  # Ensure website deploys first
     
     steps:
       - name: Checkout repository
@@ -57,10 +93,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './counter-func/slaterbot-func/package-lock.json'
 
       - name: Install dependencies
         working-directory: ./counter-func/slaterbot-func
-        run: npm ci
+        run: |
+          echo "Installing dependencies..."
+          npm ci --production
+          echo "Dependencies installed successfully"
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -69,11 +110,67 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_426505E5B8D047D49E23CD34400365EA }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_79BA3DE4A9FE47AB99A0E03642265D06 }}
 
+      - name: Verify Function App exists
+        run: |
+          echo "Verifying Azure Function App..."
+          az functionapp show \
+            --name ${{ env.AZURE_FUNCTION_APP }} \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --query '{Name:name, State:state, DefaultHostName:defaultHostName}' \
+            -o table || {
+              echo "Error: Function App not found"
+              exit 1
+            }
+
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
-          app-name: 'slaterbot'
+          app-name: ${{ env.AZURE_FUNCTION_APP }}
           slot-name: 'Production'
           package: './counter-func/slaterbot-func'
+
+      - name: Verify deployment
+        run: |
+          echo "Waiting for deployment to complete..."
+          sleep 30
+          echo "Checking function app health..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://${{ env.AZURE_FUNCTION_APP }}.azurewebsites.net/api/health || echo "000")
+          if [ "$response" = "200" ] || [ "$response" = "401" ]; then
+            echo "Function app is responding (HTTP $response)"
+          else
+            echo "Warning: Function app returned HTTP $response"
+          fi
+
+  # Summary job for status notification
+  deployment-summary:
+    runs-on: ubuntu-latest
+    name: Deployment Summary
+    needs: [deploy-website, deploy-function]
+    if: always()
+    
+    steps:
+      - name: Check deployment status
+        run: |
+          echo "Deployment Summary:"
+          echo "=================="
+          if [ "${{ needs.deploy-website.result }}" = "success" ]; then
+            echo "✓ Website deployment: SUCCESS"
+          else
+            echo "✗ Website deployment: FAILED"
+          fi
+          
+          if [ "${{ needs.deploy-function.result }}" = "success" ]; then
+            echo "✓ Function deployment: SUCCESS"
+          else
+            echo "✗ Function deployment: FAILED"
+          fi
+          
+          echo ""
+          echo "Website URL: https://slater.cloud"
+          echo "Function URL: https://${{ env.AZURE_FUNCTION_APP }}.azurewebsites.net"
+          
+          if [ "${{ needs.deploy-website.result }}" != "success" ] || [ "${{ needs.deploy-function.result }}" != "success" ]; then
+            exit 1
+          fi
 
 

@@ -1,0 +1,198 @@
+name: Test Deployment
+
+on:
+  workflow_run:
+    workflows: ["Deploy Cloud Resume"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      test_type:
+        description: 'Type of test to run'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - full
+          - performance
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    name: Smoke Test Production
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Wait for deployment propagation
+        if: github.event_name == 'workflow_run'
+        run: |
+          echo "Waiting 30 seconds for CDN propagation..."
+          sleep 30
+
+      - name: Test website availability
+        run: |
+          echo "Testing website availability..."
+          max_attempts=5
+          for i in $(seq 1 $max_attempts); do
+            status=$(curl -s -o /dev/null -w "%{http_code}" https://slater.cloud)
+            if [ "$status" = "200" ]; then
+              echo "✓ Website is accessible (HTTP $status)"
+              exit 0
+            else
+              echo "Attempt $i/$max_attempts: HTTP $status"
+              if [ $i -lt $max_attempts ]; then
+                sleep 10
+              fi
+            fi
+          done
+          echo "✗ Website is not accessible after $max_attempts attempts"
+          exit 1
+
+      - name: Test critical resources
+        run: |
+          echo "Testing critical resources..."
+          resources=(
+            "https://slater.cloud/index.html"
+            "https://slater.cloud/styles.css"
+            "https://slater.cloud/chatbot.js"
+          )
+          
+          for resource in "${resources[@]}"; do
+            status=$(curl -s -o /dev/null -w "%{http_code}" "$resource")
+            if [ "$status" = "200" ]; then
+              echo "✓ $resource - HTTP $status"
+            else
+              echo "✗ $resource - HTTP $status"
+              exit 1
+            fi
+          done
+
+      - name: Test function endpoint
+        run: |
+          echo "Testing Azure Function..."
+          func_status=$(curl -s -o /dev/null -w "%{http_code}" https://slaterbot.azurewebsites.net/api/chathandler)
+          # Expecting 401 (unauthorized) or 200 depending on configuration
+          if [ "$func_status" = "401" ] || [ "$func_status" = "200" ]; then
+            echo "✓ Function endpoint responding (HTTP $func_status)"
+          else
+            echo "✗ Function endpoint returned HTTP $func_status"
+            exit 1
+          fi
+
+      - name: Performance check
+        if: ${{ github.event.inputs.test_type == 'performance' || github.event.inputs.test_type == 'full' }}
+        run: |
+          echo "Running performance test..."
+          total_time=0
+          test_count=10
+          
+          for i in $(seq 1 $test_count); do
+            time=$(curl -s -o /dev/null -w "%{time_total}" https://slater.cloud)
+            total_time=$(echo "$total_time + $time" | bc)
+            echo "Request $i: ${time}s"
+          done
+          
+          avg_time=$(echo "scale=3; $total_time / $test_count" | bc)
+          echo "Average response time: ${avg_time}s"
+          
+          # Fail if average response time > 2 seconds
+          if (( $(echo "$avg_time > 2" | bc -l) )); then
+            echo "✗ Average response time too high!"
+            exit 1
+          else
+            echo "✓ Performance test passed"
+          fi
+
+      - name: Content verification
+        run: |
+          echo "Verifying page content..."
+          content=$(curl -s https://slater.cloud)
+          
+          # Check for key content
+          if echo "$content" | grep -q "Jason Slater"; then
+            echo "✓ Found expected content"
+          else
+            echo "✗ Expected content not found"
+            exit 1
+          fi
+
+      - name: SSL certificate check
+        run: |
+          echo "Checking SSL certificate..."
+          if echo | openssl s_client -servername slater.cloud -connect slater.cloud:443 2>/dev/null | openssl x509 -noout -checkend 86400; then
+            echo "✓ SSL certificate is valid for at least 24 hours"
+          else
+            echo "⚠ SSL certificate expires within 24 hours"
+          fi
+
+      - name: Create test report
+        if: always()
+        run: |
+          echo "## Deployment Test Report" > test-report.md
+          echo "Date: $(date)" >> test-report.md
+          echo "Test Type: ${{ github.event.inputs.test_type || 'smoke' }}" >> test-report.md
+          echo "" >> test-report.md
+          
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ **All tests passed**" >> test-report.md
+          else
+            echo "❌ **Tests failed**" >> test-report.md
+          fi
+          
+          echo "" >> test-report.md
+          echo "### Test Results" >> test-report.md
+          echo "- Website: https://slater.cloud" >> test-report.md
+          echo "- Function: https://slaterbot.azurewebsites.net" >> test-report.md
+          
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployment-test-report
+          path: test-report.md
+
+  load-test:
+    runs-on: ubuntu-latest
+    name: Load Test
+    if: ${{ github.event.inputs.test_type == 'full' }}
+    
+    steps:
+      - name: Install Apache Bench
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apache2-utils
+
+      - name: Run load test
+        run: |
+          echo "Running load test..."
+          echo "Testing with 100 requests, 10 concurrent..."
+          
+          ab -n 100 -c 10 -g results.tsv https://slater.cloud/ | tee load-test-results.txt
+          
+          # Extract key metrics
+          requests_per_second=$(grep "Requests per second" load-test-results.txt | awk '{print $4}')
+          time_per_request=$(grep "Time per request" load-test-results.txt | head -1 | awk '{print $4}')
+          
+          echo "Results:"
+          echo "- Requests per second: $requests_per_second"
+          echo "- Time per request: ${time_per_request}ms"
+          
+          # Fail if requests per second < 50
+          if (( $(echo "$requests_per_second < 50" | bc -l) )); then
+            echo "✗ Load test failed - too slow"
+            exit 1
+          else
+            echo "✓ Load test passed"
+          fi
+
+      - name: Upload load test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: load-test-results
+          path: |
+            load-test-results.txt
+            results.tsv
