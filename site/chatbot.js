@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const API_URL =
     'https://slaterbot-staging.azurewebsites.net/api/chathandler?code=ptm5_TZyfWXUNz6fxwLGz1dTARFD0a2YuoN-izImiGDEAzFuFicq8Q==';
 
-  sendBtn.addEventListener('click', async () => {
+  async function sendMessage() {
     const msg = promptEl.value.trim();
     if (!msg) return;
     appendMessage('user', msg);
@@ -38,6 +38,17 @@ window.addEventListener('DOMContentLoaded', () => {
       historyEl.lastChild.remove();
       appendMessage('bot', '⚠️ Error');
       console.error(err);
+    }
+  }
+
+  // Send message on button click
+  sendBtn.addEventListener('click', sendMessage);
+
+  // Send message on Enter key press
+  promptEl.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendMessage();
     }
   });
 });
