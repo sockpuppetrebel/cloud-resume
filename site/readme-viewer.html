@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README - Learning Section | Jason Slater</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f0f0f0;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Markdown styling */
+        .markdown-content {
+            line-height: 1.8;
+        }
+
+        .markdown-content h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .markdown-content h2 {
+            color: #4a5568;
+            font-size: 1.8rem;
+            margin: 25px 0 15px;
+        }
+
+        .markdown-content h3 {
+            color: #667eea;
+            font-size: 1.4rem;
+            margin: 20px 0 10px;
+        }
+
+        .markdown-content p {
+            margin: 15px 0;
+            color: #4a5568;
+        }
+
+        .markdown-content ul, .markdown-content ol {
+            margin: 15px 0 15px 30px;
+            color: #4a5568;
+        }
+
+        .markdown-content li {
+            margin: 8px 0;
+        }
+
+        .markdown-content code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .markdown-content pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .markdown-content pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .markdown-content strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        /* Raw code view */
+        .code-content {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 30px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+            transform: translateX(-3px);
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-button.copied {
+            background: #48bb78;
+        }
+
+        .highlight {
+            background: linear-gradient(to right, transparent 0%, #ffd70050 20%, #ffd70050 80%, transparent 100%);
+            padding: 2px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .markdown-content h1 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-bottom: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Learning Section Documentation</h1>
+            <p>How I built and maintain the interactive learning timeline</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('rendered')">📖 Formatted View</div>
+            <div class="tab" onclick="switchTab('raw')">📝 Raw Markdown</div>
+            <div class="tab" onclick="switchTab('preview')">👁️ Live Preview</div>
+        </div>
+
+        <div class="content">
+            <a href="index.html#learning" class="back-link">
+                ← Back to Learning Section
+            </a>
+
+            <div id="rendered" class="view active">
+                <div class="markdown-content">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+
+            <div id="raw" class="view">
+                <div style="position: relative;">
+                    <button class="copy-button" onclick="copyCode()">Copy Code</button>
+                    <pre class="code-content" id="raw-content"><!-- Raw content will be loaded here --></pre>
+                </div>
+            </div>
+
+            <div id="preview" class="view">
+                <iframe src="index.html#learning" style="width: 100%; height: 600px; border: none; border-radius: 8px;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // README content
+        const readmeContent = `# What I Actually Learned — Interactive Changelog Section
+
+This section of my site is inspired by a great post I saw on Reddit (shoutout to whoever made that clean visual of their cloud project learnings). I wanted to take the idea and build something similar — but interactive, scroll-reveal, and mobile-friendly — to document what I *really* learned while building my cloud resume, bot, and deployment flow.
+
+## 🧱 How It's Built
+
+- It's just straight HTML, CSS, and a small \`<script>\` using click handlers for the expand/collapse effect
+- Each "lesson" is a div with a title, challenge, and what I learned
+- It's responsive, works on mobile, and light enough to drop into any static site
+- The timeline visual gives it a nice flow and makes it easy to scan
+
+## 📍 Where to Find It
+
+The learning timeline is embedded directly in \`/site/index.html\` in the "Learning Timeline Section" (look for \`<section id="learning">\`). The styles are in the same file within the \`<style>\` tag.
+
+## ✍️ How to Update It
+
+When I learn something new (or survive some stupid Azure bug), I'll:
+
+1. Open \`/site/index.html\`
+2. Find the learning timeline section (search for \`id="learning"\`)
+3. Add a new learning item like this:
+   \`\`\`html
+   <div class="learning-item">
+     <div class="learning-card" data-expanded="false">
+       <div class="learning-header">
+         <h3>New Topic I Learned</h3>
+         <span class="expand-icon">+</span>
+       </div>
+       <div class="learning-content">
+         <p><strong>The Challenge:</strong> What broke or confused me</p>
+         <p><strong>The Solution:</strong> What I figured out</p>
+         <p><strong>What I Learned:</strong> The actual lesson from this experience</p>
+       </div>
+     </div>
+   </div>
+   \`\`\`
+
+## 🎨 Styling
+
+The section uses:
+- A gradient background for visual interest
+- Cards that expand on click to show details
+- A timeline connector line between items
+- Smooth transitions for the expand/collapse effect
+- Mobile-responsive design that stacks nicely
+
+## 🔧 JavaScript
+
+The interactivity is simple:
+- Click handlers on each card
+- Toggle \`data-expanded\` attribute
+- CSS transitions handle the animation
+- No dependencies or frameworks needed
+
+## 💡 Ideas for Future Updates
+
+- Add dates to each learning item
+- Include code snippets in some lessons
+- Add tags for different technologies (Azure, Git, etc.)
+- Create a filter to show only certain types of lessons
+- Add a "copy link" button to share specific lessons
+
+## 📝 Example Lessons Currently Included
+
+1. **DNS & SSL Setup** - Fighting with Azure DNS zones and SSL certificates
+2. **Blob Storage Migration** - Moving from basic blob to proper static site hosting
+3. **CDN Configuration** - Learning about edge caching the hard way
+4. **GitHub Actions** - Setting up CI/CD without breaking production
+5. **OpenAI Integration** - Building a chatbot that actually works
+6. **Staging Environments** - Why you need a staging branch (learned this one painfully)
+
+This section is my favorite part of the site because it's honest about the struggles and celebrates the small wins along the way.`;
+
+        // Simple markdown parser
+        function parseMarkdown(markdown) {
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Bold
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            
+            // Code blocks
+            html = html.replace(/```html([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            
+            // Inline code
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Lists
+            html = html.replace(/^\* (.+)$/gim, '<li>$1</li>');
+            html = html.replace(/^\d+\. (.+)$/gim, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            
+            // Paragraphs
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+            
+            // Clean up
+            html = html.replace(/<p><h/g, '<h');
+            html = html.replace(/<\/h(\d)><\/p>/g, '</h$1>');
+            html = html.replace(/<p><ul>/g, '<ul>');
+            html = html.replace(/<\/ul><\/p>/g, '</ul>');
+            html = html.replace(/<p><pre>/g, '<pre>');
+            html = html.replace(/<\/pre><\/p>/g, '</pre>');
+            
+            return html;
+        }
+
+        // Load content
+        document.getElementById('raw-content').textContent = readmeContent;
+        document.querySelector('.markdown-content').innerHTML = parseMarkdown(readmeContent);
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Update tabs
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update views
+            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Copy functionality
+        function copyCode() {
+            const button = event.target;
+            const content = document.getElementById('raw-content').textContent;
+            
+            navigator.clipboard.writeText(content).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy Code';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
