@@ -396,6 +396,119 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Learning Timeline Section */
+.learning-section {
+  background: var(--primary-dark);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+}
+
+.learning-timeline {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 40px;
+}
+
+.learning-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--border-color);
+}
+
+.learning-item {
+  position: relative;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.learning-dot {
+  position: absolute;
+  left: -25px;
+  top: 15px;
+  width: 12px;
+  height: 12px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.learning-item:hover .learning-dot {
+  transform: scale(1.5);
+  background: var(--accent-green);
+  box-shadow: 0 0 30px rgba(0, 212, 170, 0.6);
+}
+
+.learning-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.learning-card:hover {
+  border-color: var(--accent-blue);
+  transform: translateX(5px);
+  box-shadow: 0 5px 20px rgba(74, 158, 255, 0.2);
+}
+
+.learning-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.learning-header h3 {
+  color: var(--accent-green);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.learning-expand {
+  color: var(--accent-blue);
+  font-size: 1.5rem;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+}
+
+.learning-item[data-expanded="true"] .learning-expand {
+  transform: rotate(45deg);
+}
+
+.learning-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  margin-top: 0;
+}
+
+.learning-item[data-expanded="true"] .learning-content {
+  max-height: 200px;
+  margin-top: 1rem;
+}
+
+.learning-challenge, .learning-solution {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.learning-challenge strong, .learning-solution strong {
+  color: var(--text-primary);
+}
+
 /* Contact Section */
 .contact-section {
   background: var(--secondary-dark);
@@ -472,5 +585,32 @@ body {
   
   .timeline-content {
     padding: 0;
+  }
+  
+  .learning-timeline {
+    padding-left: 30px;
+  }
+  
+  .learning-timeline::before {
+    left: 10px;
+  }
+  
+  .learning-dot {
+    left: -20px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+  }
+  
+  .learning-card {
+    padding: 1rem;
+  }
+  
+  .learning-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .learning-item[data-expanded="true"] .learning-content {
+    max-height: 300px;
   }
 }

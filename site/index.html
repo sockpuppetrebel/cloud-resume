@@ -24,6 +24,7 @@
           <a href="#about" class="nav-link">About</a>
           <a href="#experience" class="nav-link">Experience</a>
           <a href="#skills" class="nav-link">Skills</a>
+          <a href="#learning" class="nav-link">Learning</a>
           <a href="#contact" class="nav-link">Contact</a>
         </div>
       </div>
@@ -141,6 +142,99 @@
     </div>
   </section>
 
+  <!-- Learning Timeline Section -->
+  <section id="learning" class="section learning-section">
+    <div class="container">
+      <h2 class="section-title">What I Learned Building This</h2>
+      <p class="section-subtitle">Real challenges and solutions from creating my cloud resume</p>
+      <div class="learning-timeline">
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>DNS & SSL with Azure</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Getting slater.cloud to validate via TXT records and CNAMEs in Cloudflare</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned how Azure expects _dnsauth for root validation, and how SSL certs propagate</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Blob → Static Site Migration</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Azure Blob Storage didn't support proper routing or custom domains cleanly</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned the benefits of Static Web Apps: built-in routing, custom domains, staging</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Azure CDN</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Cached files (like chatbot.js) wouldn't update even after upload</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned to use purge commands and max-age cache headers properly</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>GitHub Actions</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Zip deploys failed silently at first</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned how to use config-zip with az functionapp deployment for clarity</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>OpenAI Chatbot</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> CORS errors + context handling on resume bot</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned how to proxy via Azure Functions and tune prompts to stay on-topic</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Staging + Dev Environments</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Needed a way to test changes without breaking prod</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned how to spin up staging Static Web Apps and configure clean CI/CD</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="section contact-section">
     <div class="container">
@@ -167,6 +261,29 @@
     function scrollToSection(sectionId) {
       document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
     }
+    
+    // Learning Timeline Interaction
+    document.addEventListener('DOMContentLoaded', function() {
+      const learningItems = document.querySelectorAll('.learning-item');
+      
+      learningItems.forEach(item => {
+        const card = item.querySelector('.learning-card');
+        
+        card.addEventListener('click', function() {
+          const isExpanded = item.getAttribute('data-expanded') === 'true';
+          
+          // Close all other items
+          learningItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.setAttribute('data-expanded', 'false');
+            }
+          });
+          
+          // Toggle current item
+          item.setAttribute('data-expanded', !isExpanded);
+        });
+      });
+    });
   </script>
 </body>
 </html>
