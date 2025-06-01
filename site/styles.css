@@ -369,6 +369,73 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* GitHub Section */
+.github-section {
+  background: var(--secondary-dark);
+  padding: 4rem 0;
+}
+
+.github-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.github-stats,
+.github-languages,
+.github-streak,
+.github-activity-graph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.github-stats:hover,
+.github-languages:hover,
+.github-streak:hover,
+.github-activity-graph:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.2);
+}
+
+.github-activity-graph {
+  grid-column: 1 / -1;
+}
+
+.github-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.github-link {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.github-link .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.github-icon {
+  transition: transform 0.3s ease;
+}
+
+.github-link .btn:hover .github-icon {
+  transform: scale(1.2) rotate(360deg);
+}
+
 /* Skills Grid */
 .skills-grid {
   display: grid;
@@ -612,5 +679,15 @@ body {
   
   .learning-item[data-expanded="true"] .learning-content {
     max-height: 300px;
+  }
+  
+  .github-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .github-stats,
+  .github-languages,
+  .github-streak {
+    padding: 0.5rem;
   }
 }
