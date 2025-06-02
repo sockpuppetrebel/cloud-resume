@@ -296,6 +296,66 @@
       }
     }
   </style>
+  
+  <!-- Print styles for PDF generation -->
+  <style media="print">
+    body {
+      background: white;
+      color: black;
+      padding: 0;
+    }
+    
+    .resume-container {
+      box-shadow: none;
+      max-width: 100%;
+      background: white;
+    }
+    
+    .resume-header {
+      background: white;
+      color: black;
+      border-bottom: 2px solid #333;
+      padding: 2rem;
+    }
+    
+    .resume-header h1 {
+      color: black;
+    }
+    
+    .section {
+      background: white;
+      page-break-inside: avoid;
+    }
+    
+    .section-title {
+      color: black;
+      border-bottom: 2px solid #333;
+    }
+    
+    .job-header h3, .project-name {
+      color: black;
+    }
+    
+    .tech-tag {
+      background: #f0f0f0;
+      color: black;
+      border: 1px solid #333;
+    }
+    
+    .download-section {
+      display: none;
+    }
+    
+    a {
+      color: black;
+      text-decoration: underline;
+    }
+    
+    /* Ensure good page breaks */
+    .experience-item, .project-item {
+      page-break-inside: avoid;
+    }
+  </style>
 </head>
 <body>
   <div class="resume-container">
@@ -403,11 +463,15 @@
             </div>
             <p class="experience-company">Optimizely | Remote</p>
             <ul>
-              <li>Automated 500+ user provisioning workflows with PowerShell, reducing onboarding time by 87%</li>
-              <li>Implemented GPT-powered IT support chatbot, deflecting 40% of L1 tickets</li>
-              <li>Architected Azure AD B2B collaboration for 200+ external partners</li>
-              <li>Managed $180K annual SaaS budget across 25+ platforms</li>
-              <li>Developed PowerShell module for license optimization, saving $35K annually</li>
+              <li>Led DocuSign geofencing implementation as Project Manager, ensuring compliance across international offices</li>
+              <li>Mentored junior administrators through comprehensive documentation and sandbox environment management</li>
+              <li>Spearheading hybrid-to-Azure migration project, designing cloud architecture and migration strategy</li>
+              <li>Directed Microsoft Copilot pilot deployment including user training and adoption programs</li>
+              <li>Managed Intune and Jamf migration projects for unified endpoint management across platforms</li>
+              <li>Maintained complex MSP infrastructure managing 200+ server fleet with 99.9% uptime</li>
+              <li>Automated Windows patching workflows using Ansible and Jenkins, reducing maintenance windows by 60%</li>
+              <li>Developed AWS and Azure automation scripts for resource provisioning and cost optimization</li>
+              <li>Handled on-call rotations for critical infrastructure issues and incident response</li>
             </ul>
           </div>
 
@@ -428,7 +492,8 @@
     </div>
 
     <div class="download-section">
-      <a href="#" class="download-btn" onclick="window.print(); return false;">
+      <a href="jason-slater-resume.pdf" class="download-btn" download="Jason_Slater_Resume.pdf" 
+         onclick="if(!this.href.includes('.pdf')) { window.print(); return false; }">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
@@ -436,6 +501,9 @@
         </svg>
         Download PDF
       </a>
+      <p style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">
+        Or press Ctrl+P (Cmd+P on Mac) to print/save as PDF
+      </p>
     </div>
   </div>
 </body>
