@@ -73,6 +73,13 @@
 - Remind user to reset terminal if any persistent state changes occur
 - When demonstrating commands that might affect terminal state, include cleanup steps
 
+## Website Learning Section Updates
+- The "What I Learned Building This" section in `site/index.html` is where we track project learnings and challenges
+- When user mentions adding learnings or challenges from the cloud resume project, update the HTML learning section (NOT this CLAUDE.md file)
+- Add new learning items after the most recent ones but before the "Collapsible older items section" comment
+- Each learning item should follow the existing format with Challenge/Solution structure
+- Keep descriptions concise and focused on the key technical insight
+
 ## Learning Summary
 
 ### Session 2025-06-01: CORS Fix and GitHub Actions Troubleshooting
