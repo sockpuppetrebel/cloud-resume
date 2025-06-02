@@ -37,7 +37,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/site"
-          skip_build: true  # Skip build step since we're just serving static files
+          api_location: "/api"
           
   # Optional quick tests - only if requested or if it's a PR
   quick-tests:
