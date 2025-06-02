@@ -68,6 +68,18 @@
 - CRITICAL: Avoid phrases like "in Jason's own words" or any AI-sounding language
 - Use simple, direct commit messages (e.g., "Fix CORS config", "Add project details", "Update resume")
 
+## Debugging and Testing Workflow - CRITICAL
+- **ALWAYS start debugging and fixes on staging branch first**
+- **NEVER commit experimental or debugging code directly to main branch**
+- Proper workflow for fixes and debugging:
+  1. Switch to staging branch: `git checkout staging`
+  2. Make debugging changes and test
+  3. Commit and push to staging: `git push origin staging`
+  4. Test on staging environment thoroughly
+  5. Only after confirming fix works, merge to main: `git checkout main && git merge staging && git push origin main`
+- This prevents breaking production with untested fixes
+- Always use staging as the testing ground for debugging iterations
+
 ## Git Push Rules - CRITICAL REMINDERS
 - **NEVER** attempt to push to GitHub directly due to SSH authentication requirements
 - **ALWAYS** remind the user to push after making commits - this is mandatory, not optional
