@@ -63,6 +63,10 @@
 - Use .gitignore for generated files and secrets
 - CRITICAL: No emojis, Claude references, or "Generated with Claude" messages in commit messages
 - CRITICAL: No attribution footers like "Co-Authored-By: Claude" in any commits
+- CRITICAL: Never make commits that sound like they were written by AI
+- CRITICAL: All commit messages should sound natural as if written by Jason
+- CRITICAL: Avoid phrases like "in Jason's own words" or any AI-sounding language
+- Use simple, direct commit messages (e.g., "Fix CORS config", "Add project details", "Update resume")
 
 ## Git Push Rules - CRITICAL REMINDERS
 - **NEVER** attempt to push to GitHub directly due to SSH authentication requirements
