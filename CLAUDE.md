@@ -55,6 +55,8 @@
 - Test locally before committing
 - Never commit sensitive data or credentials
 - Use .gitignore for generated files and secrets
+- CRITICAL: No emojis, Claude references, or "Generated with Claude" messages in commit messages
+- CRITICAL: No attribution footers like "Co-Authored-By: Claude" in any commits
 
 ## Git Push Rules - CRITICAL REMINDERS
 - **NEVER** attempt to push to GitHub directly due to SSH authentication requirements
@@ -70,3 +72,24 @@
 - Before session ends, run: printf '\e[?2004l' to disable bracket pasting
 - Remind user to reset terminal if any persistent state changes occur
 - When demonstrating commands that might affect terminal state, include cleanup steps
+
+## Learning Summary
+
+### Session 2025-06-01: CORS Fix and GitHub Actions Troubleshooting
+
+**Problem**: Chatbot API was returning 500 errors on staging environment due to CORS restrictions blocking the staging domain.
+
+**Root Cause**: The chatbot API (`api/chathandler/index.js`) had hardcoded CORS headers that only allowed the production domain `https://slater.cloud`, blocking requests from the staging domain `https://proud-smoke-0fa3b7e1e.1.azurestaticapps.net`.
+
+**Solution**: 
+- Updated CORS configuration to dynamically allow both production and staging domains
+- Implemented origin-based CORS header generation that checks the request origin against allowed domains
+- Fixed staging workflow path filters that were preventing API deployments
+
+**Technical Details**:
+- Modified CORS headers to use dynamic origin checking instead of hardcoded values
+- Added both production (`slater.cloud`) and staging (`proud-smoke-0fa3b7e1e.1.azurestaticapps.net`) domains to allowed origins
+- Fixed GitHub Actions workflow path filters that were missing `api/**` and `counter-func/**` directories
+- Corrected workflow filename reference in path filter from `fast-staging-deploy.yml` to `azure-static-web-apps-staging-fast.yml`
+
+**Key Learning**: GitHub Actions path filters are restrictive - if specified, workflows only trigger when files matching those exact patterns change. Missing directories or incorrect filenames in path filters will prevent workflows from triggering entirely, even on the correct branch.
