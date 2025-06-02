@@ -320,6 +320,18 @@ body {
     var(--hacker-green)) !important;
 }
 
+.learning-timestamp {
+  color: var(--text-muted) !important;
+  font-size: 0.75rem !important;
+  font-family: 'Space Mono', monospace !important;
+  margin-top: 8px !important;
+  opacity: 0.8 !important;
+  border-left: 2px solid var(--hacker-green-dim) !important;
+  padding-left: 8px !important;
+  background: rgba(0, 255, 65, 0.05) !important;
+  border-radius: 0 4px 4px 0 !important;
+}
+
 /* Contact Section */
 .contact-section {
   background: var(--bg-secondary) !important;
