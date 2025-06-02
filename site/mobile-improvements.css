@@ -175,6 +175,32 @@
   .container {
     padding: 0 1.5rem !important;
   }
+  
+  /* Fix Experience Timeline Dots */
+  .timeline::before {
+    left: 20px !important;
+  }
+  
+  .timeline-item::before {
+    left: 20px !important;
+    transform: translateX(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    z-index: 1;
+  }
+  
+  .timeline-item {
+    padding-left: 50px !important;
+  }
+  
+  .timeline-date {
+    padding-left: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-content {
+    padding-left: 0 !important;
+  }
 }
 
 /* Extra small devices */
