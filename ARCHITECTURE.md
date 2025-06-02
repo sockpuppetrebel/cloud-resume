@@ -1,138 +1,80 @@
 # Cloud Resume Architecture
 
-## Overview
-This document outlines the architecture and deployment pipeline for my cloud resume project hosted at slater.cloud.
+## Current Setup
 
-## Infrastructure Components
+### Production Environment
+- **URL**: https://slater.cloud
+- **Hosting**: Azure Static Web Apps
+- **Frontend**: /site directory
+- **API**: /api directory (managed by Azure SWA)
+- **Deployment**: Automatic via GitHub Actions on push to main
 
-### Storage Accounts
-- **Production**: `jtsresumehosting` - Hosts the production website files
-- **Staging**: `jtsresumehostingstg` - Hosts the staging environment for testing
+### Staging Environment  
+- **URL**: https://proud-smoke-0fa3b7e1e.6.azurestaticapps.net
+- **Hosting**: Azure Static Web Apps (same instance as production)
+- **Frontend**: /site directory
+- **API**: Shares production API endpoints
+- **Deployment**: Automatic via GitHub Actions on push to staging
 
-### CDN Configuration
-- **Endpoint**: `slatercloud.azureedge.net`
-- **Custom Domain**: slater.cloud (root and www)
-- **SSL/TLS**: 
-  - Root domain uses Cloudflare SSL with proxy enabled
-  - WWW subdomain uses Azure CDN managed certificates
+### Unused Resources
+- **Azure Function App**: slaterbot.azurewebsites.net (not actively deployed)
 
-### Azure Functions
-- **Function App**: `slaterbot`
-- **Purpose**: Powers the GPT chatbot functionality
-- **Endpoint**: `slaterbot.azurewebsites.net`
+## Problems with Current Architecture
 
-## Deployment Pipeline
+1. **No API isolation** - Staging and production share the same API
+2. **No testing gates** - Code can be pushed directly to production
+3. **Confusing resource setup** - Standalone Function App exists but isn't used
+4. **Limited staging capabilities** - Can't test API changes in isolation
 
-### Production (main branch)
-1. Push code to `main` branch
-2. GitHub Actions workflow triggers automatically
-3. Static site files deployed to `jtsresumehosting` storage account
-4. Azure Function code deployed to `slaterbot` function app
-5. CDN cache automatically purged
-6. Changes visible at https://slater.cloud
+## Recommended Architecture
 
-### Staging (staging branch)
-1. Push code to `staging` branch
-2. GitHub Actions workflow deploys to `jtsresumehostingstg`
-3. Changes immediately visible at https://jtsresumehostingstg.z22.web.core.windows.net/
-4. No CDN caching = instant updates for testing
+### Development Workflow
+1. **Local Development** → Test locally with dev server
+2. **Feature Branch** → Create PR to staging
+3. **Staging** → Deploy and test both frontend + API
+4. **Production** → Merge staging to main after testing
 
-## Development Workflow
-
-### Feature Development
-1. Create feature branch from `staging`
-2. Develop and test locally
-3. Push to feature branch and create PR to `staging`
-4. Merge to `staging` for testing in staging environment
-5. Once validated, merge `staging` to `main` for production deployment
-
-### Branch Strategy
-- `main` - Production branch, auto-deploys to slater.cloud
-- `staging` - Testing branch, auto-deploys to staging URL
-- `feature/*` - Feature branches for development
-
-## GitHub Actions Workflows
-
-### Production Deployment (.github/workflows/deploy.yml)
-- Triggered on push to `main`
-- Deploys static site to Azure Storage
-- Deploys Azure Function
-- Purges CDN cache for immediate updates
-
-### Staging Deployment (.github/workflows/deploy-staging.yml)
-- Triggered on push to `staging`
-- Deploys static site to staging storage account
-- No CDN involved for instant updates
-
-## DNS and Domain Architecture
-
-### Domain Registration
-- **Registrar**: Cloudflare (or your registrar if different)
-- **Nameservers**: Cloudflare DNS
-
-### DNS Configuration (Cloudflare)
-
-| Domain | Type | Target | Proxy Status | Purpose |
-|--------|------|--------|--------------|----------|
-| slater.cloud | CNAME | slatercloud.azureedge.net | Proxied | Root domain with Cloudflare SSL |
-| www.slater.cloud | CNAME | slatercloud.azureedge.net | DNS Only | Direct to Azure CDN |
-
-### Request Flow Diagram
-
-#### Root Domain (slater.cloud)
+### Environment Separation
 ```
-User → https://slater.cloud
-  ↓
-Cloudflare DNS (CNAME lookup)
-  ↓
-Cloudflare Proxy (SSL termination)
-  ↓
-Azure CDN (slatercloud.azureedge.net)
-  ↓
-Azure Storage ($web container in jtsresumehosting)
-  ↓
-index.html served to user
+Production (main branch)
+├── Frontend: https://slater.cloud
+├── API: https://slater.cloud/api/*
+└── Resources: Production Azure Static Web App
+
+Staging (staging branch)  
+├── Frontend: https://[staging-url].azurestaticapps.net
+├── API: https://[staging-url].azurestaticapps.net/api/*
+└── Resources: Separate Azure Static Web App instance
 ```
 
-#### WWW Subdomain (www.slater.cloud)
-```
-User → https://www.slater.cloud
-  ↓
-Cloudflare DNS (CNAME lookup)
-  ↓
-Direct to Azure CDN (slatercloud.azureedge.net)
-  ↓
-Azure Storage ($web container in jtsresumehosting)
-  ↓
-index.html served to user
-```
+### Deployment Pipeline
+1. Push to staging → Deploy to staging environment
+2. Run automated tests on staging
+3. Manual approval or PR review
+4. Merge to main → Deploy to production
 
-### Cloudflare Settings
-- **SSL/TLS Encryption Mode**: Full
-- **Always Use HTTPS**: Enabled
-- **Automatic HTTPS Rewrites**: Enabled
-- **HSTS**: Enabled
+## Implementation Steps
 
-### URL Routing Rules
-1. **HTTP to HTTPS Redirect**: All HTTP traffic automatically redirected to HTTPS
-2. **Root to CDN**: slater.cloud → Cloudflare Proxy → Azure CDN
-3. **WWW to CDN**: www.slater.cloud → Direct to Azure CDN
-4. **Static Assets**: All CSS, JS, and images served from Azure CDN with cache headers
+1. **Create separate Azure Static Web App for staging**
+   - This ensures complete isolation
+   - Allows testing API changes safely
 
-### SSL Certificate Management
-- **Root Domain (slater.cloud)**: Cloudflare Universal SSL Certificate
-- **WWW Subdomain**: Azure CDN Managed Certificate (DigiCert)
-- **Backend Connection**: Cloudflare to Azure CDN uses "Full" SSL mode
+2. **Update GitHub workflows**
+   - Staging workflow deploys to staging SWA
+   - Production workflow includes test validation
 
-## Environment URLs
+3. **Add environment variables**
+   - Separate API keys for staging/production
+   - Environment-specific configurations
 
-- **Production**: https://slater.cloud
-- **Staging**: https://jtsresumehostingstg.z22.web.core.windows.net/
-- **CDN Endpoint**: https://slatercloud.azureedge.net
-- **Function API**: https://slaterbot.azurewebsites.net/api/chathandler
+4. **Implement testing gates**
+   - API endpoint tests
+   - Frontend functionality tests
+   - Performance benchmarks
 
-## Notes
-- CDN caching can cause delays in production updates; cache purge is automated
-- Staging environment bypasses CDN for immediate feedback
-- All sensitive configuration stored in GitHub Secrets
-- Azure authentication uses service principal with OIDC
+## Benefits
+
+- **Safe testing** - API changes tested in isolation
+- **Faster iteration** - Deploy to staging without affecting production
+- **Better reliability** - Tests catch issues before production
+- **Clear separation** - No confusion about which resources are used
