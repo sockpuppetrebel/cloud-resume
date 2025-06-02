@@ -3,7 +3,7 @@ let statusData = null;
 let statusPanelOpen = false;
 
 // Configuration
-const STATUS_API_URL = 'https://slaterbot.azurewebsites.net/api/uptime';
+const STATUS_API_URL = '/api/uptime';
 const UPDATE_INTERVAL = 300000; // 5 minutes
 
 // Create status widget HTML
