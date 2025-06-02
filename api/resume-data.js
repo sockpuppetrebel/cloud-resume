@@ -17,13 +17,18 @@ const resumeData = {
     title: "System Administrator",
     company: "Optimizely",
     location: "Remote",
-    duration: "May 2020 - Present (4+ years)",
+    duration: "2020 - Present",
     achievements: [
-      "Automated 500+ user provisioning workflows with PowerShell, reducing onboarding time by 87%",
-      "Implemented GPT-powered IT support chatbot, deflecting 40% of L1 tickets",
-      "Architected Azure AD B2B collaboration for 200+ external partners",
-      "Managed $180K annual SaaS budget across 25+ platforms",
-      "Developed PowerShell module for license optimization, saving $35K annually"
+      "Led DocuSign geofencing project as PM, setting up forms and managing implementation",
+      "Training younger admins through documentation, sandbox testing environments, and access management",
+      "Leading long-term project to break hybrid infrastructure and migrate servers to Azure",
+      "Headed Copilot pilot deployment, creating presentations and supporting users learning AI tools",
+      "Managing Intune and Jamf migration projects",
+      "Worked in MSP department managing fleets of servers and applications",
+      "Collaborated with app support teams maintaining complex infrastructure",
+      "On-call duties including Windows patching with Ansible/Jenkins",
+      "Creating apps and automations in AWS and Azure",
+      "Providing cloud services to large organizations"
     ]
   },
   
