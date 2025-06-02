@@ -765,6 +765,7 @@
         <span class="header-title">Resume AI by Jason</span>
         <div class="header-controls">
           <button class="minimize-btn" id="chatMinimizeBtn">−</button>
+          <button class="close-btn" id="chatCloseBtn">×</button>
         </div>
       </div>
       <div class="chat-body" id="chatBody">
@@ -777,10 +778,21 @@
     </div>
   </div>
 
+  <!-- Chatbot Reopen Button -->
+  <div class="reopen-btn" id="chatReopenBtn" style="display: none;">
+    <span class="reopen-icon">💬</span>
+    <div class="reopen-tooltip">Open Chat</div>
+  </div>
 
   <script src="chatbot.js" defer></script>
   <script src="simple-widget.js" defer></script>
   <script src="github-commits.js" defer></script>
+
+  <!-- Status Widget Reopen Button -->
+  <div class="status-reopen-btn" id="statusReopenBtn" style="display: none;">
+    <span class="reopen-icon">📊</span>
+    <div class="reopen-tooltip">Open Status</div>
+  </div>
   <script>
     function scrollToSection(sectionId) {
       document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });

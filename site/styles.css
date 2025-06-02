@@ -707,3 +707,64 @@ body {
     padding: 0.5rem;
   }
 }
+
+/* Status Widget Reopen Button */
+.status-reopen-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #0a0a0a 100%);
+  border: 2px solid rgba(0, 255, 65, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.status-reopen-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  border-color: rgba(0, 255, 65, 0.6);
+  box-shadow: 0 6px 25px rgba(0, 255, 65, 0.2);
+  animation: none;
+}
+
+.status-reopen-btn .reopen-icon {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.status-reopen-btn:hover .reopen-icon {
+  transform: scale(1.2);
+}
+
+.status-reopen-btn .reopen-tooltip {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  color: #00ff41;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.status-reopen-btn:hover .reopen-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
