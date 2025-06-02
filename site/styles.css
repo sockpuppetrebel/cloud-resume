@@ -162,6 +162,7 @@ body {
   text-align: center;
   z-index: 10;
   animation: fadeInUp 1s ease;
+  margin-top: 80px;
 }
 
 .profile-section {
