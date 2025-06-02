@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const theme = themes[THEME];
   
-  // Create widget
+  // Create widget container
   const widget = document.createElement('div');
   widget.id = 'statusWidget';
   widget.style.position = 'fixed';
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
   widget.style.left = '20px';
   widget.style.background = theme.background;
   widget.style.color = theme.color;
-  widget.style.padding = '16px';
   widget.style.borderRadius = theme.borderRadius;
   widget.style.boxShadow = theme.boxShadow;
   widget.style.border = theme.border;
@@ -61,6 +60,59 @@ document.addEventListener('DOMContentLoaded', function() {
   widget.style.fontSize = '14px';
   widget.style.minWidth = '200px';
   widget.style.backdropFilter = 'blur(10px)';
+  widget.style.overflow = 'hidden';
+  widget.style.transition = 'all 0.3s ease';
+
+  // Create header with drag handle and minimize button
+  const header = document.createElement('div');
+  header.id = 'statusHeader';
+  header.style.display = 'flex';
+  header.style.alignItems = 'center';
+  header.style.justifyContent = 'space-between';
+  header.style.padding = '12px 16px';
+  header.style.background = 'rgba(0, 255, 65, 0.1)';
+  header.style.borderBottom = '1px solid rgba(0, 255, 65, 0.2)';
+  header.style.cursor = 'move';
+  header.style.userSelect = 'none';
+
+  const dragHandle = document.createElement('div');
+  dragHandle.innerHTML = '⋮⋮';
+  dragHandle.style.fontSize = '16px';
+  dragHandle.style.cursor = 'grab';
+  dragHandle.style.padding = '4px';
+  dragHandle.style.borderRadius = '4px';
+  dragHandle.style.transition = 'all 0.2s ease';
+  dragHandle.style.color = theme.color;
+  dragHandle.style.opacity = '0.7';
+
+  const headerTitle = document.createElement('span');
+  headerTitle.textContent = 'System Status';
+  headerTitle.style.fontWeight = '600';
+  headerTitle.style.fontSize = '14px';
+
+  const minimizeBtn = document.createElement('button');
+  minimizeBtn.id = 'statusMinimizeBtn';
+  minimizeBtn.innerHTML = '−';
+  minimizeBtn.style.background = 'rgba(0, 255, 65, 0.2)';
+  minimizeBtn.style.border = 'none';
+  minimizeBtn.style.color = theme.color;
+  minimizeBtn.style.width = '20px';
+  minimizeBtn.style.height = '20px';
+  minimizeBtn.style.borderRadius = '50%';
+  minimizeBtn.style.cursor = 'pointer';
+  minimizeBtn.style.fontSize = '14px';
+  minimizeBtn.style.fontWeight = 'bold';
+  minimizeBtn.style.transition = 'all 0.2s ease';
+
+  header.appendChild(dragHandle);
+  header.appendChild(headerTitle);
+  header.appendChild(minimizeBtn);
+
+  // Create body container
+  const body = document.createElement('div');
+  body.id = 'statusBody';
+  body.style.padding = '16px';
+  body.style.transition = 'all 0.3s ease';
   
   // Theme-specific content
   const content = {
@@ -86,14 +138,171 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const text = content[THEME];
   
-  // Add content
-  widget.innerHTML = 
+  // Add content to body
+  body.innerHTML = 
     '<div style="margin-bottom: 10px; font-weight: 600;"><span id="statusDot" style="color: ' + theme.dotColor + '; margin-right: 8px;">●</span>' + text.title + '</div>' +
     '<div id="uptimeDisplay" style="font-size: 24px; margin: 8px 0; color: ' + theme.dotColor + '; font-weight: 700;">--.--%</div>' +
     '<div id="statusText" style="margin-bottom: 10px; color: ' + theme.secondaryColor + '; font-size: 13px;">Checking status...</div>' +
     '<div id="detailsLink" style="color: ' + theme.accentColor + '; cursor: pointer; text-decoration: underline; font-weight: 500; font-size: 13px;">' + text.link + '</div>';
   
+  // Assemble widget
+  widget.appendChild(header);
+  widget.appendChild(body);
   document.body.appendChild(widget);
+
+  // Load saved position from localStorage
+  const savedPosition = localStorage.getItem('statusPosition');
+  if (savedPosition) {
+    const position = JSON.parse(savedPosition);
+    widget.style.left = position.x + 'px';
+    widget.style.top = position.y + 'px';
+    widget.style.bottom = 'auto';
+  }
+
+  // Load minimized state
+  const isMinimized = localStorage.getItem('statusMinimized') === 'true';
+  if (isMinimized) {
+    body.style.height = '0';
+    body.style.padding = '0 16px';
+    minimizeBtn.innerHTML = '+';
+  }
+
+  // Minimize/Maximize functionality
+  minimizeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const isCurrentlyMinimized = body.style.height === '0px';
+    
+    if (isCurrentlyMinimized) {
+      body.style.height = 'auto';
+      body.style.padding = '16px';
+      minimizeBtn.innerHTML = '−';
+      localStorage.setItem('statusMinimized', 'false');
+    } else {
+      body.style.height = '0';
+      body.style.padding = '0 16px';
+      minimizeBtn.innerHTML = '+';
+      localStorage.setItem('statusMinimized', 'true');
+    }
+  });
+
+  // Hover effects for drag handle and minimize button
+  dragHandle.addEventListener('mouseenter', function() {
+    this.style.opacity = '1';
+    this.style.background = 'rgba(0, 255, 65, 0.1)';
+  });
+
+  dragHandle.addEventListener('mouseleave', function() {
+    this.style.opacity = '0.7';
+    this.style.background = 'transparent';
+  });
+
+  minimizeBtn.addEventListener('mouseenter', function() {
+    this.style.background = 'rgba(0, 255, 65, 0.3)';
+    this.style.transform = 'scale(1.1)';
+  });
+
+  minimizeBtn.addEventListener('mouseleave', function() {
+    this.style.background = 'rgba(0, 255, 65, 0.2)';
+    this.style.transform = 'scale(1)';
+  });
+
+  // Collision detection function
+  function checkCollision(newX, newY, currentWidget) {
+    const chatContainer = document.getElementById('chatContainer');
+    if (!chatContainer) return false;
+    
+    const currentRect = {
+      left: newX,
+      top: newY,
+      right: newX + currentWidget.offsetWidth,
+      bottom: newY + currentWidget.offsetHeight
+    };
+    
+    const chatRect = chatContainer.getBoundingClientRect();
+    
+    return !(currentRect.right < chatRect.left || 
+             currentRect.left > chatRect.right || 
+             currentRect.bottom < chatRect.top || 
+             currentRect.top > chatRect.bottom);
+  }
+
+  // Drag functionality - only on desktop
+  if (window.innerWidth > 768) {
+    let isDragging = false;
+    let dragOffset = { x: 0, y: 0 };
+
+    header.addEventListener('mousedown', function(e) {
+      // Only start drag if not clicking on minimize button
+      if (e.target === minimizeBtn) {
+        return;
+      }
+      
+      isDragging = true;
+      const rect = widget.getBoundingClientRect();
+      dragOffset.x = e.clientX - rect.left;
+      dragOffset.y = e.clientY - rect.top;
+      
+      header.style.cursor = 'grabbing';
+      dragHandle.style.cursor = 'grabbing';
+      document.body.style.userSelect = 'none';
+      
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      
+      const newX = e.clientX - dragOffset.x;
+      const newY = e.clientY - dragOffset.y;
+      
+      // Keep widget within viewport bounds
+      const maxX = window.innerWidth - widget.offsetWidth;
+      const maxY = window.innerHeight - widget.offsetHeight;
+      
+      let boundedX = Math.max(0, Math.min(newX, maxX));
+      let boundedY = Math.max(0, Math.min(newY, maxY));
+      
+      // Check for collision with chatbot and avoid overlap
+      if (checkCollision(boundedX, boundedY, widget)) {
+        // If collision detected, try to snap to edge
+        const chatContainer = document.getElementById('chatContainer');
+        const chatRect = chatContainer.getBoundingClientRect();
+        
+        // Determine which side to snap to based on drag direction
+        if (newX < chatRect.left) {
+          boundedX = Math.max(0, chatRect.left - widget.offsetWidth - 10);
+        } else if (newX > chatRect.right) {
+          boundedX = Math.min(maxX, chatRect.right + 10);
+        }
+        
+        if (newY < chatRect.top) {
+          boundedY = Math.max(0, chatRect.top - widget.offsetHeight - 10);
+        } else if (newY > chatRect.bottom) {
+          boundedY = Math.min(maxY, chatRect.bottom + 10);
+        }
+      }
+      
+      widget.style.left = boundedX + 'px';
+      widget.style.top = boundedY + 'px';
+      widget.style.bottom = 'auto';
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (isDragging) {
+        isDragging = false;
+        header.style.cursor = 'move';
+        dragHandle.style.cursor = 'grab';
+        document.body.style.userSelect = '';
+        
+        // Save position to localStorage
+        const rect = widget.getBoundingClientRect();
+        localStorage.setItem('statusPosition', JSON.stringify({
+          x: rect.left,
+          y: rect.top
+        }));
+      }
+    });
+  }
   
   // Create metrics panel
   const panel = document.createElement('div');

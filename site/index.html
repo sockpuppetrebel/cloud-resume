@@ -381,6 +381,7 @@
             <div class="learning-content">
               <p class="learning-challenge"><strong>Challenge:</strong> Needed real-time status monitoring but API deployment kept failing with 404 errors</p>
               <p class="learning-solution"><strong>Solution:</strong> Learned proper Azure Functions zip deployment with full function app structure and CORS configuration</p>
+              <div class="learning-timestamp">Added: June 2, 2025</div>
             </div>
           </div>
         </div>
@@ -759,11 +760,20 @@
   <div class="floating-chat" id="chatContainer">
     <button class="chat-toggle-btn" id="chatToggleBtn">💬</button>
     <div class="gpt-mini">
-    <div class="header">Resume AI by Jason</div>
-    <div class="history" id="history"></div>
-    <div class="input-area">
-      <input id="mini-prompt" type="text" placeholder="Ask me anything…">
-      <button id="mini-send">➤</button>
+      <div class="header" id="chatHeader">
+        <div class="drag-handle" id="chatDragHandle">⋮⋮</div>
+        <span class="header-title">Resume AI by Jason</span>
+        <div class="header-controls">
+          <button class="minimize-btn" id="chatMinimizeBtn">−</button>
+        </div>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="history" id="history"></div>
+        <div class="input-area">
+          <input id="mini-prompt" type="text" placeholder="Ask me anything…">
+          <button id="mini-send">➤</button>
+        </div>
+      </div>
     </div>
   </div>
 
