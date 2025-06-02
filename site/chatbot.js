@@ -90,5 +90,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Show greeting when page loads
   showGreeting();
+  
+  // Keep the function warm by pinging it every 5 minutes
+  function keepWarm() {
+    fetch('/api/keepwarm')
+      .then(() => console.log('Function kept warm'))
+      .catch(() => console.log('Keep-warm failed'));
+  }
+  
+  // Initial warm-up call
+  keepWarm();
+  
+  // Keep warm every 5 minutes
+  setInterval(keepWarm, 5 * 60 * 1000);
 });
 
