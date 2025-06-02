@@ -25,6 +25,7 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: 60px;
 }
 
 /* Scrollbar Styling */
@@ -80,18 +81,19 @@ body {
 
 /* Navigation */
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 0;
   z-index: 100;
+  background: rgba(10, 15, 28, 0.9);
+  backdrop-filter: blur(10px);
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  width: 100%;
+  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
