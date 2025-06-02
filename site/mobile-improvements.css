@@ -1,0 +1,253 @@
+/* Mobile Improvements and Responsive Fixes */
+
+/* Mobile Chatbot - Collapsible Button */
+@media (max-width: 768px) {
+  /* Hide full chatbot on mobile by default */
+  .floating-chat .gpt-mini {
+    display: none;
+  }
+  
+  /* Show a floating action button instead */
+  .chat-toggle-btn {
+    display: flex !important;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 20px rgba(74, 158, 255, 0.4);
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .chat-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(74, 158, 255, 0.6);
+  }
+  
+  /* When chat is open */
+  .floating-chat.chat-open .gpt-mini {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    z-index: 2000;
+  }
+  
+  .floating-chat.chat-open .chat-toggle-btn {
+    display: none !important;
+  }
+  
+  /* Add close button to header on mobile */
+  .chat-open .gpt-mini .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+  }
+  
+  .chat-open .gpt-mini .header::before {
+    content: '✕';
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  .chat-open .gpt-mini .header::before:hover {
+    transform: rotate(90deg);
+  }
+  
+  /* Mobile Navigation Improvements */
+  .nav-links {
+    display: none !important;
+  }
+  
+  /* Add hamburger menu */
+  .nav-hamburger {
+    display: block !important;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .nav-hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+  }
+  
+  /* Mobile menu overlay */
+  .nav-links.mobile-open {
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 15, 28, 0.98);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    z-index: 999;
+  }
+  
+  .nav-links.mobile-open .nav-link {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+  
+  /* GitHub Stats Mobile Layout */
+  .github-content {
+    grid-template-columns: 1fr !important;
+    padding: 0 1rem;
+  }
+  
+  .github-stats img,
+  .github-languages img,
+  .github-streak img,
+  .github-activity-graph img {
+    transform: scale(0.9);
+    max-width: 100%;
+  }
+  
+  /* Learning Timeline Mobile */
+  .learning-timeline {
+    padding-left: 20px !important;
+  }
+  
+  .learning-card {
+    padding: 1rem !important;
+  }
+  
+  .learning-header h3 {
+    font-size: 1rem !important;
+  }
+  
+  /* Skills Grid Mobile */
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Hero Content Mobile */
+  .hero-title {
+    font-size: 2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Section Padding Mobile */
+  .section {
+    padding: 3rem 0 !important;
+  }
+  
+  .container {
+    padding: 0 1.5rem !important;
+  }
+  
+  /* Fix Experience Timeline Dots */
+  .timeline::before {
+    left: 20px !important;
+  }
+  
+  .timeline-item::before {
+    left: 20px !important;
+    transform: translateX(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    z-index: 1;
+  }
+  
+  .timeline-item {
+    padding-left: 50px !important;
+  }
+  
+  .timeline-date {
+    padding-left: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-content {
+    padding-left: 0 !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.75rem !important;
+  }
+  
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .profile-img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  /* Even smaller chatbot button on very small screens */
+  .chat-toggle-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* Desktop - hide mobile elements */
+@media (min-width: 769px) {
+  .chat-toggle-btn {
+    display: none !important;
+  }
+  
+  .nav-hamburger {
+    display: none !important;
+  }
+  
+  .floating-chat .gpt-mini {
+    display: flex !important;
+  }
+}
+
+/* Print styles to ensure resume prints correctly */
+@media print {
+  .floating-chat,
+  .chat-toggle-btn,
+  .nav-hamburger {
+    display: none !important;
+  }
+}
