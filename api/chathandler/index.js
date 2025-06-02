@@ -1,24 +1,18 @@
-const OpenAIpkg = require("openai");
+const OpenAI = require("openai");
 
-// Initialize OpenAI client (support v4 and v3 SDKs)
+// Initialize OpenAI client once at module level for reuse
 let openai;
-try {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    throw new Error('OPENAI_API_KEY environment variable is not set');
-  }
-  
-  if (typeof OpenAIpkg.OpenAI === 'function') {
-    // v4+ default export style
-    openai = new OpenAIpkg.OpenAI({ apiKey: apiKey });
-  } else {
-    // v3 style: Configuration + OpenAIApi
-    const { Configuration, OpenAIApi } = OpenAIpkg;
-    const config = new Configuration({ apiKey: apiKey });
-    openai = new OpenAIApi(config);
-  }
-} catch (initError) {
-  console.error('Failed to initialize OpenAI client:', initError.message);
+const apiKey = process.env.OPENAI_API_KEY;
+
+if (apiKey) {
+  openai = new OpenAI({ 
+    apiKey: apiKey,
+    timeout: 20000, // 20 second timeout
+    maxRetries: 1 // Don't retry on failure to keep responses fast
+  });
+  console.log('OpenAI client initialized successfully');
+} else {
+  console.error('OPENAI_API_KEY not found in environment');
 }
 
 // CORS settings - support both production and staging domains
@@ -64,23 +58,28 @@ module.exports = async function (context, req) {
     const userMessage = req.body?.message || '';
     context.log('💬 User message:', userMessage);
 
-    // Call OpenAI
-    let aiReply;
-    if (openai.createChatCompletion) {
-      // v3 SDK
-      const resp = await openai.createChatCompletion({
-        model: 'gpt-4o',
-        messages: [{ role: 'user', content: userMessage }]
-      });
-      aiReply = resp.data.choices[0].message.content;
-    } else {
-      // v4 SDK
-      const resp = await openai.chat.completions.create({
-        model: 'gpt-4o',
-        messages: [{ role: 'user', content: userMessage }]
-      });
-      aiReply = resp.choices[0].message.content;
-    }
+    // Call OpenAI with optimized settings
+    const startTime = Date.now();
+    
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo', // Much faster than gpt-4o
+      messages: [
+        {
+          role: 'system',
+          content: 'You are Jason Slater\'s AI assistant on his cloud resume website. Be helpful, concise, and professional. Keep responses brief unless asked for details.'
+        },
+        { 
+          role: 'user', 
+          content: userMessage 
+        }
+      ],
+      max_tokens: 200, // Limit response length for speed
+      temperature: 0.7
+    });
+    
+    const aiReply = completion.choices[0].message.content;
+    const responseTime = Date.now() - startTime;
+    context.log(`OpenAI response time: ${responseTime}ms`);
     context.log('🤖 AI reply:', aiReply);
 
     context.res = { status: 200, headers: corsHeaders, body: { reply: aiReply } };
