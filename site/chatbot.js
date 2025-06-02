@@ -104,31 +104,44 @@ window.addEventListener('DOMContentLoaded', () => {
   // Keep warm every 5 minutes
   setInterval(keepWarm, 5 * 60 * 1000);
 
-  // Drag and Drop Functionality
+  // Enhanced Widget State Management
   const chatContainer = document.getElementById('chatContainer');
   const chatHeader = document.getElementById('chatHeader');
   const chatMinimizeBtn = document.getElementById('chatMinimizeBtn');
+  const chatCloseBtn = document.getElementById('chatCloseBtn');
   const chatBody = document.getElementById('chatBody');
+  const chatReopenBtn = document.getElementById('chatReopenBtn');
   const gptMini = chatContainer.querySelector('.gpt-mini');
 
   let isDragging = false;
   let dragOffset = { x: 0, y: 0 };
 
-  // Load saved position from localStorage
-  const savedPosition = localStorage.getItem('chatPosition');
-  if (savedPosition) {
-    const position = JSON.parse(savedPosition);
-    chatContainer.style.left = position.x + 'px';
-    chatContainer.style.top = position.y + 'px';
+  // Enhanced state management - three states: open, minimized, closed
+  const chatState = {
+    position: JSON.parse(localStorage.getItem('chatPosition') || 'null'),
+    isMinimized: localStorage.getItem('chatMinimized') === 'true',
+    isClosed: localStorage.getItem('chatClosed') === 'true'
+  };
+
+  // Load saved position
+  if (chatState.position) {
+    chatContainer.style.left = chatState.position.x + 'px';
+    chatContainer.style.top = chatState.position.y + 'px';
     chatContainer.style.right = 'auto';
     chatContainer.style.bottom = 'auto';
   }
 
-  // Load minimized state
-  const isMinimized = localStorage.getItem('chatMinimized') === 'true';
-  if (isMinimized) {
-    gptMini.classList.add('minimized');
-    chatMinimizeBtn.textContent = '+';
+  // Load saved states on startup
+  if (chatState.isClosed) {
+    chatContainer.classList.add('closed');
+    chatContainer.style.display = 'none';
+    chatReopenBtn.style.display = 'flex';
+  } else {
+    if (chatState.isMinimized) {
+      gptMini.classList.add('minimized');
+      chatMinimizeBtn.textContent = '+';
+    }
+    chatReopenBtn.style.display = 'none';
   }
 
   // Minimize/Maximize functionality
@@ -139,19 +152,62 @@ window.addEventListener('DOMContentLoaded', () => {
     if (isCurrentlyMinimized) {
       gptMini.classList.remove('minimized');
       chatMinimizeBtn.textContent = '−';
+      chatState.isMinimized = false;
       localStorage.setItem('chatMinimized', 'false');
     } else {
       gptMini.classList.add('minimized');
       chatMinimizeBtn.textContent = '+';
+      chatState.isMinimized = true;
       localStorage.setItem('chatMinimized', 'true');
+    }
+  });
+
+  // Close functionality
+  chatCloseBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    
+    // Add subtle flash effect for confirmation
+    chatContainer.style.boxShadow = '0 0 20px rgba(255, 0, 0, 0.4)';
+    setTimeout(() => {
+      chatContainer.style.boxShadow = '';
+    }, 200);
+    
+    // Close with smooth animation
+    setTimeout(() => {
+      chatContainer.classList.add('closed');
+      setTimeout(() => {
+        chatContainer.style.display = 'none';
+        chatReopenBtn.style.display = 'flex';
+        chatState.isClosed = true;
+        localStorage.setItem('chatClosed', 'true');
+      }, 400);
+    }, 200);
+  });
+
+  // Reopen functionality
+  chatReopenBtn.addEventListener('click', function() {
+    chatReopenBtn.style.display = 'none';
+    chatContainer.style.display = 'block';
+    chatContainer.classList.remove('closed');
+    chatState.isClosed = false;
+    localStorage.setItem('chatClosed', 'false');
+    
+    // Restore previous minimize state
+    if (chatState.isMinimized) {
+      gptMini.classList.add('minimized');
+      chatMinimizeBtn.textContent = '+';
+    } else {
+      gptMini.classList.remove('minimized');
+      chatMinimizeBtn.textContent = '−';
     }
   });
 
   // Drag functionality - only on desktop
   if (window.innerWidth > 768) {
     chatHeader.addEventListener('mousedown', function(e) {
-      // Only start drag if not clicking on minimize button
-      if (e.target === chatMinimizeBtn || e.target.closest('.minimize-btn')) {
+      // Only start drag if not clicking on control buttons
+      if (e.target === chatMinimizeBtn || e.target === chatCloseBtn || 
+          e.target.closest('.minimize-btn') || e.target.closest('.close-btn')) {
         return;
       }
       
@@ -193,10 +249,8 @@ window.addEventListener('DOMContentLoaded', () => {
         
         // Save position to localStorage
         const rect = chatContainer.getBoundingClientRect();
-        localStorage.setItem('chatPosition', JSON.stringify({
-          x: rect.left,
-          y: rect.top
-        }));
+        chatState.position = { x: rect.left, y: rect.top };
+        localStorage.setItem('chatPosition', JSON.stringify(chatState.position));
       }
     });
   }

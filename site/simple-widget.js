@@ -90,6 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
   headerTitle.style.fontWeight = '600';
   headerTitle.style.fontSize = '14px';
 
+  const controls = document.createElement('div');
+  controls.style.display = 'flex';
+  controls.style.gap = '4px';
+
   const minimizeBtn = document.createElement('button');
   minimizeBtn.id = 'statusMinimizeBtn';
   minimizeBtn.innerHTML = '−';
@@ -104,9 +108,26 @@ document.addEventListener('DOMContentLoaded', function() {
   minimizeBtn.style.fontWeight = 'bold';
   minimizeBtn.style.transition = 'all 0.2s ease';
 
+  const closeBtn = document.createElement('button');
+  closeBtn.id = 'statusCloseBtn';
+  closeBtn.innerHTML = '×';
+  closeBtn.style.background = 'rgba(255, 0, 0, 0.2)';
+  closeBtn.style.border = 'none';
+  closeBtn.style.color = theme.color;
+  closeBtn.style.width = '20px';
+  closeBtn.style.height = '20px';
+  closeBtn.style.borderRadius = '50%';
+  closeBtn.style.cursor = 'pointer';
+  closeBtn.style.fontSize = '16px';
+  closeBtn.style.fontWeight = 'bold';
+  closeBtn.style.transition = 'all 0.2s ease';
+
+  controls.appendChild(minimizeBtn);
+  controls.appendChild(closeBtn);
+
   header.appendChild(dragHandle);
   header.appendChild(headerTitle);
-  header.appendChild(minimizeBtn);
+  header.appendChild(controls);
 
   // Create body container
   const body = document.createElement('div');
@@ -150,21 +171,34 @@ document.addEventListener('DOMContentLoaded', function() {
   widget.appendChild(body);
   document.body.appendChild(widget);
 
-  // Load saved position from localStorage
-  const savedPosition = localStorage.getItem('statusPosition');
-  if (savedPosition) {
-    const position = JSON.parse(savedPosition);
-    widget.style.left = position.x + 'px';
-    widget.style.top = position.y + 'px';
+  // Get reopen button
+  const statusReopenBtn = document.getElementById('statusReopenBtn');
+
+  // Enhanced state management
+  const statusState = {
+    position: JSON.parse(localStorage.getItem('statusPosition') || 'null'),
+    isMinimized: localStorage.getItem('statusMinimized') === 'true',
+    isClosed: localStorage.getItem('statusClosed') === 'true'
+  };
+
+  // Load saved position
+  if (statusState.position) {
+    widget.style.left = statusState.position.x + 'px';
+    widget.style.top = statusState.position.y + 'px';
     widget.style.bottom = 'auto';
   }
 
-  // Load minimized state
-  const isMinimized = localStorage.getItem('statusMinimized') === 'true';
-  if (isMinimized) {
-    body.style.height = '0';
-    body.style.padding = '0 16px';
-    minimizeBtn.innerHTML = '+';
+  // Load saved states on startup
+  if (statusState.isClosed) {
+    widget.style.display = 'none';
+    statusReopenBtn.style.display = 'flex';
+  } else {
+    if (statusState.isMinimized) {
+      body.style.height = '0';
+      body.style.padding = '0 16px';
+      minimizeBtn.innerHTML = '+';
+    }
+    statusReopenBtn.style.display = 'none';
   }
 
   // Minimize/Maximize functionality
@@ -176,12 +210,58 @@ document.addEventListener('DOMContentLoaded', function() {
       body.style.height = 'auto';
       body.style.padding = '16px';
       minimizeBtn.innerHTML = '−';
+      statusState.isMinimized = false;
       localStorage.setItem('statusMinimized', 'false');
     } else {
       body.style.height = '0';
       body.style.padding = '0 16px';
       minimizeBtn.innerHTML = '+';
+      statusState.isMinimized = true;
       localStorage.setItem('statusMinimized', 'true');
+    }
+  });
+
+  // Close functionality
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    
+    // Add subtle flash effect for confirmation
+    widget.style.border = '2px solid rgba(255, 0, 0, 0.6)';
+    setTimeout(() => {
+      widget.style.border = theme.border;
+    }, 200);
+    
+    // Close with smooth animation
+    setTimeout(() => {
+      widget.style.opacity = '0';
+      widget.style.transform = 'scale(0.8) translateY(20px)';
+      setTimeout(() => {
+        widget.style.display = 'none';
+        statusReopenBtn.style.display = 'flex';
+        statusState.isClosed = true;
+        localStorage.setItem('statusClosed', 'true');
+      }, 400);
+    }, 200);
+  });
+
+  // Reopen functionality
+  statusReopenBtn.addEventListener('click', function() {
+    statusReopenBtn.style.display = 'none';
+    widget.style.display = 'block';
+    widget.style.opacity = '1';
+    widget.style.transform = 'scale(1) translateY(0)';
+    statusState.isClosed = false;
+    localStorage.setItem('statusClosed', 'false');
+    
+    // Restore previous minimize state
+    if (statusState.isMinimized) {
+      body.style.height = '0';
+      body.style.padding = '0 16px';
+      minimizeBtn.innerHTML = '+';
+    } else {
+      body.style.height = 'auto';
+      body.style.padding = '16px';
+      minimizeBtn.innerHTML = '−';
     }
   });
 
@@ -203,6 +283,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   minimizeBtn.addEventListener('mouseleave', function() {
     this.style.background = 'rgba(0, 255, 65, 0.2)';
+    this.style.transform = 'scale(1)';
+  });
+
+  closeBtn.addEventListener('mouseenter', function() {
+    this.style.background = 'rgba(255, 0, 0, 0.4)';
+    this.style.transform = 'scale(1.1)';
+  });
+
+  closeBtn.addEventListener('mouseleave', function() {
+    this.style.background = 'rgba(255, 0, 0, 0.2)';
     this.style.transform = 'scale(1)';
   });
 
@@ -232,8 +322,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let dragOffset = { x: 0, y: 0 };
 
     header.addEventListener('mousedown', function(e) {
-      // Only start drag if not clicking on minimize button
-      if (e.target === minimizeBtn) {
+      // Only start drag if not clicking on control buttons
+      if (e.target === minimizeBtn || e.target === closeBtn) {
         return;
       }
       
@@ -296,10 +386,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Save position to localStorage
         const rect = widget.getBoundingClientRect();
-        localStorage.setItem('statusPosition', JSON.stringify({
-          x: rect.left,
-          y: rect.top
-        }));
+        statusState.position = { x: rect.left, y: rect.top };
+        localStorage.setItem('statusPosition', JSON.stringify(statusState.position));
       }
     });
   }
