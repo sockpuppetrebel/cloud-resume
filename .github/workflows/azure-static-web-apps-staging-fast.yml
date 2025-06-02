@@ -9,7 +9,7 @@ on:
       - 'site/**'
       - 'api/**'
       - 'counter-func/**'
-      - '.github/workflows/fast-staging-deploy.yml'
+      - '.github/workflows/azure-static-web-apps-staging-fast.yml'
   workflow_dispatch:
     inputs:
       skip_tests:
