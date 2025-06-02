@@ -67,14 +67,14 @@ module.exports = async function (context, req) {
     if (openai.createChatCompletion) {
       // v3 SDK
       const resp = await openai.createChatCompletion({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         messages: [{ role: 'user', content: userMessage }]
       });
       aiReply = resp.data.choices[0].message.content;
     } else {
       // v4 SDK
       const resp = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         messages: [{ role: 'user', content: userMessage }]
       });
       aiReply = resp.choices[0].message.content;
