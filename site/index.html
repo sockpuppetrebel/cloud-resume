@@ -8,9 +8,13 @@
   <link rel="stylesheet" href="chatbot.css">
   <link rel="stylesheet" href="mobile-improvements.css">
   <link rel="stylesheet" href="status-widget.css">
+  <link rel="stylesheet" href="hacker-theme.css">
+  <link rel="stylesheet" href="chatbot-modern.css">
+  <link rel="stylesheet" href="mobile-hacker.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
 <body>
   <!-- Hero Section with Mountain/Forest Background -->
@@ -30,6 +34,7 @@
         <div class="nav-links" id="navLinks">
           <a href="#about" class="nav-link">About</a>
           <a href="#github" class="nav-link">GitHub</a>
+          <a href="#projects" class="nav-link">Projects</a>
           <a href="#experience" class="nav-link">Experience</a>
           <a href="#skills" class="nav-link">Skills</a>
           <a href="#learning" class="nav-link">Learning</a>
@@ -112,6 +117,107 @@
     </div>
   </section>
 
+  <!-- Projects Section -->
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-subtitle">Enterprise automation tools and cloud solutions</p>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <h3>PowerShell Automation Toolkit</h3>
+            <div class="project-status">
+              <span class="status-badge active">Active</span>
+            </div>
+          </div>
+          <p class="project-description">Comprehensive collection of enterprise PowerShell scripts for Microsoft 365, Azure, and security administration. Includes compliance assessment, cost optimization, and governance automation tools.</p>
+          <div class="project-features">
+            <span class="feature-tag">M365 Management</span>
+            <span class="feature-tag">Azure Cost Analysis</span>
+            <span class="feature-tag">Security Auditing</span>
+            <span class="feature-tag">Compliance Assessment</span>
+          </div>
+          <div class="tech-stack">
+            <span class="tech">PowerShell</span>
+            <span class="tech">Microsoft Graph</span>
+            <span class="tech">Azure CLI</span>
+            <span class="tech">Exchange Online</span>
+            <span class="tech">SharePoint</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat">
+              <span class="stat-number">12+</span>
+              <span class="stat-label">Scripts</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">SOC2</span>
+              <span class="stat-label">Compliance</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">Enterprise</span>
+              <span class="stat-label">Grade</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/sockpuppetrebel/pwsh_honeypot" class="btn btn-primary" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+              View Code
+            </a>
+            <a href="https://github.com/sockpuppetrebel/pwsh_honeypot/blob/main/README.md" class="btn btn-secondary" target="_blank">Documentation</a>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Cloud Resume Challenge</h3>
+            <div class="project-status">
+              <span class="status-badge active">Live</span>
+            </div>
+          </div>
+          <p class="project-description">This very website! Built with Azure Static Web Apps, serverless functions, and CI/CD pipeline. Features AI-powered chatbot, real-time monitoring, and enterprise network architecture.</p>
+          <div class="project-features">
+            <span class="feature-tag">AI Chatbot</span>
+            <span class="feature-tag">Real-time Monitoring</span>
+            <span class="feature-tag">CI/CD Pipeline</span>
+            <span class="feature-tag">Custom Domain</span>
+          </div>
+          <div class="tech-stack">
+            <span class="tech">Azure Functions</span>
+            <span class="tech">GitHub Actions</span>
+            <span class="tech">OpenAI API</span>
+            <span class="tech">Azure CDN</span>
+            <span class="tech">JavaScript</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat">
+              <span class="stat-number">99.9%</span>
+              <span class="stat-label">Uptime</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">SSL</span>
+              <span class="stat-label">Secured</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">Global</span>
+              <span class="stat-label">CDN</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/sockpuppetrebel/cloud-resume" class="btn btn-primary" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+              </svg>
+              View Code
+            </a>
+            <a href="readme-viewer.html" class="btn btn-secondary" target="_blank">Architecture</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Experience Section -->
   <section id="experience" class="section experience-section">
     <div class="container">
@@ -148,32 +254,53 @@
       <h2 class="section-title">Technical Skills</h2>
       <div class="skills-grid">
         <div class="skill-card">
-          <div class="skill-icon">☁️</div>
+          <div class="skill-icon cloud-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure" class="logo-img">
+            <i class="devicon-googlecloud-plain colored"></i>
+          </div>
           <h3>Cloud Platforms</h3>
           <p>AWS (SA-C02, CLF-C01), Azure, GCP</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">⚡</div>
+          <div class="skill-icon code-snippet">
+            <pre><code>Get-ADUser -Filter *
+| Where-Object {$_.Enabled}
+| Export-Csv users.csv</code></pre>
+          </div>
           <h3>Automation & Scripting</h3>
           <p>PowerShell, Bash, Ansible, Terraform</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🔒</div>
+          <div class="skill-icon">
+            <i class="devicon-azure-plain colored"></i>
+          </div>
           <h3>Identity & Security</h3>
           <p>Azure AD, IAM, MFA, Conditional Access</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🤖</div>
+          <div class="skill-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#00ff41">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-6h4v2h-4v-2zm0-4h4v2h-4v-2z"/>
+            </svg>
+          </div>
           <h3>AI Integration</h3>
           <p>GPT API, Microsoft Copilot, Automation Bots</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🔧</div>
+          <div class="skill-icon saas-icons">
+            <i class="devicon-office365-plain colored"></i>
+            <i class="devicon-jira-plain colored"></i>
+          </div>
           <h3>SaaS Platforms</h3>
           <p>M365, Zoom, Jira, Artifactory, DocuSign</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🚀</div>
+          <div class="skill-icon devops-icons">
+            <i class="devicon-github-original"></i>
+            <i class="devicon-jenkins-line"></i>
+            <i class="devicon-terraform-plain"></i>
+          </div>
           <h3>CI/CD & DevOps</h3>
           <p>GitHub Actions, Jenkins, ARM Templates</p>
         </div>
@@ -194,6 +321,20 @@
       </div>
       <div class="learning-timeline">
         <!-- Today's new learning items -->
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Azure Functions API Integration</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Needed real-time status monitoring but API deployment kept failing with 404 errors</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned proper Azure Functions zip deployment with full function app structure and CORS configuration</p>
+            </div>
+          </div>
+        </div>
+        
         <div class="learning-item" data-expanded="false">
           <div class="learning-dot"></div>
           <div class="learning-card">

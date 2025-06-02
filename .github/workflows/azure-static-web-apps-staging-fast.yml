@@ -1,0 +1,67 @@
+name: Fast Staging Deploy
+
+on:
+  push:
+    branches:
+      - staging
+    # Only run on relevant file changes
+    paths:
+      - 'site/**'
+      - 'api/**'
+      - 'counter-func/**'
+      - '.github/workflows/azure-static-web-apps-staging-fast.yml'
+  workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: 'Skip tests for faster deployment'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  # Quick build and deploy - no tests unless needed
+  fast-deploy:
+    runs-on: ubuntu-latest
+    name: Fast Deploy to Staging
+    
+    steps:
+      - name: Checkout (shallow clone for speed)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1  # Only get latest commit
+          
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_SMOKE_0FA3B7E1E }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/site"
+          skip_build: true  # Skip build step since we're just serving static files
+          
+  # Optional quick tests - only if requested or if it's a PR
+  quick-tests:
+    runs-on: ubuntu-latest
+    name: Quick Tests
+    if: github.event.inputs.skip_tests != 'true' && github.event_name == 'pull_request'
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          
+      - name: Quick HTML validation
+        run: |
+          # Just check for syntax errors
+          if ! grep -q "<!DOCTYPE html>" site/index.html; then
+            echo "Missing DOCTYPE"
+            exit 1
+          fi
+          
+          # Check for basic required elements
+          if ! grep -q "<title>" site/index.html; then
+            echo "Missing title tag"
+            exit 1
+          fi
+          
+          echo "Basic validation passed"
