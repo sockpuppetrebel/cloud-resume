@@ -1,5 +1,11 @@
 # Claude Configuration
 
+## IMPORTANT: Multiple CLAUDE.md Files Rule
+- When updating this CLAUDE.md file, ALWAYS search for all copies across the project
+- Update every instance found to keep them synchronized
+- Use Glob tool with pattern "**/CLAUDE.md" to find all instances
+- This ensures consistency across the entire codebase
+
 ## Code Style Preferences
 - NO emojis in any code, documentation, or README files
 - NO Claude references or attribution in code
