@@ -103,5 +103,102 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // Keep warm every 5 minutes
   setInterval(keepWarm, 5 * 60 * 1000);
+
+  // Drag and Drop Functionality
+  const chatContainer = document.getElementById('chatContainer');
+  const chatHeader = document.getElementById('chatHeader');
+  const chatMinimizeBtn = document.getElementById('chatMinimizeBtn');
+  const chatBody = document.getElementById('chatBody');
+  const gptMini = chatContainer.querySelector('.gpt-mini');
+
+  let isDragging = false;
+  let dragOffset = { x: 0, y: 0 };
+
+  // Load saved position from localStorage
+  const savedPosition = localStorage.getItem('chatPosition');
+  if (savedPosition) {
+    const position = JSON.parse(savedPosition);
+    chatContainer.style.left = position.x + 'px';
+    chatContainer.style.top = position.y + 'px';
+    chatContainer.style.right = 'auto';
+    chatContainer.style.bottom = 'auto';
+  }
+
+  // Load minimized state
+  const isMinimized = localStorage.getItem('chatMinimized') === 'true';
+  if (isMinimized) {
+    gptMini.classList.add('minimized');
+    chatMinimizeBtn.textContent = '+';
+  }
+
+  // Minimize/Maximize functionality
+  chatMinimizeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const isCurrentlyMinimized = gptMini.classList.contains('minimized');
+    
+    if (isCurrentlyMinimized) {
+      gptMini.classList.remove('minimized');
+      chatMinimizeBtn.textContent = '−';
+      localStorage.setItem('chatMinimized', 'false');
+    } else {
+      gptMini.classList.add('minimized');
+      chatMinimizeBtn.textContent = '+';
+      localStorage.setItem('chatMinimized', 'true');
+    }
+  });
+
+  // Drag functionality - only on desktop
+  if (window.innerWidth > 768) {
+    chatHeader.addEventListener('mousedown', function(e) {
+      // Only start drag if not clicking on minimize button
+      if (e.target === chatMinimizeBtn || e.target.closest('.minimize-btn')) {
+        return;
+      }
+      
+      isDragging = true;
+      const rect = chatContainer.getBoundingClientRect();
+      dragOffset.x = e.clientX - rect.left;
+      dragOffset.y = e.clientY - rect.top;
+      
+      chatHeader.style.cursor = 'grabbing';
+      document.body.style.userSelect = 'none';
+      
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      
+      const newX = e.clientX - dragOffset.x;
+      const newY = e.clientY - dragOffset.y;
+      
+      // Keep widget within viewport bounds
+      const maxX = window.innerWidth - chatContainer.offsetWidth;
+      const maxY = window.innerHeight - chatContainer.offsetHeight;
+      
+      const boundedX = Math.max(0, Math.min(newX, maxX));
+      const boundedY = Math.max(0, Math.min(newY, maxY));
+      
+      chatContainer.style.left = boundedX + 'px';
+      chatContainer.style.top = boundedY + 'px';
+      chatContainer.style.right = 'auto';
+      chatContainer.style.bottom = 'auto';
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (isDragging) {
+        isDragging = false;
+        chatHeader.style.cursor = 'move';
+        document.body.style.userSelect = '';
+        
+        // Save position to localStorage
+        const rect = chatContainer.getBoundingClientRect();
+        localStorage.setItem('chatPosition', JSON.stringify({
+          x: rect.left,
+          y: rect.top
+        }));
+      }
+    });
+  }
 });
 
