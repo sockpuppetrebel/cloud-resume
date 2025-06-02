@@ -5,11 +5,16 @@ window.addEventListener('DOMContentLoaded', () => {
   const sendBtn   = document.getElementById('mini-send');
 
   function appendMessage(who, text) {
-    const div = document.createElement('div');
-    div.className = 'message ' + who;
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message ' + who;
+    
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'bubble';
     // Replace \n with <br> for proper line breaks
-    div.innerHTML = text.replace(/\n/g, '<br>');
-    historyEl.append(div);
+    bubbleDiv.innerHTML = text.replace(/\n/g, '<br>');
+    
+    messageDiv.appendChild(bubbleDiv);
+    historyEl.append(messageDiv);
     historyEl.scrollTop = historyEl.scrollHeight;
   }
 

@@ -35,20 +35,43 @@ body {
   color: var(--text-white) !important;
 }
 
-/* Hero Section */
+/* Hero Section with Mystical Forest Background */
 .hero {
   background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%) !important;
+  position: relative !important;
 }
 
 .hero-background {
-  background: var(--bg-primary) !important;
+  background: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2070&auto=format&fit=crop') center/cover !important;
+  opacity: 0.45 !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 1 !important;
 }
 
 .hero-overlay {
   background: linear-gradient(45deg, 
-    rgba(0, 255, 65, 0.1) 0%, 
-    rgba(0, 0, 0, 0.8) 50%, 
-    rgba(0, 255, 65, 0.05) 100%) !important;
+    rgba(0, 0, 0, 0.85) 0%, 
+    rgba(0, 0, 0, 0.7) 30%,
+    rgba(0, 20, 0, 0.8) 70%,
+    rgba(0, 0, 0, 0.9) 100%) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 2 !important;
+}
+
+/* Ensure hero content is above background */
+.hero .navbar,
+.hero .hero-content,
+.hero .scroll-indicator {
+  position: relative !important;
+  z-index: 3 !important;
 }
 
 .hero-title {
@@ -65,10 +88,30 @@ body {
   color: var(--text-secondary) !important;
 }
 
-/* Navigation */
+/* Navigation with Shipibo Pattern */
 .navbar {
   background: rgba(0, 0, 0, 0.95) !important;
-  border-bottom: 2px solid var(--hacker-green) !important;
+  border-bottom: 3px solid var(--hacker-green) !important;
+  position: relative !important;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg,
+    var(--hacker-green) 0px,
+    var(--hacker-green) 6px,
+    transparent 6px,
+    transparent 12px,
+    var(--hacker-green-dim) 12px,
+    var(--hacker-green-dim) 18px,
+    transparent 18px,
+    transparent 30px
+  );
 }
 
 .nav-logo {
@@ -132,19 +175,59 @@ body {
   color: var(--text-secondary) !important;
 }
 
-/* Cards */
+/* Cards with Subtle Shipibo Patterns */
 .skill-card, .stat-card, .timeline-content {
   background: var(--bg-card) !important;
   border: 1px solid var(--border-dim) !important;
   color: var(--text-white) !important;
   box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1) !important;
   transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.skill-card::before, .stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg,
+    transparent 0px,
+    transparent 8px,
+    var(--border-dim) 8px,
+    var(--border-dim) 12px,
+    transparent 12px,
+    transparent 20px,
+    var(--border-dim) 20px,
+    var(--border-dim) 22px,
+    transparent 22px,
+    transparent 32px
+  );
+  opacity: 0.5;
 }
 
 .skill-card:hover, .stat-card:hover {
   border-color: var(--hacker-green) !important;
   box-shadow: 0 8px 30px rgba(0, 255, 65, 0.2) !important;
   transform: translateY(-5px) !important;
+}
+
+.skill-card:hover::before, .stat-card:hover::before {
+  background: repeating-linear-gradient(90deg,
+    transparent 0px,
+    transparent 8px,
+    var(--hacker-green) 8px,
+    var(--hacker-green) 12px,
+    transparent 12px,
+    transparent 20px,
+    var(--hacker-green-dim) 20px,
+    var(--hacker-green-dim) 22px,
+    transparent 22px,
+    transparent 32px
+  );
+  opacity: 0.8;
 }
 
 .skill-card h3, .stat-card h3 {
@@ -162,7 +245,7 @@ body {
   border-radius: 8px !important;
 }
 
-/* Learning Timeline */
+/* Learning Timeline with Shipibo Accents */
 .learning-section {
   background: linear-gradient(135deg, 
     var(--bg-primary) 0%, 
@@ -174,11 +257,51 @@ body {
   background: var(--bg-card) !important;
   border: 1px solid var(--border-dim) !important;
   transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.learning-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: repeating-linear-gradient(90deg,
+    transparent 0px,
+    transparent 6px,
+    var(--border-dim) 6px,
+    var(--border-dim) 9px,
+    transparent 9px,
+    transparent 18px,
+    var(--border-dim) 18px,
+    var(--border-dim) 20px,
+    transparent 20px,
+    transparent 28px
+  );
+  opacity: 0.3;
 }
 
 .learning-card:hover {
   border-color: var(--hacker-green) !important;
   box-shadow: 0 0 20px rgba(0, 255, 65, 0.15) !important;
+}
+
+.learning-card:hover::after {
+  background: repeating-linear-gradient(90deg,
+    transparent 0px,
+    transparent 6px,
+    var(--hacker-green) 6px,
+    var(--hacker-green) 9px,
+    transparent 9px,
+    transparent 18px,
+    var(--hacker-green-dim) 18px,
+    var(--hacker-green-dim) 20px,
+    transparent 20px,
+    transparent 28px
+  );
+  opacity: 0.6;
 }
 
 .learning-card h3 {
@@ -337,14 +460,36 @@ body {
   }
 }
 
-/* Animation Effects */
-@keyframes glow {
-  0%, 100% { text-shadow: 0 0 5px var(--glow-color); }
-  50% { text-shadow: 0 0 20px var(--glow-bright), 0 0 30px var(--glow-color); }
+/* Clean Text - No Blur Effects */
+.hero-title {
+  color: var(--text-white) !important;
+  text-shadow: none !important;
+  animation: none !important;
 }
 
-.hero-title {
-  animation: glow 3s ease-in-out infinite !important;
+.hero-subtitle {
+  color: var(--hacker-green) !important;
+  text-shadow: none !important;
+}
+
+.nav-logo {
+  color: var(--hacker-green-bright) !important;
+  text-shadow: none !important;
+}
+
+.nav-link:hover {
+  color: var(--hacker-green) !important;
+  text-shadow: none !important;
+}
+
+.section-title {
+  color: var(--hacker-green) !important;
+  text-shadow: none !important;
+}
+
+/* Remove all text-shadow effects */
+h1, h2, h3, h4, h5, h6, .nav-logo, .hero-title, .hero-subtitle, .section-title {
+  text-shadow: none !important;
 }
 
 /* Mobile Menu */
