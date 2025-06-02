@@ -1,4 +1,4 @@
-// chatbot.js
+// chatbot.js - Updated June 1 2025
 window.addEventListener('DOMContentLoaded', () => {
   const historyEl = document.getElementById('history');
   const promptEl  = document.getElementById('mini-prompt');
