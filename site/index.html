@@ -391,6 +391,20 @@
           </div>
         </div>
         
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Fullstack Staging Environment Fix</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Staging was only deploying static files - API wasn't updating, blocking fullstack development testing</p>
+              <p class="learning-solution"><strong>Solution:</strong> Added ONE line (api_location: "/api") to staging workflow - Azure Static Web Apps needs explicit API config</p>
+            </div>
+          </div>
+        </div>
+        
         <!-- Collapsible older items section -->
         <div id="older-learning-items" class="older-items" style="display: none;">
         <div class="learning-item" data-expanded="false">
