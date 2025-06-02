@@ -62,6 +62,11 @@ module.exports = async function (context, req) {
     // Call OpenAI with optimized settings
     const startTime = Date.now();
     
+    // Debug: Log API key info (safely)
+    context.log(`API Key present: ${!!apiKey}`);
+    context.log(`API Key length: ${apiKey ? apiKey.length : 0}`);
+    context.log(`API Key prefix: ${apiKey ? apiKey.substring(0, 10) + '...' : 'none'}`);
+    
     const systemPrompt = `You are Jason Slater's AI assistant on his cloud resume website. You have access to Jason's accurate resume information. 
 
 CRITICAL RULES:
@@ -75,6 +80,15 @@ ${JSON.stringify(resumeData, null, 2)}
 
 Remember: Only use the above data. Never make up information.`;
 
+    // Test API key with a simple models list first
+    try {
+      const models = await openai.models.list();
+      context.log('API key validated successfully');
+    } catch (testError) {
+      context.log('API key validation failed:', testError.message);
+      throw new Error(`API key validation failed: ${testError.message}`);
+    }
+    
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [
