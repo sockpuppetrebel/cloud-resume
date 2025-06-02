@@ -8,9 +8,12 @@
   <link rel="stylesheet" href="chatbot.css">
   <link rel="stylesheet" href="mobile-improvements.css">
   <link rel="stylesheet" href="status-widget.css">
+  <link rel="stylesheet" href="hacker-theme.css">
+  <link rel="stylesheet" href="chatbot-hacker.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
 <body>
   <!-- Hero Section with Mountain/Forest Background -->
@@ -148,32 +151,53 @@
       <h2 class="section-title">Technical Skills</h2>
       <div class="skills-grid">
         <div class="skill-card">
-          <div class="skill-icon">☁️</div>
+          <div class="skill-icon cloud-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" class="logo-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure" class="logo-img">
+            <i class="devicon-googlecloud-plain colored"></i>
+          </div>
           <h3>Cloud Platforms</h3>
           <p>AWS (SA-C02, CLF-C01), Azure, GCP</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">⚡</div>
+          <div class="skill-icon code-snippet">
+            <pre><code>Get-ADUser -Filter *
+| Where-Object {$_.Enabled}
+| Export-Csv users.csv</code></pre>
+          </div>
           <h3>Automation & Scripting</h3>
           <p>PowerShell, Bash, Ansible, Terraform</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🔒</div>
+          <div class="skill-icon">
+            <i class="devicon-azure-plain colored"></i>
+          </div>
           <h3>Identity & Security</h3>
           <p>Azure AD, IAM, MFA, Conditional Access</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🤖</div>
+          <div class="skill-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#00ff41">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-6h4v2h-4v-2zm0-4h4v2h-4v-2z"/>
+            </svg>
+          </div>
           <h3>AI Integration</h3>
           <p>GPT API, Microsoft Copilot, Automation Bots</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🔧</div>
+          <div class="skill-icon saas-icons">
+            <i class="devicon-office365-plain colored"></i>
+            <i class="devicon-jira-plain colored"></i>
+          </div>
           <h3>SaaS Platforms</h3>
           <p>M365, Zoom, Jira, Artifactory, DocuSign</p>
         </div>
         <div class="skill-card">
-          <div class="skill-icon">🚀</div>
+          <div class="skill-icon devops-icons">
+            <i class="devicon-github-original"></i>
+            <i class="devicon-jenkins-line"></i>
+            <i class="devicon-terraform-plain"></i>
+          </div>
           <h3>CI/CD & DevOps</h3>
           <p>GitHub Actions, Jenkins, ARM Templates</p>
         </div>
@@ -194,6 +218,20 @@
       </div>
       <div class="learning-timeline">
         <!-- Today's new learning items -->
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Azure Functions API Integration</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Needed real-time status monitoring but API deployment kept failing with 404 errors</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned proper Azure Functions zip deployment with full function app structure and CORS configuration</p>
+            </div>
+          </div>
+        </div>
+        
         <div class="learning-item" data-expanded="false">
           <div class="learning-dot"></div>
           <div class="learning-card">
