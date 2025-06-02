@@ -49,7 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
     appendMessage('bot', message);
   }
 
-  const API_URL = '/api/chathandler';
+  const API_URL = 'https://slaterbot.azurewebsites.net/api/chathandler';
 
   async function sendMessage() {
     const msg = promptEl.value.trim();
