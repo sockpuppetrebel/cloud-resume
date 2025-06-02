@@ -688,8 +688,32 @@
     </div>
   </div>
 
+  <!-- Status Widget HTML -->
+  <div class="status-widget" id="statusWidget" style="display: block;">
+    <div class="status-header">
+      <div class="status-indicator operational"></div>
+      <span class="status-title">System Status</span>
+      <div class="status-minimize" title="Minimize">−</div>
+    </div>
+    <div class="status-content">
+      <div class="status-uptime">--.--%</div>
+      <div class="status-text">Loading status...</div>
+      <div class="status-details">View details →</div>
+    </div>
+  </div>
+  
+  <div class="status-panel" id="statusPanel" style="display: none;">
+    <h3 style="margin-top: 0; color: var(--text-primary);">Service Status</h3>
+    <div class="service-list" id="serviceList">
+      <div style="text-align: center; color: var(--text-secondary);">Loading services...</div>
+    </div>
+    <div style="margin-top: 1rem; text-align: center; font-size: 0.8rem; color: var(--text-secondary);">
+      Last checked: <span id="lastCheckTime">--</span>
+    </div>
+  </div>
+
   <script src="chatbot.js" defer></script>
-  <script src="status-widget.js" defer></script>
+  <script src="status-widget-inline.js" defer></script>
   <script src="github-commits.js" defer></script>
   <script>
     function scrollToSection(sectionId) {
