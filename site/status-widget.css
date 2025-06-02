@@ -9,7 +9,7 @@
   padding: 1rem;
   min-width: 200px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  z-index: 900;
+  z-index: 1100;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
@@ -145,7 +145,7 @@
   max-height: 400px;
   overflow-y: auto;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  z-index: 901;
+  z-index: 1101;
   display: none;
   animation: slideUp 0.3s ease;
 }
