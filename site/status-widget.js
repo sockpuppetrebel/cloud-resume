@@ -184,13 +184,18 @@ document.addEventListener('click', (e) => {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('Status widget initializing...', 'Screen width:', window.innerWidth);
+  
   // Only show on desktop or tablets
   if (window.innerWidth > 480) {
+    console.log('Creating status widget...');
     createStatusWidget();
     
     // Show loading state immediately
     const indicator = document.querySelector('.status-indicator');
     const statusText = document.querySelector('.status-text');
+    console.log('Found elements:', { indicator: !!indicator, statusText: !!statusText });
+    
     if (indicator) indicator.className = 'status-indicator operational';
     if (statusText) statusText.textContent = 'Checking status...';
     
@@ -199,6 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Update every 5 minutes
     setInterval(fetchStatus, UPDATE_INTERVAL);
+  } else {
+    console.log('Widget hidden on mobile (width <= 480)');
   }
 });
 
