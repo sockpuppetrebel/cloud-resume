@@ -30,15 +30,15 @@ document.addEventListener('DOMContentLoaded', function() {
       secondaryColor: '#00cc33'
     },
     modern: {
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      color: '#ffffff',
-      border: 'none',
+      background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #0a0a0a 100%)',
+      color: '#00ff41',
+      border: '1px solid rgba(0, 255, 65, 0.3)',
       borderRadius: '16px',
-      boxShadow: '0 8px 32px rgba(102, 126, 234, 0.3), 0 2px 8px rgba(0,0,0,0.1)',
+      boxShadow: '0 8px 32px rgba(0, 255, 65, 0.2), 0 2px 8px rgba(0,0,0,0.3)',
       fontFamily: 'Inter, sans-serif',
-      dotColor: '#34d399',
-      accentColor: '#fbbf24',
-      secondaryColor: '#e5e7eb'
+      dotColor: '#39ff14',
+      accentColor: '#00cc33',
+      secondaryColor: '#888888'
     }
   };
   
