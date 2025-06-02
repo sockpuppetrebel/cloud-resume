@@ -1,0 +1,185 @@
+name: Mobile Compatibility Testing
+
+on:
+  pull_request:
+    branches:
+      - main
+      - staging
+  workflow_dispatch:
+
+jobs:
+  lighthouse-mobile:
+    runs-on: ubuntu-latest
+    name: Lighthouse Mobile Tests
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli
+
+      - name: Start local server
+        run: |
+          cd site
+          python -m http.server 8080 &
+          sleep 5
+
+      - name: Run Lighthouse Mobile Tests
+        run: |
+          lhci autorun \
+            --collect.url=http://localhost:8080 \
+            --collect.settings.preset=mobile \
+            --assert.preset=lighthouse:recommended \
+            --assert.assertions.categories:performance=off \
+            --assert.assertions.categories:accessibility=error \
+            --assert.assertions.categories:best-practices=warn \
+            --assert.assertions.categories:seo=warn
+
+      - name: Upload Lighthouse Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: lighthouse-mobile-report
+          path: .lighthouseci/
+
+  responsive-screenshots:
+    runs-on: ubuntu-latest
+    name: Mobile Screenshots
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Playwright
+        run: npm install -D @playwright/test
+
+      - name: Install browsers
+        run: npx playwright install --with-deps
+
+      - name: Create screenshot script
+        run: |
+          cat > mobile-screenshots.js << 'EOF'
+          const { chromium, devices } = require('playwright');
+          const fs = require('fs');
+
+          async function captureScreenshots() {
+            const browser = await chromium.launch();
+            
+            const viewports = [
+              { name: 'iPhone-12', device: devices['iPhone 12'] },
+              { name: 'iPhone-SE', device: devices['iPhone SE'] },
+              { name: 'Pixel-5', device: devices['Pixel 5'] },
+              { name: 'iPad-Mini', device: devices['iPad Mini'] },
+              { name: 'Galaxy-S20', device: devices['Galaxy S20'] }
+            ];
+
+            for (const viewport of viewports) {
+              const context = await browser.newContext(viewport.device);
+              const page = await context.newPage();
+              
+              await page.goto('file://' + process.cwd() + '/site/index.html');
+              await page.waitForLoadState('networkidle');
+              
+              // Capture full page
+              await page.screenshot({ 
+                path: `screenshots/${viewport.name}-full.png`,
+                fullPage: true 
+              });
+              
+              // Test interactions
+              // Learning section expansion
+              const learningItem = await page.$('.learning-item');
+              if (learningItem) {
+                await learningItem.click();
+                await page.screenshot({ 
+                  path: `screenshots/${viewport.name}-learning-expanded.png`,
+                  fullPage: false 
+                });
+              }
+              
+              await context.close();
+            }
+            
+            await browser.close();
+          }
+
+          fs.mkdirSync('screenshots', { recursive: true });
+          captureScreenshots().catch(console.error);
+          EOF
+
+      - name: Run screenshot tests
+        run: node mobile-screenshots.js
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-screenshots
+          path: screenshots/
+
+  css-validation:
+    runs-on: ubuntu-latest
+    name: Mobile CSS Validation
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for mobile-unfriendly CSS
+        run: |
+          echo "Checking for mobile CSS issues..."
+          
+          # Check for fixed widths that might break mobile
+          if grep -r "width:\s*[0-9]\+px" site/*.css | grep -v "max-width"; then
+            echo "Warning: Fixed pixel widths found that may cause mobile issues"
+          fi
+          
+          # Check for viewport meta tag
+          if ! grep -q "viewport" site/index.html; then
+            echo "Error: Missing viewport meta tag!"
+            exit 1
+          fi
+          
+          # Check for hover-only interactions
+          if grep -r ":hover\s*{" site/*.css | grep -v "media"; then
+            echo "Warning: Hover-only interactions found - ensure touch alternatives exist"
+          fi
+
+  mobile-performance:
+    runs-on: ubuntu-latest
+    name: Mobile Performance Check
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check image sizes
+        run: |
+          echo "Checking image optimization for mobile..."
+          
+          # Find large images
+          find site -name "*.jpg" -o -name "*.png" -o -name "*.jpeg" | while read img; do
+            size=$(stat -f%z "$img" 2>/dev/null || stat -c%s "$img")
+            if [ $size -gt 500000 ]; then
+              echo "Warning: $img is larger than 500KB ($size bytes)"
+            fi
+          done
+
+      - name: Check JavaScript bundle size
+        run: |
+          total_js=$(find site -name "*.js" -exec stat -f%z {} + 2>/dev/null | awk '{s+=$1} END {print s}' || \
+                     find site -name "*.js" -exec stat -c%s {} + | awk '{s+=$1} END {print s}')
+          
+          if [ "$total_js" -gt 200000 ]; then
+            echo "Warning: Total JavaScript size is large for mobile: $total_js bytes"
+          fi

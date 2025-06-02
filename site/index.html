@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="chatbot.css">
   <link rel="stylesheet" href="mobile-improvements.css">
+  <link rel="stylesheet" href="status-widget.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
@@ -390,6 +391,20 @@
             </div>
           </div>
         </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Infrastructure Monitoring</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Needed to showcase DevOps monitoring skills and provide real-time status</p>
+              <p class="learning-solution"><strong>Solution:</strong> Built custom uptime monitoring with Azure Functions, displaying live status widget with 99.9% uptime tracking</p>
+            </div>
+          </div>
+        </div>
         </div>
         
         <!-- Show/Hide toggle for older items -->
@@ -427,6 +442,7 @@
   </div>
 
   <script src="chatbot.js" defer></script>
+  <script src="status-widget.js" defer></script>
   <script>
     function scrollToSection(sectionId) {
       document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
