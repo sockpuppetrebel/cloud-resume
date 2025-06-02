@@ -6,6 +6,7 @@
   <title>Jason Slater - Cloud Architect</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="chatbot.css">
+  <link rel="stylesheet" href="mobile-improvements.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
@@ -20,7 +21,12 @@
     <nav class="navbar">
       <div class="nav-container">
         <div class="nav-logo">jasslater11@gmail.com</div>
-        <div class="nav-links">
+        <div class="nav-hamburger" onclick="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
           <a href="#about" class="nav-link">About</a>
           <a href="#github" class="nav-link">GitHub</a>
           <a href="#experience" class="nav-link">Experience</a>
@@ -409,7 +415,9 @@
   </section>
 
   <!-- Chatbot -->
-  <div class="gpt-mini floating-chat">
+  <div class="floating-chat" id="chatContainer">
+    <button class="chat-toggle-btn" onclick="toggleChat()">💬</button>
+    <div class="gpt-mini">
     <div class="header">Resume AI by Jason</div>
     <div class="history" id="history"></div>
     <div class="input-area">
@@ -423,6 +431,38 @@
     function scrollToSection(sectionId) {
       document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
     }
+    
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('mobile-open');
+    }
+    
+    // Mobile chat toggle
+    function toggleChat() {
+      const chatContainer = document.getElementById('chatContainer');
+      chatContainer.classList.toggle('chat-open');
+    }
+    
+    // Close mobile menu when clicking a link
+    document.addEventListener('DOMContentLoaded', function() {
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          document.getElementById('navLinks').classList.remove('mobile-open');
+        });
+      });
+      
+      // Close chat when clicking the X
+      const chatHeader = document.querySelector('.gpt-mini .header');
+      if (chatHeader) {
+        chatHeader.addEventListener('click', function(e) {
+          if (window.innerWidth <= 768 && e.target === chatHeader) {
+            toggleChat();
+          }
+        });
+      }
+    });
     
     // Learning Timeline Interaction
     document.addEventListener('DOMContentLoaded', function() {
