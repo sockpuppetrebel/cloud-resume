@@ -87,22 +87,43 @@ function updateStatusDisplay(data) {
   lastCheckTime.textContent = checkTime.toLocaleTimeString();
 }
 
-// Fetch status data
+// Fetch status data with timeout and retry
 async function fetchStatus() {
   try {
-    const response = await fetch(STATUS_API_URL);
-    if (!response.ok) throw new Error('Failed to fetch status');
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    
+    const response = await fetch(STATUS_API_URL, {
+      signal: controller.signal,
+      cache: 'no-cache'
+    });
+    
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
     
     const data = await response.json();
     updateStatusDisplay(data);
+    
+    // Reset error state
+    document.querySelector('.status-text').style.color = '';
+    
   } catch (error) {
     console.error('Error fetching status:', error);
     
     // Show error state
+    const indicator = document.querySelector('.status-indicator');
     const statusText = document.querySelector('.status-text');
+    const uptimeText = document.querySelector('.status-uptime');
+    
+    if (indicator) indicator.className = 'status-indicator degraded';
     if (statusText) {
-      statusText.textContent = 'Unable to fetch status';
+      statusText.textContent = 'Status check failed';
+      statusText.style.color = '#ff6b6b';
     }
+    if (uptimeText) uptimeText.textContent = '--.--%';
   }
 }
 
@@ -132,6 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Only show on desktop or tablets
   if (window.innerWidth > 480) {
     createStatusWidget();
+    
+    // Show loading state immediately
+    const indicator = document.querySelector('.status-indicator');
+    const statusText = document.querySelector('.status-text');
+    if (indicator) indicator.className = 'status-indicator operational';
+    if (statusText) statusText.textContent = 'Checking status...';
+    
+    // Fetch actual status
     fetchStatus();
     
     // Update every 5 minutes
