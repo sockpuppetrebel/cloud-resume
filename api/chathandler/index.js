@@ -24,7 +24,9 @@ try {
 // CORS settings - support both production and staging domains
 const allowedOrigins = [
   "https://slater.cloud",
-  "https://proud-smoke-0fa3b7e1e.6.azurestaticapps.net"
+  "https://proud-smoke-0fa3b7e1e.6.azurestaticapps.net",
+  "https://proud-smoke-0fa3b7e1e.1.azurestaticapps.net",
+  "http://localhost:3000" // for local development
 ];
 
 function getCorsHeaders(origin) {
