@@ -531,3 +531,215 @@ input:focus, textarea:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--hacker-green-bright);
 }
+
+/* Projects Section */
+.projects-section {
+  background: var(--bg-primary) !important;
+  color: var(--text-white) !important;
+}
+
+.projects-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)) !important;
+  gap: 30px !important;
+  margin-top: 40px !important;
+}
+
+.project-card {
+  background: var(--bg-card) !important;
+  border: 2px solid var(--border-dim) !important;
+  border-radius: 12px !important;
+  padding: 30px !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.project-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, var(--hacker-green), var(--hacker-green-bright)) !important;
+}
+
+.project-card:hover {
+  border-color: var(--hacker-green) !important;
+  box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2) !important;
+  transform: translateY(-5px) !important;
+}
+
+.project-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+  margin-bottom: 15px !important;
+}
+
+.project-header h3 {
+  color: var(--hacker-green) !important;
+  font-size: 1.5rem !important;
+  margin: 0 !important;
+  font-weight: 700 !important;
+}
+
+.project-status {
+  margin-left: 15px !important;
+}
+
+.status-badge {
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.status-badge.active {
+  background: rgba(0, 255, 65, 0.2) !important;
+  color: var(--hacker-green) !important;
+  border: 1px solid var(--hacker-green) !important;
+}
+
+.project-description {
+  color: var(--text-white) !important;
+  line-height: 1.6 !important;
+  margin-bottom: 20px !important;
+  font-size: 1rem !important;
+}
+
+.project-features {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 20px !important;
+}
+
+.feature-tag {
+  background: rgba(0, 255, 65, 0.1) !important;
+  color: var(--hacker-green) !important;
+  padding: 4px 10px !important;
+  border-radius: 15px !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  border: 1px solid rgba(0, 255, 65, 0.3) !important;
+}
+
+.tech-stack {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 20px !important;
+}
+
+.tech {
+  background: rgba(0, 255, 65, 0.05) !important;
+  color: var(--text-secondary) !important;
+  padding: 5px 12px !important;
+  border-radius: 12px !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  border: 1px solid rgba(0, 255, 65, 0.2) !important;
+  font-family: 'Space Mono', monospace !important;
+}
+
+.project-stats {
+  display: flex !important;
+  justify-content: space-around !important;
+  margin: 20px 0 !important;
+  padding: 15px 0 !important;
+  border-top: 1px solid rgba(0, 255, 65, 0.2) !important;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.2) !important;
+}
+
+.stat {
+  text-align: center !important;
+}
+
+.stat-number {
+  display: block !important;
+  color: var(--hacker-green) !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  font-family: 'Space Mono', monospace !important;
+}
+
+.stat-label {
+  color: var(--text-muted) !important;
+  font-size: 0.8rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.project-links {
+  display: flex !important;
+  gap: 15px !important;
+  margin-top: 20px !important;
+}
+
+.project-links .btn {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 20px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.project-links .btn-primary {
+  background: var(--hacker-green) !important;
+  color: var(--hacker-black) !important;
+  border: 2px solid var(--hacker-green) !important;
+}
+
+.project-links .btn-primary:hover {
+  background: var(--hacker-green-bright) !important;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.project-links .btn-secondary {
+  background: transparent !important;
+  color: var(--hacker-green) !important;
+  border: 2px solid var(--hacker-green) !important;
+}
+
+.project-links .btn-secondary:hover {
+  background: rgba(0, 255, 65, 0.1) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .project-card {
+    padding: 20px !important;
+  }
+  
+  .project-header {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  
+  .project-stats {
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+  
+  .project-links {
+    flex-direction: column !important;
+  }
+}
