@@ -38,6 +38,8 @@ jobs:
           action: "upload"
           app_location: "/site"
           api_location: "/api"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           
   # Optional quick tests - only if requested or if it's a PR
   quick-tests:
