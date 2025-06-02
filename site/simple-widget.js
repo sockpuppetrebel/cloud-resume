@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (window.innerWidth <= 480) return; // Skip on mobile
   
   // CHANGE THIS LINE TO SWITCH THEMES: 'minimal', 'hacker', or 'modern'
-  const THEME = 'minimal';
+  const THEME = 'modern';
   
   // Theme definitions
   const themes = {
