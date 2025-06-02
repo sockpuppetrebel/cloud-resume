@@ -7,6 +7,8 @@ on:
     # Only run on relevant file changes
     paths:
       - 'site/**'
+      - 'api/**'
+      - 'counter-func/**'
       - '.github/workflows/fast-staging-deploy.yml'
   workflow_dispatch:
     inputs:
