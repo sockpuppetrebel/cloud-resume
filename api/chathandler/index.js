@@ -2,14 +2,23 @@ const OpenAIpkg = require("openai");
 
 // Initialize OpenAI client (support v4 and v3 SDKs)
 let openai;
-if (typeof OpenAIpkg.OpenAI === 'function') {
-  // v4+ default export style
-  openai = new OpenAIpkg.OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-} else {
-  // v3 style: Configuration + OpenAIApi
-  const { Configuration, OpenAIApi } = OpenAIpkg;
-  const config = new Configuration({ apiKey: process.env.OPENAI_API_KEY });
-  openai = new OpenAIApi(config);
+try {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY environment variable is not set');
+  }
+  
+  if (typeof OpenAIpkg.OpenAI === 'function') {
+    // v4+ default export style
+    openai = new OpenAIpkg.OpenAI({ apiKey: apiKey });
+  } else {
+    // v3 style: Configuration + OpenAIApi
+    const { Configuration, OpenAIApi } = OpenAIpkg;
+    const config = new Configuration({ apiKey: apiKey });
+    openai = new OpenAIApi(config);
+  }
+} catch (initError) {
+  console.error('Failed to initialize OpenAI client:', initError.message);
 }
 
 // CORS settings - support both production and staging domains
@@ -46,6 +55,10 @@ module.exports = async function (context, req) {
   }
 
   try {
+    if (!openai) {
+      throw new Error('OpenAI client not initialized - check API key configuration');
+    }
+    
     const userMessage = req.body?.message || '';
     context.log('💬 User message:', userMessage);
 
@@ -54,14 +67,14 @@ module.exports = async function (context, req) {
     if (openai.createChatCompletion) {
       // v3 SDK
       const resp = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o-mini',
         messages: [{ role: 'user', content: userMessage }]
       });
       aiReply = resp.data.choices[0].message.content;
     } else {
       // v4 SDK
       const resp = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o-mini',
         messages: [{ role: 'user', content: userMessage }]
       });
       aiReply = resp.choices[0].message.content;
