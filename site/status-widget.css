@@ -2,7 +2,7 @@
 .status-widget {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 10px;
@@ -20,12 +20,54 @@
   border-color: var(--accent-blue);
 }
 
+.status-widget.minimized {
+  min-width: auto;
+  padding: 0.75rem;
+}
+
+.status-widget.minimized .status-header {
+  margin-bottom: 0;
+}
+
+.status-widget.minimized:hover {
+  transform: translateY(-1px);
+}
+
+.status-content {
+  transition: all 0.3s ease;
+}
+
 .status-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.status-title {
+  flex: 1;
+}
+
+.status-minimize {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.status-minimize:hover {
+  background: rgba(255, 255, 255, 0.2);
   color: var(--text-primary);
 }
 

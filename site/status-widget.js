@@ -13,11 +13,14 @@ function createStatusWidget() {
   widget.innerHTML = `
     <div class="status-header">
       <div class="status-indicator operational"></div>
-      <span>System Status</span>
+      <span class="status-title">System Status</span>
+      <div class="status-minimize" onclick="toggleMinimize()" title="Minimize">−</div>
     </div>
-    <div class="status-uptime">--.--%</div>
-    <div class="status-text">Loading status...</div>
-    <div class="status-details" onclick="toggleStatusPanel()">View details →</div>
+    <div class="status-content">
+      <div class="status-uptime">--.--%</div>
+      <div class="status-text">Loading status...</div>
+      <div class="status-details" onclick="toggleStatusPanel()">View details →</div>
+    </div>
   `;
   
   const panel = document.createElement('div');
@@ -127,9 +130,40 @@ async function fetchStatus() {
   }
 }
 
+// Toggle minimize state
+function toggleMinimize() {
+  const widget = document.querySelector('.status-widget');
+  const content = document.querySelector('.status-content');
+  const minimizeBtn = document.querySelector('.status-minimize');
+  
+  if (widget.classList.contains('minimized')) {
+    widget.classList.remove('minimized');
+    content.style.display = 'block';
+    minimizeBtn.innerHTML = '−';
+    minimizeBtn.title = 'Minimize';
+  } else {
+    widget.classList.add('minimized');
+    content.style.display = 'none';
+    minimizeBtn.innerHTML = '+';
+    minimizeBtn.title = 'Expand';
+    
+    // Also close the panel if open
+    if (statusPanelOpen) {
+      toggleStatusPanel();
+    }
+  }
+}
+
 // Toggle status panel
 function toggleStatusPanel() {
   const panel = document.querySelector('.status-panel');
+  const widget = document.querySelector('.status-widget');
+  
+  // Don't open panel if widget is minimized
+  if (widget.classList.contains('minimized')) {
+    return;
+  }
+  
   statusPanelOpen = !statusPanelOpen;
   
   if (statusPanelOpen) {
