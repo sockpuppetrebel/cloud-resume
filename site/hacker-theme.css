@@ -332,6 +332,171 @@ body {
   border-radius: 0 4px 4px 0 !important;
 }
 
+/* GitHub Recent Commits Terminal Style */
+.github-recent-commits {
+  height: 100% !important;
+}
+
+.commit-terminal {
+  background: var(--hacker-black) !important;
+  border: 1px solid var(--hacker-green-dim) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  height: 300px !important;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.1) !important;
+}
+
+.terminal-header {
+  background: linear-gradient(90deg, #1a1a1a, #2a2a2a) !important;
+  padding: 8px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  border-bottom: 1px solid var(--hacker-green-dim) !important;
+}
+
+.terminal-controls {
+  display: flex !important;
+  gap: 6px !important;
+  margin-right: 16px !important;
+}
+
+.control {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+}
+
+.control.red {
+  background: #ff5f56 !important;
+}
+
+.control.yellow {
+  background: #ffbd2e !important;
+}
+
+.control.green {
+  background: #27ca3f !important;
+}
+
+.terminal-title {
+  color: var(--hacker-green) !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+.terminal-content {
+  padding: 16px !important;
+  height: calc(100% - 40px) !important;
+  overflow-y: auto !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+.commit-entry {
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1) !important;
+  padding-bottom: 12px !important;
+}
+
+.commit-header {
+  color: var(--hacker-green) !important;
+  margin-bottom: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.commit-hash {
+  color: var(--hacker-green-bright) !important;
+  font-weight: bold !important;
+}
+
+.commit-time {
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+}
+
+.commit-message {
+  color: var(--text-white) !important;
+  margin-bottom: 8px !important;
+  font-size: 12px !important;
+}
+
+.commit-diff {
+  background: rgba(0, 20, 0, 0.3) !important;
+  border: 1px solid rgba(0, 255, 65, 0.2) !important;
+  border-radius: 4px !important;
+  padding: 8px !important;
+  margin-top: 6px !important;
+}
+
+.diff-line {
+  margin: 2px 0 !important;
+  font-size: 10px !important;
+}
+
+.diff-add {
+  color: #00ff41 !important;
+}
+
+.diff-remove {
+  color: #ff4444 !important;
+}
+
+.diff-context {
+  color: #888888 !important;
+}
+
+.loading-commits {
+  color: var(--hacker-green) !important;
+  text-align: center !important;
+  animation: pulse 2s infinite !important;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.file-header {
+  color: var(--hacker-green-bright) !important;
+  font-weight: bold !important;
+  margin: 6px 0 4px 0 !important;
+  font-size: 11px !important;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.2) !important;
+  padding-bottom: 2px !important;
+}
+
+.error-message {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+/* Custom scrollbar for terminal */
+.terminal-content::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.terminal-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+  background: var(--hacker-green-dim) !important;
+  border-radius: 3px !important;
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--hacker-green) !important;
+}
+
 /* Contact Section */
 .contact-section {
   background: var(--bg-secondary) !important;

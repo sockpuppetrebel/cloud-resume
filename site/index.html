@@ -102,6 +102,21 @@
         <div class="github-streak">
           <img src="https://github-readme-streak-stats.herokuapp.com/?user=sockpuppetrebel&theme=tokyonight&hide_border=true&background=0a0f1c&ring=4a9eff&fire=00d4aa&currStreakLabel=e8e8e8" alt="GitHub Streak" />
         </div>
+        <div class="github-recent-commits">
+          <div class="commit-terminal">
+            <div class="terminal-header">
+              <div class="terminal-controls">
+                <span class="control red"></span>
+                <span class="control yellow"></span>
+                <span class="control green"></span>
+              </div>
+              <div class="terminal-title">recent commits</div>
+            </div>
+            <div class="terminal-content" id="recentCommits">
+              <div class="loading-commits">Loading recent commits...</div>
+            </div>
+          </div>
+        </div>
         <div class="github-activity-graph">
           <img src="https://github-readme-activity-graph.vercel.app/graph?username=sockpuppetrebel&theme=tokyo-night&hide_border=true&bg_color=0a0f1c&color=00d4aa&line=4a9eff&point=e8e8e8" alt="Activity Graph" />
         </div>
@@ -660,6 +675,7 @@
 
   <script src="chatbot.js" defer></script>
   <script src="simple-status.js" defer></script>
+  <script src="github-commits.js" defer></script>
   <script>
     function scrollToSection(sectionId) {
       document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
