@@ -1,7 +1,12 @@
 // Simple Status Widget - No CSP Issues
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('[Status Widget] DOM loaded, starting initialization');
+  
   // Only show on desktop
-  if (window.innerWidth <= 480) return;
+  if (window.innerWidth <= 480) {
+    console.log('[Status Widget] Mobile device detected, skipping');
+    return;
+  }
   
   // Create widget
   const widget = document.createElement('div');
@@ -47,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
   widget.appendChild(text);
   widget.appendChild(uptime);
   
+  console.log('[Status Widget] Appending widget to body');
   document.body.appendChild(widget);
+  console.log('[Status Widget] Widget created and appended successfully');
   
   // Fetch real status
   fetch('/api/uptime')

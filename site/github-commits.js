@@ -43,14 +43,34 @@ class GitHubCommits {
     // Get commit details with diff
     const diffData = await this.fetchCommitDiff(commit.sha);
     
-    commitDiv.innerHTML = `
-      <div class="commit-header">
-        <span class="commit-hash">${commit.sha.substring(0, 7)}</span>
-        <span class="commit-time">${this.formatDate(commit.commit.committer.date)}</span>
-      </div>
-      <div class="commit-message">${this.escapeHtml(commit.commit.message.split('\n')[0])}</div>
-      ${diffData ? this.createDiffDisplay(diffData) : ''}
-    `;
+    // Build content using DOM methods to avoid CSP issues
+    const header = document.createElement('div');
+    header.className = 'commit-header';
+    
+    const hash = document.createElement('span');
+    hash.className = 'commit-hash';
+    hash.textContent = commit.sha.substring(0, 7);
+    
+    const time = document.createElement('span');
+    time.className = 'commit-time';
+    time.textContent = this.formatDate(commit.commit.committer.date);
+    
+    header.appendChild(hash);
+    header.appendChild(time);
+    
+    const message = document.createElement('div');
+    message.className = 'commit-message';
+    message.textContent = commit.commit.message.split('\n')[0];
+    
+    commitDiv.appendChild(header);
+    commitDiv.appendChild(message);
+    
+    if (diffData) {
+      const diffHTML = this.createDiffDisplay(diffData);
+      const diffContainer = document.createElement('div');
+      diffContainer.innerHTML = diffHTML;
+      commitDiv.appendChild(diffContainer);
+    }
     
     return commitDiv;
   }
@@ -117,12 +137,22 @@ class GitHubCommits {
   }
 
   showError() {
-    this.container.innerHTML = `
-      <div class="error-message" style="color: #ff4444; text-align: center;">
-        <div>⚠ Unable to load commits</div>
-        <div style="font-size: 10px; margin-top: 4px;">Check console for details</div>
-      </div>
-    `;
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.style.cssText = 'color: #ff4444; text-align: center;';
+    
+    const mainMsg = document.createElement('div');
+    mainMsg.textContent = '⚠ Unable to load commits';
+    
+    const subMsg = document.createElement('div');
+    subMsg.style.cssText = 'font-size: 10px; margin-top: 4px;';
+    subMsg.textContent = 'Check console for details';
+    
+    errorDiv.appendChild(mainMsg);
+    errorDiv.appendChild(subMsg);
+    
+    this.container.innerHTML = '';
+    this.container.appendChild(errorDiv);
   }
 }
 
