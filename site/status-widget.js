@@ -14,14 +14,21 @@ function createStatusWidget() {
     <div class="status-header">
       <div class="status-indicator operational"></div>
       <span class="status-title">System Status</span>
-      <div class="status-minimize" onclick="toggleMinimize()" title="Minimize">−</div>
+      <div class="status-minimize" title="Minimize">−</div>
     </div>
     <div class="status-content">
       <div class="status-uptime">--.--%</div>
       <div class="status-text">Loading status...</div>
-      <div class="status-details" onclick="toggleStatusPanel()">View details →</div>
+      <div class="status-details">View details →</div>
     </div>
   `;
+  
+  // Add event listeners after creating the element
+  const minimizeBtn = widget.querySelector('.status-minimize');
+  const detailsBtn = widget.querySelector('.status-details');
+  
+  minimizeBtn.addEventListener('click', toggleMinimize);
+  detailsBtn.addEventListener('click', toggleStatusPanel);
   
   const panel = document.createElement('div');
   panel.className = 'status-panel';
