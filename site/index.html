@@ -26,7 +26,7 @@
     <nav class="navbar">
       <div class="nav-container">
         <div class="nav-logo">jasslater11@gmail.com</div>
-        <div class="nav-hamburger" onclick="toggleMobileMenu()">
+        <div class="nav-hamburger" id="navHamburger">
           <span></span>
           <span></span>
           <span></span>
@@ -53,8 +53,8 @@
       <p class="hero-description">Building and maintaining scalable cloud solutions in the Pacific Northwest. Learning by pain since 1992.</p>
       
       <div class="hero-buttons">
-        <button class="btn btn-primary" onclick="scrollToSection('experience')">View Experience</button>
-        <button class="btn btn-secondary" onclick="scrollToSection('contact')">Get in Touch</button>
+        <button class="btn btn-primary" id="viewExperienceBtn">View Experience</button>
+        <button class="btn btn-secondary" id="getInTouchBtn">Get in Touch</button>
       </div>
     </div>
 
@@ -579,7 +579,7 @@
         
         <!-- Show/Hide toggle for older items -->
         <div class="learning-toggle-container" style="text-align: center; margin-top: 30px;">
-          <button id="toggle-older-items" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-family: inherit; font-size: 14px; font-weight: 500;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+          <button id="toggle-older-items" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-family: inherit; font-size: 14px; font-weight: 500;">
             <span id="toggle-icon">▼</span>
             <span id="toggle-text">Show Earlier Learning Items (7 more)</span>
           </button>
@@ -601,7 +601,7 @@
 
   <!-- Chatbot -->
   <div class="floating-chat" id="chatContainer">
-    <button class="chat-toggle-btn" onclick="toggleChat()">💬</button>
+    <button class="chat-toggle-btn" id="chatToggleBtn">💬</button>
     <div class="gpt-mini">
     <div class="header">Resume AI by Jason</div>
     <div class="history" id="history"></div>
@@ -632,6 +632,45 @@
     
     // Close mobile menu when clicking a link
     document.addEventListener('DOMContentLoaded', function() {
+      // Add event listeners for buttons that were using inline handlers
+      const navHamburger = document.getElementById('navHamburger');
+      const viewExperienceBtn = document.getElementById('viewExperienceBtn');
+      const getInTouchBtn = document.getElementById('getInTouchBtn');
+      const chatToggleBtn = document.getElementById('chatToggleBtn');
+      const toggleOlderItemsBtn = document.getElementById('toggle-older-items');
+      
+      // Mobile menu toggle
+      if (navHamburger) {
+        navHamburger.addEventListener('click', toggleMobileMenu);
+      }
+      
+      // Scroll to section buttons
+      if (viewExperienceBtn) {
+        viewExperienceBtn.addEventListener('click', () => scrollToSection('experience'));
+      }
+      
+      if (getInTouchBtn) {
+        getInTouchBtn.addEventListener('click', () => scrollToSection('contact'));
+      }
+      
+      // Chat toggle button
+      if (chatToggleBtn) {
+        chatToggleBtn.addEventListener('click', toggleChat);
+      }
+      
+      // Toggle older items button hover effects
+      if (toggleOlderItemsBtn) {
+        toggleOlderItemsBtn.addEventListener('mouseover', function() {
+          this.style.background = 'rgba(255,255,255,0.2)';
+          this.style.transform = 'translateY(-2px)';
+        });
+        
+        toggleOlderItemsBtn.addEventListener('mouseout', function() {
+          this.style.background = 'rgba(255,255,255,0.1)';
+          this.style.transform = 'translateY(0)';
+        });
+      }
+      
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => {
         link.addEventListener('click', function() {
