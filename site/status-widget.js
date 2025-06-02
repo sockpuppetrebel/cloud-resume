@@ -14,14 +14,21 @@ function createStatusWidget() {
     <div class="status-header">
       <div class="status-indicator operational"></div>
       <span class="status-title">System Status</span>
-      <div class="status-minimize" onclick="toggleMinimize()" title="Minimize">−</div>
+      <div class="status-minimize" title="Minimize">−</div>
     </div>
     <div class="status-content">
       <div class="status-uptime">--.--%</div>
       <div class="status-text">Loading status...</div>
-      <div class="status-details" onclick="toggleStatusPanel()">View details →</div>
+      <div class="status-details">View details →</div>
     </div>
   `;
+  
+  // Add event listeners after creating the element
+  const minimizeBtn = widget.querySelector('.status-minimize');
+  const detailsBtn = widget.querySelector('.status-details');
+  
+  minimizeBtn.addEventListener('click', toggleMinimize);
+  detailsBtn.addEventListener('click', toggleStatusPanel);
   
   const panel = document.createElement('div');
   panel.className = 'status-panel';
@@ -184,13 +191,18 @@ document.addEventListener('click', (e) => {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('Status widget initializing...', 'Screen width:', window.innerWidth);
+  
   // Only show on desktop or tablets
   if (window.innerWidth > 480) {
+    console.log('Creating status widget...');
     createStatusWidget();
     
     // Show loading state immediately
     const indicator = document.querySelector('.status-indicator');
     const statusText = document.querySelector('.status-text');
+    console.log('Found elements:', { indicator: !!indicator, statusText: !!statusText });
+    
     if (indicator) indicator.className = 'status-indicator operational';
     if (statusText) statusText.textContent = 'Checking status...';
     
@@ -199,6 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Update every 5 minutes
     setInterval(fetchStatus, UPDATE_INTERVAL);
+  } else {
+    console.log('Widget hidden on mobile (width <= 480)');
   }
 });
 
