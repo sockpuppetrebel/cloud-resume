@@ -185,6 +185,65 @@
         </a>
       </div>
       <div class="learning-timeline">
+        <!-- Today's new learning items -->
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Production-Ready CI/CD Pipeline</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Basic deployment workflow lacked error handling, verification, and rollback capabilities</p>
+              <p class="learning-solution"><strong>Solution:</strong> Built comprehensive pipeline with pre/post deployment tests, automated rollback scripts, and detailed logging</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Azure Static Web Apps Deployment Issues</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Staging deployment claimed success but served stale content - cache busting didn't help</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned about Azure SWA deployment delays and CDN propagation - sometimes takes 15+ minutes</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Interactive Documentation Strategy</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Wanted to showcase code and documentation without cluttering the main site</p>
+              <p class="learning-solution"><strong>Solution:</strong> Created interactive README viewer with formatted/raw/preview tabs for users to explore implementation</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>Git SSH Authentication & Workflow</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> GitHub deprecated password auth - needed to handle SSH key authentication in automated workflows</p>
+              <p class="learning-solution"><strong>Solution:</strong> Learned proper SSH key management and why manual pushing is sometimes necessary for security</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Collapsible older items section -->
+        <div id="older-learning-items" class="older-items" style="display: none;">
         <div class="learning-item" data-expanded="false">
           <div class="learning-dot"></div>
           <div class="learning-card">
@@ -324,6 +383,15 @@
             </div>
           </div>
         </div>
+        </div>
+        
+        <!-- Show/Hide toggle for older items -->
+        <div class="learning-toggle-container" style="text-align: center; margin-top: 30px;">
+          <button id="toggle-older-items" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-family: inherit; font-size: 14px; font-weight: 500;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+            <span id="toggle-icon">▼</span>
+            <span id="toggle-text">Show Earlier Learning Items (7 more)</span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -376,6 +444,32 @@
           item.setAttribute('data-expanded', !isExpanded);
         });
       });
+      
+      // Toggle older learning items
+      const toggleButton = document.getElementById('toggle-older-items');
+      const olderItems = document.getElementById('older-learning-items');
+      const toggleIcon = document.getElementById('toggle-icon');
+      const toggleText = document.getElementById('toggle-text');
+      
+      if (toggleButton && olderItems) {
+        toggleButton.addEventListener('click', function() {
+          const isHidden = olderItems.style.display === 'none';
+          
+          if (isHidden) {
+            olderItems.style.display = 'block';
+            toggleIcon.textContent = '▲';
+            toggleText.textContent = 'Hide Earlier Learning Items';
+            // Smooth scroll animation
+            setTimeout(() => {
+              olderItems.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+          } else {
+            olderItems.style.display = 'none';
+            toggleIcon.textContent = '▼';
+            toggleText.textContent = 'Show Earlier Learning Items (7 more)';
+          }
+        });
+      }
     });
   </script>
 </body>
