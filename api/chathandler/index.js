@@ -12,16 +12,26 @@ if (typeof OpenAIpkg.OpenAI === 'function') {
   openai = new OpenAIApi(config);
 }
 
-// CORS settings
-const allowedOrigin = "https://slater.cloud";
-const corsHeaders = {
-  "Access-Control-Allow-Origin": allowedOrigin,
-  "Access-Control-Allow-Methods": "POST,OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type"
-};
+// CORS settings - support both production and staging domains
+const allowedOrigins = [
+  "https://slater.cloud",
+  "https://proud-smoke-0fa3b7e1e.6.azurestaticapps.net"
+];
+
+function getCorsHeaders(origin) {
+  const isAllowed = allowedOrigins.includes(origin);
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : allowedOrigins[0],
+    "Access-Control-Allow-Methods": "POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type"
+  };
+}
 
 module.exports = async function (context, req) {
   context.log('⚡ Received request:', req.method, req.url);
+  
+  const origin = req.headers.origin || req.headers.referer || allowedOrigins[0];
+  const corsHeaders = getCorsHeaders(origin);
 
   // Preflight
   if (req.method === 'OPTIONS') {
