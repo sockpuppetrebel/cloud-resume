@@ -86,7 +86,14 @@ module.exports = async function (context, req) {
     context.res = { status: 200, headers: corsHeaders, body: { reply: aiReply } };
   } catch (err) {
     context.log.error('🚨 Error in function:', err);
-    context.res = { status: 500, headers: corsHeaders, body: { error: err.message } };
+    // Return more detailed error info for debugging
+    const errorDetails = {
+      error: err.message || 'Unknown error',
+      type: err.name || 'Error',
+      apiKeySet: !!process.env.OPENAI_API_KEY,
+      apiKeyLength: process.env.OPENAI_API_KEY ? process.env.OPENAI_API_KEY.length : 0
+    };
+    context.res = { status: 500, headers: corsHeaders, body: errorDetails };
   }
 };
 
