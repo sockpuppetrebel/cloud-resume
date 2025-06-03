@@ -676,7 +676,7 @@ body {
 }
 }
 
-/* Skills Grid */
+/* Skills Grid - Fixed Centering */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -685,6 +685,7 @@ body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem 0;
+  place-items: center;
 }
 
 .skill-card {
