@@ -83,7 +83,7 @@ const resumeData = {
     automation: ["PowerShell", "Ansible", "Terraform", "Azure CLI"],
     devops: ["GitHub Actions", "Jenkins", "Docker"],
     ai: ["OpenAI GPT", "Azure Functions", "Chatbot Development"],
-    saas: ["Microsoft 365", "Zoom", "Jira", "Artifactory"]
+    saas: ["Microsoft 365", "G Suite", "Zoom", "Jira", "Artifactory"]
   },
   
   certifications: [
