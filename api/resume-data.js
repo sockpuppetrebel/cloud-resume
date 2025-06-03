@@ -17,7 +17,7 @@ const resumeData = {
     title: "System Administrator",
     company: "Optimizely",
     location: "Remote",
-    duration: "2020 - Present",
+    duration: "Oct 2021 - Present",
     achievements: [
       "Supported the enterprise rollout of Microsoft Copilot, assisting with deployment planning, user access controls, and hands-on enablement across departments",
       "Provided training, documentation, and real-time support to ensure smooth Copilot adoption",
@@ -31,6 +31,16 @@ const resumeData = {
   
   previousRoles: [
     {
+      title: "Field Tech",
+      company: "Andersen/Robert Half",
+      duration: "Jun 2021 - Oct 2021",
+      highlights: [
+        "Supported thousands of PCs, tablets, and printers in all corporate, remote, and production environments within Andersen",
+        "Scheduled 24/7 on-call support responsibilities for all production facilities nationwide",
+        "Specialized in P1 printer and engineering station incidents at the Bayport facility"
+      ]
+    },
+    {
       title: "Level 3 Deskside Support",
       company: "Ameriprise Financial",
       duration: "Sep 2019 - Jun 2021",
@@ -39,15 +49,6 @@ const resumeData = {
         "Resolved escalated technical issues across Mac and Windows systems",
         "Led technical aspects of 10,000-user M365 migration with zero data loss",
         "Mentored team of 8 L1/L2 technicians on cloud-first troubleshooting"
-      ]
-    },
-    {
-      title: "Level 2 Deskside Support",
-      company: "HealthPartners",
-      duration: "Mar 2019 - Sep 2019",
-      highlights: [
-        "Supported EMR go-lives at multiple clinics",
-        "Provided on-site triage for critical incidents across hardware, software, and clinical apps"
       ]
     }
   ],
