@@ -452,6 +452,72 @@ body {
   transform: scale(1.2) rotate(360deg);
 }
 
+/* GitHub Projects Tile - Matches exact height of stat tiles */
+.github-projects {
+  height: 192px; /* Matches the height of the stats images */
+  overflow: hidden;
+  position: relative;
+}
+
+.github-projects .projects-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+}
+
+.github-projects .projects-title {
+  color: var(--accent-green);
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.github-projects .project-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.github-projects .project-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.github-projects .project-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.github-projects .project-list::-webkit-scrollbar-thumb {
+  background: rgba(74, 158, 255, 0.3);
+  border-radius: 2px;
+}
+
+.github-projects .project-item {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(42, 52, 71, 0.3);
+}
+
+.github-projects .project-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.github-projects .project-item h4 {
+  color: var(--accent-blue);
+  font-size: 0.9rem;
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.github-projects .project-item p {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* Skills Grid */
 .skills-grid {
   display: grid;
