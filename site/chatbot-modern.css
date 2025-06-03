@@ -24,7 +24,6 @@
   bottom: 20px;
   right: 20px;
   z-index: 1000;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .floating-chat:hover .gpt-mini {
@@ -518,14 +517,11 @@
 }
 
 /* Widget close/open animations */
-.floating-chat {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .floating-chat.closed {
   opacity: 0;
   transform: scale(0.8) translateY(20px);
   pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Mobile Responsive */

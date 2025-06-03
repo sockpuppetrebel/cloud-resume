@@ -121,13 +121,45 @@ window.addEventListener('DOMContentLoaded', () => {
     isClosed: localStorage.getItem('chatClosed') === 'true'
   };
 
-  // Load saved position
-  if (chatState.position) {
-    chatContainer.style.left = chatState.position.x + 'px';
-    chatContainer.style.top = chatState.position.y + 'px';
-    chatContainer.style.right = 'auto';
-    chatContainer.style.bottom = 'auto';
+  // Function to validate and apply position
+  function applyPosition(savedPos) {
+    if (savedPos) {
+      // Get current viewport dimensions
+      const maxX = window.innerWidth - chatContainer.offsetWidth;
+      const maxY = window.innerHeight - chatContainer.offsetHeight;
+      
+      // Validate position is within viewport
+      const validX = Math.max(0, Math.min(savedPos.x, maxX));
+      const validY = Math.max(0, Math.min(savedPos.y, maxY));
+      
+      // Only apply if position is reasonable
+      if (validX >= 0 && validY >= 0) {
+        chatContainer.style.left = validX + 'px';
+        chatContainer.style.top = validY + 'px';
+        chatContainer.style.right = 'auto';
+        chatContainer.style.bottom = 'auto';
+        return true;
+      }
+    }
+    return false;
   }
+
+  // Disable transitions during initialization to prevent twitching
+  chatContainer.style.transition = 'none';
+  
+  // Load saved position with validation
+  if (!applyPosition(chatState.position)) {
+    // Reset to default position if saved position is invalid
+    chatContainer.style.bottom = '20px';
+    chatContainer.style.right = '20px';
+    chatContainer.style.left = 'auto';
+    chatContainer.style.top = 'auto';
+  }
+  
+  // Re-enable transitions after position is set
+  setTimeout(() => {
+    chatContainer.style.transition = '';
+  }, 100);
 
   // Load saved states on startup
   if (chatState.isClosed) {
