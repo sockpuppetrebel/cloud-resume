@@ -394,6 +394,7 @@ body {
 .github-content {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 180px) auto;
   gap: 1.5rem;
   max-width: 900px;
   margin: 0 auto;
