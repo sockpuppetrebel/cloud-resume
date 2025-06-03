@@ -248,21 +248,34 @@ document.addEventListener('DOMContentLoaded', function() {
   statusReopenBtn.addEventListener('click', function() {
     statusReopenBtn.style.display = 'none';
     widget.style.display = 'block';
-    widget.style.opacity = '1';
-    widget.style.transform = 'scale(1) translateY(0)';
-    statusState.isClosed = false;
-    localStorage.setItem('statusClosed', 'false');
     
-    // Restore previous minimize state
-    if (statusState.isMinimized) {
-      body.style.height = '0';
-      body.style.padding = '0 16px';
-      minimizeBtn.innerHTML = '+';
-    } else {
+    // Force reset all widget styles
+    setTimeout(() => {
+      widget.style.opacity = '1';
+      widget.style.transform = 'scale(1) translateY(0)';
+      widget.style.transition = 'all 0.3s ease';
+      
+      // Always restore to full open state
       body.style.height = 'auto';
       body.style.padding = '16px';
-      minimizeBtn.innerHTML = '−';
-    }
+      body.style.overflow = 'visible';
+      body.style.transition = 'all 0.3s ease';
+      
+      // Restore minimize state after ensuring body is visible
+      if (statusState.isMinimized) {
+        setTimeout(() => {
+          body.style.height = '0';
+          body.style.padding = '0 16px';
+          body.style.overflow = 'hidden';
+          minimizeBtn.innerHTML = '+';
+        }, 100);
+      } else {
+        minimizeBtn.innerHTML = '−';
+      }
+    }, 10);
+    
+    statusState.isClosed = false;
+    localStorage.setItem('statusClosed', 'false');
   });
 
   // Hover effects for drag handle and minimize button
