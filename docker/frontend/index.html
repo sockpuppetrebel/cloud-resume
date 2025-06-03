@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Development Status - Cloud Resume</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0f1c;
+            color: #00ff41;
+            padding: 2rem;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .status-card {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .running { color: #00ff41; }
+        .stopped { color: #ff4444; }
+        h1, h2 { color: #00d4aa; }
+        code {
+            background: rgba(0, 255, 65, 0.2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐳 Docker Development Environment</h1>
+        <p>Jason Slater's Cloud Resume - Containerized Development</p>
+        
+        <div class="status-card">
+            <h2>Container Status</h2>
+            <p><span class="running">●</span> Frontend Container: <strong>RUNNING</strong></p>
+            <p><span id="api-status" class="stopped">●</span> API Container: <strong>CHECKING...</strong></p>
+            <p><span class="running">●</span> Nginx Proxy: <strong>RUNNING</strong></p>
+        </div>
+
+        <div class="status-card">
+            <h2>Development URLs</h2>
+            <p>Frontend: <code>http://localhost:3000</code></p>
+            <p>API: <code>http://localhost:7071</code></p>
+            <p>This Status: <code>http://localhost:3000/docker-status</code></p>
+        </div>
+
+        <div class="status-card">
+            <h2>Quick Commands</h2>
+            <p><code>docker-compose up -d</code> - Start all services</p>
+            <p><code>docker-compose logs frontend</code> - View frontend logs</p>
+            <p><code>docker-compose restart api</code> - Restart API</p>
+            <p><code>docker-compose down</code> - Stop all services</p>
+        </div>
+
+        <div class="status-card">
+            <h2>Skills Demonstrated</h2>
+            <ul>
+                <li>Multi-stage Docker builds</li>
+                <li>Nginx reverse proxy configuration</li>
+                <li>Container orchestration with Docker Compose</li>
+                <li>Development environment containerization</li>
+                <li>Health checks and monitoring</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Check API status
+        fetch('/api/health')
+            .then(response => {
+                const status = document.getElementById('api-status');
+                if (response.ok) {
+                    status.className = 'running';
+                    status.nextSibling.innerHTML = ' API Container: <strong>RUNNING</strong>';
+                } else {
+                    status.className = 'stopped';
+                    status.nextSibling.innerHTML = ' API Container: <strong>STOPPED</strong>';
+                }
+            })
+            .catch(() => {
+                const status = document.getElementById('api-status');
+                status.className = 'stopped';
+                status.nextSibling.innerHTML = ' API Container: <strong>STOPPED</strong>';
+            });
+    </script>
+</body>
+</html>

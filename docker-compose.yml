@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # Frontend service with Nginx
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    container_name: cloud-resume-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - cloud-resume-network
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    restart: unless-stopped
+    labels:
+      - "com.jasonslater.service=frontend"
+      - "com.jasonslater.description=Cloud Resume Frontend"
+
+  # API service with Azure Functions
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    container_name: cloud-resume-api
+    ports:
+      - "7071:7071"
+    networks:
+      - cloud-resume-network
+    volumes:
+      - ./api:/home/site/wwwroot:ro
+      - api-data:/tmp
+    environment:
+      - NODE_ENV=development
+      - FUNCTIONS_WORKER_RUNTIME=node
+      - AzureWebJobsStorage=UseDevelopmentStorage=true
+    restart: unless-stopped
+    labels:
+      - "com.jasonslater.service=api"
+      - "com.jasonslater.description=Cloud Resume API"
+
+  # Development database (optional for future features)
+  redis:
+    image: redis:alpine
+    container_name: cloud-resume-cache
+    ports:
+      - "6379:6379"
+    networks:
+      - cloud-resume-network
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    labels:
+      - "com.jasonslater.service=cache"
+      - "com.jasonslater.description=Development Cache"
+
+networks:
+  cloud-resume-network:
+    driver: bridge
+    labels:
+      - "com.jasonslater.network=development"
+
+volumes:
+  api-data:
+    driver: local
+    labels:
+      - "com.jasonslater.volume=api-temp"
+  redis-data:
+    driver: local
+    labels:
+      - "com.jasonslater.volume=cache-data"
