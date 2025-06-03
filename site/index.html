@@ -842,7 +842,6 @@
         <div class="drag-handle" id="chatDragHandle">⋮⋮</div>
         <span class="header-title">Resume AI by Jason</span>
         <div class="header-controls">
-          <button class="minimize-btn" id="chatMinimizeBtn">−</button>
           <button class="close-btn" id="chatCloseBtn">×</button>
         </div>
       </div>
@@ -885,6 +884,18 @@
     // Mobile chat toggle
     function toggleChat() {
       const chatContainer = document.getElementById('chatContainer');
+      const chatReopenBtn = document.getElementById('chatReopenBtn');
+      
+      // Check if chat is closed
+      if (chatContainer.classList.contains('closed') || chatContainer.style.display === 'none') {
+        // Reopen the chat first
+        chatReopenBtn.style.display = 'none';
+        chatContainer.style.display = 'block';
+        chatContainer.classList.remove('closed');
+        localStorage.setItem('chatClosed', 'false');
+      }
+      
+      // Toggle the mobile open state
       chatContainer.classList.toggle('chat-open');
     }
     
