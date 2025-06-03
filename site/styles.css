@@ -332,57 +332,158 @@ body {
 }
 
 /* Timeline */
-.timeline {
+/* Modern Staggered Experience Timeline */
+.experience-timeline {
   position: relative;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem 0;
 }
 
-.timeline::before {
+/* Central timeline line */
+.experience-timeline::before {
   content: '';
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 2px;
+  width: 3px;
   height: 100%;
-  background: var(--border-color);
+  background: linear-gradient(180deg, var(--accent-blue), var(--accent-green));
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(74, 158, 255, 0.3);
 }
 
+/* Timeline item container */
 .timeline-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3rem;
   position: relative;
+  margin-bottom: 4rem;
+  width: 100%;
 }
 
-.timeline-item::before {
-  content: '';
+/* Timeline dots */
+.timeline-dot {
   position: absolute;
   left: 50%;
+  top: 2rem;
   transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  background: var(--accent-blue);
+  width: 16px;
+  height: 16px;
+  background: var(--accent-green);
+  border: 3px solid var(--primary-dark);
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
+  z-index: 2;
+  box-shadow: 0 0 20px rgba(0, 212, 170, 0.5);
+  transition: all 0.3s ease;
 }
 
+.timeline-item:hover .timeline-dot {
+  transform: translateX(-50%) scale(1.3);
+  box-shadow: 0 0 30px rgba(0, 212, 170, 0.8);
+}
+
+/* Date positioning */
 .timeline-date {
-  flex: 1;
+  position: absolute;
+  top: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  background: var(--primary-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+/* Right side items */
+.timeline-item.right .timeline-date {
+  left: 55%;
+}
+
+.timeline-item.right .experience-card {
+  margin-left: 55%;
+  padding-left: 3rem;
+}
+
+/* Left side items */
+.timeline-item.left .timeline-date {
+  right: 55%;
   text-align: right;
-  padding-right: 2rem;
-  color: var(--text-secondary);
 }
 
-.timeline-content {
-  flex: 1;
-  padding-left: 2rem;
+.timeline-item.left .experience-card {
+  margin-right: 55%;
+  padding-right: 3rem;
 }
 
-.timeline-content h3 {
+/* Experience cards */
+.experience-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.experience-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+  border-radius: 12px 12px 0 0;
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 15px 40px rgba(74, 158, 255, 0.2);
+}
+
+/* Card header */
+.card-header {
+  margin-bottom: 1.5rem;
+}
+
+.job-title {
   color: var(--accent-green);
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.company-name {
+  color: var(--accent-blue);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.location {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Card content */
+.card-content {
+  line-height: 1.7;
+}
+
+.card-content p {
+  color: var(--text-primary);
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+}
+
+.card-content p:last-child {
+  margin-bottom: 0;
 }
 
 /* GitHub Section - 2x2 Grid Layout */
@@ -786,23 +887,48 @@ body {
     display: none;
   }
   
-  .timeline::before {
-    left: 20px;
+  /* Experience Timeline Mobile */
+  .experience-timeline::before {
+    left: 30px;
+    width: 2px;
   }
   
-  .timeline-item {
-    flex-direction: column;
+  .timeline-item.left,
+  .timeline-item.right {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .timeline-item.left .experience-card,
+  .timeline-item.right .experience-card {
+    margin-left: 70px;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .timeline-item.left .timeline-date,
+  .timeline-item.right .timeline-date {
+    left: 70px;
+    right: auto;
     text-align: left;
   }
   
-  .timeline-date {
-    text-align: left;
-    padding: 0;
-    margin-bottom: 1rem;
+  .timeline-dot {
+    left: 30px;
+    transform: translateX(-50%);
   }
   
-  .timeline-content {
-    padding: 0;
+  .experience-card {
+    padding: 1.5rem;
+  }
+  
+  .job-title {
+    font-size: 1.2rem;
+  }
+  
+  .company-name {
+    font-size: 1rem;
   }
   
   .learning-timeline {
