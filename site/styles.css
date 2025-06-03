@@ -381,10 +381,11 @@ body {
   box-shadow: 0 0 30px rgba(0, 212, 170, 0.8);
 }
 
-/* Date positioning */
+/* Date positioning - Top-right corner badges */
 .timeline-date {
   position: absolute;
-  top: 1.5rem;
+  top: 1rem;
+  right: 1rem;
   font-weight: 600;
   color: var(--accent-blue);
   background: var(--primary-dark);
@@ -393,29 +394,21 @@ body {
   border: 1px solid var(--border-color);
   font-size: 0.9rem;
   white-space: nowrap;
-  z-index: 3;
+  z-index: 4;
 }
 
 /* Right side items */
-.timeline-item.right .timeline-date {
-  right: 45%;
-  text-align: left;
-}
-
 .timeline-item.right .experience-card {
   margin-left: 55%;
   padding-left: 3rem;
+  position: relative;
 }
 
 /* Left side items */
-.timeline-item.left .timeline-date {
-  left: 45%;
-  text-align: right;
-}
-
 .timeline-item.left .experience-card {
   margin-right: 55%;
   padding-right: 3rem;
+  position: relative;
 }
 
 /* Experience cards */
