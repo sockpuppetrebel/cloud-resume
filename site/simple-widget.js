@@ -181,24 +181,56 @@ document.addEventListener('DOMContentLoaded', function() {
     isClosed: localStorage.getItem('statusClosed') === 'true'
   };
 
-  // Load saved position
-  if (statusState.position) {
-    widget.style.left = statusState.position.x + 'px';
-    widget.style.top = statusState.position.y + 'px';
-    widget.style.bottom = 'auto';
+  // Function to validate and apply position
+  function applyStatusPosition(savedPos) {
+    if (savedPos) {
+      // Get current viewport dimensions
+      const maxX = window.innerWidth - widget.offsetWidth;
+      const maxY = window.innerHeight - widget.offsetHeight;
+      
+      // Validate position is within viewport
+      const validX = Math.max(0, Math.min(savedPos.x, maxX));
+      const validY = Math.max(0, Math.min(savedPos.y, maxY));
+      
+      // Only apply if position is reasonable
+      if (validX >= 0 && validY >= 0) {
+        widget.style.left = validX + 'px';
+        widget.style.top = validY + 'px';
+        widget.style.bottom = 'auto';
+        return true;
+      }
+    }
+    return false;
   }
 
-  // Load saved states on startup
-  if (statusState.isClosed) {
+  // Disable transitions during initialization
+  widget.style.transition = 'none';
+  
+  // Load saved position with validation
+  if (!applyStatusPosition(statusState.position)) {
+    // Keep default position if saved position is invalid
+    // Default position is already set in initial styles
+  }
+  
+  // Re-enable transitions after position is set
+  setTimeout(() => {
+    widget.style.transition = 'all 0.3s ease';
+  }, 100);
+
+  // Load saved states on startup - but ensure widget defaults to OPEN
+  if (statusState.isClosed === true) {  // Explicit check for true
     widget.style.display = 'none';
     statusReopenBtn.style.display = 'flex';
   } else {
+    // Default to open state
+    widget.style.display = 'block';
+    statusReopenBtn.style.display = 'none';
+    
     if (statusState.isMinimized) {
       body.style.height = '0';
       body.style.padding = '0 16px';
       minimizeBtn.innerHTML = '+';
     }
-    statusReopenBtn.style.display = 'none';
   }
 
   // Minimize/Maximize functionality

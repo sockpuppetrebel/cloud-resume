@@ -900,6 +900,13 @@
     }
     
     // Close mobile menu when clicking a link
+    // Global function to reset widget positions (can be called from console if needed)
+    window.resetWidgetPositions = function() {
+      localStorage.removeItem('chatPosition');
+      localStorage.removeItem('statusPosition');
+      console.log('Widget positions reset. Please refresh the page.');
+    };
+    
     document.addEventListener('DOMContentLoaded', function() {
       // Add event listeners for buttons that were using inline handlers
       const navHamburger = document.getElementById('navHamburger');
