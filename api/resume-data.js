@@ -19,16 +19,13 @@ const resumeData = {
     location: "Remote",
     duration: "2020 - Present",
     achievements: [
-      "Led DocuSign geofencing project as PM, setting up forms and managing implementation",
-      "Training younger admins through documentation, sandbox testing environments, and access management",
-      "Leading long-term project to break hybrid infrastructure and migrate servers to Azure",
-      "Headed Copilot pilot deployment, creating presentations and supporting users learning AI tools",
-      "Managing Intune and Jamf migration projects",
-      "Worked in MSP department managing fleets of servers and applications",
-      "Collaborated with app support teams maintaining complex infrastructure",
-      "On-call duties including Windows patching with Ansible/Jenkins",
-      "Creating apps and automations in AWS and Azure",
-      "Providing cloud services to large organizations"
+      "Supported the enterprise rollout of Microsoft Copilot, assisting with deployment planning, user access controls, and hands-on enablement across departments",
+      "Provided training, documentation, and real-time support to ensure smooth Copilot adoption",
+      "Continue to assist in the ongoing effort to fully break down and migrate our complex hybrid environment, which has grown increasingly tangled due to multiple acquisitions and legacy on-prem applications",
+      "Contributed to infrastructure patching workflows using Ansible, Jenkins, and Git to support automated updates across Windows server environments",
+      "Previously worked in the MSP division managing server fleets for multi-tenant clients, including critical response and recovery efforts",
+      "Spearheaded Intune and Jamf integration to streamline cross-platform device management",
+      "Mentor junior admins through sandbox environments, process docs, and secure access onboarding"
     ]
   },
   
@@ -86,7 +83,7 @@ const resumeData = {
     automation: ["PowerShell", "Ansible", "Terraform", "Azure CLI"],
     devops: ["GitHub Actions", "Jenkins", "Docker"],
     ai: ["OpenAI GPT", "Azure Functions", "Chatbot Development"],
-    saas: ["Microsoft 365", "Zoom", "Jira", "Artifactory", "DocuSign"]
+    saas: ["Microsoft 365", "Zoom", "Jira", "Artifactory"]
   },
   
   certifications: [
