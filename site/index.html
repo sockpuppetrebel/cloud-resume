@@ -34,6 +34,7 @@
           <a href="#about" class="nav-link">About</a>
           <a href="#github" class="nav-link">GitHub</a>
           <a href="#projects" class="nav-link">Projects</a>
+          <a href="#claude-archive" class="nav-link">AI Archive</a>
           <a href="#experience" class="nav-link">Experience</a>
           <a href="#skills" class="nav-link">Skills</a>
           <a href="#learning" class="nav-link">Learning</a>
@@ -282,6 +283,47 @@
         
         <div class="project-card">
           <div class="project-header">
+            <h3>AI Development Journal Archive</h3>
+            <div class="project-status">
+              <span class="status-badge active">Live</span>
+            </div>
+          </div>
+          <p class="project-description">Cloud storage solution for AI-backed development journaling. Features automated Azure Blob Storage integration, REST API access, and portfolio showcase of Claude.md archives from multiple projects.</p>
+          <div class="project-features">
+            <span class="feature-tag">Azure Blob Storage</span>
+            <span class="feature-tag">REST API</span>
+            <span class="feature-tag">Automated Upload</span>
+            <span class="feature-tag">CORS Enabled</span>
+          </div>
+          <div class="tech-stack">
+            <span class="tech">Azure Storage</span>
+            <span class="tech">Azure CLI</span>
+            <span class="tech">Bash Scripting</span>
+            <span class="tech">Git Filter-Branch</span>
+            <span class="tech">JSON APIs</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat">
+              <span class="stat-number">2</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">Public</span>
+              <span class="stat-label">API</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">Hot</span>
+              <span class="stat-label">Tier</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://jslaterdevjournal.blob.core.windows.net/claude-development-journal/index.json" class="btn btn-primary" target="_blank">View API</a>
+            <a href="#claude-archive" class="btn btn-secondary">Browse Archives</a>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-header">
             <h3>Docker Development Environment</h3>
             <div class="project-status">
               <span class="status-badge active">Running</span>
@@ -319,6 +361,48 @@
             <a href="http://localhost:8081" class="btn btn-primary" target="_blank">View Live Container</a>
             <a href="#" class="btn btn-secondary" onclick="navigator.clipboard.writeText('docker-compose up -d'); alert('Docker command copied!'); return false;">Quick Start</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Claude Archive Section -->
+  <section id="claude-archive" class="section claude-archive-section">
+    <div class="container">
+      <h2 class="section-title">AI Development Journal Archive</h2>
+      <p class="section-subtitle">Explore my AI-backed development process and project evolution</p>
+      
+      <div class="archive-browser">
+        <div class="archive-header">
+          <h3>Development Archives</h3>
+          <div class="archive-stats" id="archiveStats">
+            <span>Loading archive data...</span>
+          </div>
+        </div>
+        
+        <div class="archive-grid" id="archiveGrid">
+          <div class="loading-archives">Loading projects...</div>
+        </div>
+        
+        <div class="archive-api-info">
+          <h4>Public API Access</h4>
+          <p>All development journals are accessible via REST API with CORS enabled for portfolio integration.</p>
+          <div class="api-endpoints">
+            <div class="endpoint">
+              <code>GET /index.json</code>
+              <span>Master index with all projects</span>
+            </div>
+            <div class="endpoint">
+              <code>GET /projects/{project}/metadata.json</code>
+              <span>Project-specific metadata</span>
+            </div>
+            <div class="endpoint">
+              <code>GET /projects/{project}/{year}/{month}/CLAUDE_{date}.md</code>
+              <span>Raw development journal content</span>
+            </div>
+          </div>
+          <a href="https://jslaterdevjournal.blob.core.windows.net/claude-development-journal/index.json" 
+             class="btn btn-primary" target="_blank">View Live API</a>
         </div>
       </div>
     </div>
@@ -460,6 +544,21 @@
       </div>
       <div class="learning-timeline">
         <!-- Most recent learning items (June 2, 2025) -->
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>AI Development Journal Archive System</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Needed to showcase AI-backed development process while removing sensitive CLAUDE.md files from git history without losing valuable documentation</p>
+              <p class="learning-solution"><strong>Solution:</strong> Built complete archive solution: git filter-branch for history cleanup, Azure Blob Storage with public API, automated upload scripts, and portfolio integration with live browser</p>
+              <div class="learning-timestamp">Added: June 4, 2025</div>
+            </div>
+          </div>
+        </div>
+        
         <div class="learning-item" data-expanded="false">
           <div class="learning-dot"></div>
           <div class="learning-card">
@@ -968,6 +1067,7 @@
   <script src="chatbot.js" defer></script>
   <script src="simple-widget.js" defer></script>
   <script src="github-commits.js" defer></script>
+  <script src="claude-archive.js" defer></script>
 
   <!-- Status Widget Reopen Button -->
   <div class="status-reopen-btn" id="statusReopenBtn" style="display: none;">
