@@ -1047,9 +1047,9 @@
         
         <!-- Show/Hide toggle for older items -->
         <div class="learning-toggle-container" style="text-align: center; margin-top: 30px;">
-          <button id="toggle-older-items" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 24px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-family: inherit; font-size: 14px; font-weight: 500;">
+          <button id="toggle-older-items" class="hacker-cli-button">
             <span id="toggle-icon">▼</span>
-            <span id="toggle-text">Show Earlier Learning Items (7 more)</span>
+            <span id="toggle-text">$ ./show_older_logs.sh --count=13</span>
           </button>
         </div>
       </div>
@@ -1234,7 +1234,7 @@
           if (isHidden) {
             olderItems.style.display = 'block';
             toggleIcon.textContent = '▲';
-            toggleText.textContent = 'Hide Earlier Learning Items';
+            toggleText.textContent = '$ ./hide_older_logs.sh --collapse';
             // Smooth scroll animation
             setTimeout(() => {
               olderItems.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1242,7 +1242,7 @@
           } else {
             olderItems.style.display = 'none';
             toggleIcon.textContent = '▼';
-            toggleText.textContent = 'Show Earlier Learning Items (7 more)';
+            toggleText.textContent = '$ ./show_older_logs.sh --count=13';
           }
         });
       }

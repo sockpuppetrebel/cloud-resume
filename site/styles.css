@@ -1319,3 +1319,40 @@ body {
     font-size: 0.8rem;
   }
 }
+
+/* Hacker CLI Button Theme */
+.hacker-cli-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid #00ff41 !important;
+  color: #00ff41 !important;
+  padding: 12px 20px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  text-shadow: 0 0 5px #00ff41 !important;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2) !important;
+}
+
+.hacker-cli-button:hover {
+  background: rgba(0, 255, 65, 0.1) !important;
+  border-color: #39ff14 !important;
+  color: #39ff14 !important;
+  text-shadow: 0 0 8px #39ff14 !important;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.hacker-cli-button #toggle-icon {
+  font-size: 12px !important;
+  transition: transform 0.3s ease !important;
+}
+
+.hacker-cli-button:hover #toggle-icon {
+  transform: scale(1.2) !important;
+}
