@@ -360,6 +360,15 @@ body {
   width: 100%;
 }
 
+/* Strategic overlapping for reduced empty space */
+.timeline-item:nth-child(2) {
+  margin-top: -2rem; /* Field Tech overlaps 50% with Optimizely */
+}
+
+.timeline-item:nth-child(3) {
+  margin-top: -2rem; /* Level 3 Deskside overlaps 50% with Field Tech */
+}
+
 /* Timeline dots */
 .timeline-dot {
   position: absolute;
@@ -909,6 +918,12 @@ body {
     text-align: left;
   }
   
+  /* Reduce overlap on mobile for better readability */
+  .timeline-item:nth-child(2),
+  .timeline-item:nth-child(3) {
+    margin-top: -1rem;
+  }
+  
   .timeline-dot {
     left: 30px;
     transform: translateX(-50%);
@@ -1254,6 +1269,9 @@ body {
 .endpoint span {
   color: var(--text-secondary);
   font-size: 0.9rem;
+  text-align: right;
+  flex: 1;
+  margin-left: 20px;
 }
 
 .loading-archives,
