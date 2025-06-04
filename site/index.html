@@ -239,17 +239,19 @@
               <span class="status-badge active">Live</span>
             </div>
           </div>
-          <p class="project-description">This very website! Built with Azure Static Web Apps, serverless functions, and CI/CD pipeline. Features AI-powered chatbot, real-time monitoring, and enterprise network architecture.</p>
+          <p class="project-description">This very website! Built with Azure Static Web Apps, serverless functions, and CI/CD pipeline. Features AI-powered chatbot, real-time monitoring, enterprise network architecture, and Docker development environment.</p>
           <div class="project-features">
             <span class="feature-tag">AI Chatbot</span>
             <span class="feature-tag">Real-time Monitoring</span>
             <span class="feature-tag">CI/CD Pipeline</span>
+            <span class="feature-tag">Docker Development</span>
             <span class="feature-tag">Custom Domain</span>
           </div>
           <div class="tech-stack">
             <span class="tech">Azure Functions</span>
             <span class="tech">GitHub Actions</span>
             <span class="tech">OpenAI API</span>
+            <span class="tech">Docker</span>
             <span class="tech">Azure CDN</span>
             <span class="tech">JavaScript</span>
           </div>
@@ -277,6 +279,47 @@
             <a href="readme-viewer.html" class="btn btn-secondary" target="_blank">Architecture</a>
           </div>
         </div>
+        
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Docker Development Environment</h3>
+            <div class="project-status">
+              <span class="status-badge active">Running</span>
+            </div>
+          </div>
+          <p class="project-description">Live containerized development environment for testing and deploying applications. Features multi-stage builds, automated health checks, and orchestrated services for local development.</p>
+          <div class="project-features">
+            <span class="feature-tag">Container Orchestration</span>
+            <span class="feature-tag">Multi-stage Builds</span>
+            <span class="feature-tag">Health Monitoring</span>
+            <span class="feature-tag">Development Workflow</span>
+          </div>
+          <div class="tech-stack">
+            <span class="tech">Docker</span>
+            <span class="tech">Docker Compose</span>
+            <span class="tech">Nginx</span>
+            <span class="tech">Alpine Linux</span>
+            <span class="tech">Make</span>
+          </div>
+          <div class="project-stats">
+            <div class="stat">
+              <span class="stat-number">3</span>
+              <span class="stat-label">Containers</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">8081</span>
+              <span class="stat-label">Port</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">Live</span>
+              <span class="stat-label">Status</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="http://localhost:8081" class="btn btn-primary" target="_blank">View Live Container</a>
+            <a href="#" class="btn btn-secondary" onclick="navigator.clipboard.writeText('docker-compose up -d'); alert('Docker command copied!'); return false;">Quick Start</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -287,7 +330,7 @@
       <h2 class="section-title">Professional Experience</h2>
       <div class="experience-timeline">
         
-        <!-- Job 1 - Right Side -->
+        <!-- Job 1 - Right Side (First Position) -->
         <div class="timeline-item right">
           <div class="timeline-dot"></div>
           <div class="experience-card">
@@ -338,6 +381,7 @@
             </div>
           </div>
         </div>
+
         
       </div>
     </div>
@@ -577,6 +621,21 @@
             <div class="learning-content">
               <p class="learning-challenge"><strong>Challenge:</strong> GitHub deprecated password auth - needed to handle SSH key authentication in automated workflows</p>
               <p class="learning-solution"><strong>Solution:</strong> Learned proper SSH key management and why manual pushing is sometimes necessary for security</p>
+              <div class="learning-timestamp">Added: January 2025</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="learning-item" data-expanded="false">
+          <div class="learning-dot"></div>
+          <div class="learning-card">
+            <div class="learning-header">
+              <h3>M365 Group Migration - Stage & Scale Strategy</h3>
+              <span class="learning-expand">+</span>
+            </div>
+            <div class="learning-content">
+              <p class="learning-challenge"><strong>Challenge:</strong> Enterprise needed to migrate legacy M365 groups from .onmicrosoft.com to production domain without service disruption - Microsoft Support couldn't provide safe migration path</p>
+              <p class="learning-solution"><strong>Solution:</strong> Engineered PowerShell-based "stage and scale" approach: create parallel groups with temp aliases, migrate members/settings via Graph API, validate Outlook functionality, then swap aliases atomically. Combined certificate auth troubleshooting, Graph SDK permissions management, and Exchange Online cmdlets for zero-downtime migration</p>
               <div class="learning-timestamp">Added: January 2025</div>
             </div>
           </div>
@@ -1059,5 +1118,6 @@
       }
     });
   </script>
+  
 </body>
 </html><!-- trigger redeploy -->
