@@ -1,5 +1,8 @@
 # Multi-stage build for cloud resume frontend
-FROM nginx:alpine as production
+FROM nginx:alpine AS production
+
+# Install curl for health checks
+RUN apk add --no-cache curl
 
 # Copy static files
 COPY site/ /usr/share/nginx/html/

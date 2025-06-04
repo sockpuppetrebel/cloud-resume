@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(git checkout:*)",
+      "Bash(mv:*)",
+      "Bash(git commit:*)",
+      "Bash(chmod:*)",
+      "Bash(grep:*)",
+      "Bash(./scripts/diagnose-staging-cache.sh:*)",
+      "Bash(./scripts/instant-preview.sh:*)",
+      "Bash(pkill:*)",
+      "Bash(cp:*)",
+      "Bash(git rm:*)",
+      "Bash(git add:*)",
+      "Bash(git restore:*)",
+      "Bash(az functionapp logs tail:*)",
+      "Bash(az functionapp log tail:*)",
+      "Bash(az functionapp log show:*)",
+      "Bash(az functionapp:*)",
+      "Bash(az group:*)"
+    ],
+    "deny": []
+  }
+}

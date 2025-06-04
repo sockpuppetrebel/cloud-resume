@@ -920,3 +920,31 @@ input:focus, textarea:focus {
     flex-direction: column !important;
   }
 }
+
+/* Projects Grid - Two rows with centered third item */
+.projects-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 30px !important;
+  margin-top: 40px !important;
+}
+
+/* Third project card spans both columns and centers */
+.projects-grid .project-card:nth-child(3) {
+  grid-column: 1 / -1 !important;
+  width: calc(50% - 15px) !important;  /* Same width as cards above */
+  max-width: 600px !important;  /* Safety max-width */
+  margin: 0 auto !important;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .projects-grid .project-card:nth-child(3) {
+    grid-column: auto !important;
+    max-width: 100% !important;
+  }
+}
+
