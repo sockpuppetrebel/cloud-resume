@@ -362,11 +362,11 @@ body {
 
 /* Strategic overlapping for reduced empty space */
 .timeline-item:nth-child(2) {
-  margin-top: -2rem; /* Field Tech overlaps 50% with Optimizely */
+  margin-top: -4rem; /* Field Tech overlaps more aggressively with Optimizely */
 }
 
 .timeline-item:nth-child(3) {
-  margin-top: -2rem; /* Level 3 Deskside overlaps 50% with Field Tech */
+  margin-top: -4rem; /* Level 3 Deskside overlaps more aggressively with Field Tech */
 }
 
 /* Timeline dots */
@@ -921,7 +921,7 @@ body {
   /* Reduce overlap on mobile for better readability */
   .timeline-item:nth-child(2),
   .timeline-item:nth-child(3) {
-    margin-top: -1rem;
+    margin-top: -2rem;
   }
   
   .timeline-dot {
