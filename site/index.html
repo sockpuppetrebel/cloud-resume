@@ -536,10 +536,27 @@
     <div class="container">
       <h2 class="section-title">What I Learned Building This</h2>
       <p class="section-subtitle">Real challenges and solutions from creating my cloud resume</p>
-      <div style="text-align: center; margin-bottom: 30px;">
-        <a href="readme-viewer.html" class="hacker-cli-button" style="text-decoration: none;">
-          $ ./view_docs.sh --interactive
-        </a>
+      <div class="cli-terminal-container" style="text-align: center; margin-bottom: 30px;">
+        <div class="cli-terminal">
+          <div class="cli-header">
+            <div class="cli-controls">
+              <span class="cli-dot red"></span>
+              <span class="cli-dot yellow"></span>
+              <span class="cli-dot green"></span>
+            </div>
+            <div class="cli-title">jason@slater-dev:~/portfolio$</div>
+          </div>
+          <div class="cli-body">
+            <div class="cli-prompt">
+              <span class="cli-user">jason@slater-dev</span>:<span class="cli-path">~/portfolio</span>$ 
+              <a href="readme-viewer.html" class="cli-command">./view_docs.sh --interactive --detailed</a>
+            </div>
+            <div class="cli-output">
+              <span class="cli-comment"># Launching interactive documentation viewer...</span><br>
+              <span class="cli-success">[OK] Ready to explore project architecture & code</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="learning-timeline">
         <!-- Most recent learning items (June 2, 2025) -->
@@ -650,402 +667,327 @@
         
         <!-- Collapsible older items section -->
         <div id="older-learning-items" class="older-items" style="display: none;">
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Fullstack Staging Environment Fix</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Staging was only deploying static files - API wasn't updating, blocking fullstack development testing</p>
-              <p class="learning-solution"><strong>Solution:</strong> Added ONE line (api_location: "/api") to staging workflow - Azure Static Web Apps needs explicit API config</p>
-              <div class="learning-timestamp">Added: June 2, 2025</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>UI Design Iteration with Theme Switching Architecture</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Hard to visualize different design aesthetics without building multiple versions - needed efficient way to compare UI themes</p>
-              <p class="learning-solution"><strong>Solution:</strong> Built single widget with switchable theme system - one variable change switches between minimal, hacker, and modern aesthetics for rapid design testing</p>
-              <div class="learning-timestamp">Added: June 2, 2025</div>
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Fullstack Staging Environment Fix</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Staging was only deploying static files - API wasn't updating, blocking fullstack development testing</p>
+                <p class="learning-solution"><strong>Solution:</strong> Added ONE line (api_location: "/api") to staging workflow - Azure Static Web Apps needs explicit API config</p>
+                <div class="learning-timestamp">Added: June 2, 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Breaking CSS Debugging Loops with Systematic Analysis</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Got stuck in debugging loop with navbar positioning - each fix created new visual problems (black bars, gaps, layering conflicts)</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned to stop, analyze current CSS state first, explain root cause, then make minimal changes with before/after comparisons instead of adding complexity</p>
-              <div class="learning-timestamp">Added: June 2, 2025</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Azure Functions API Integration</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Needed real-time status monitoring but API deployment kept failing with 404 errors</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned proper Azure Functions zip deployment with full function app structure and CORS configuration</p>
-              <div class="learning-timestamp">Added: June 2, 2025</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>UI Design Iteration with Theme Switching Architecture</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Hard to visualize different design aesthetics without building multiple versions - needed efficient way to compare UI themes</p>
+                <p class="learning-solution"><strong>Solution:</strong> Built single widget with switchable theme system - one variable change switches between minimal, hacker, and modern aesthetics for rapid design testing</p>
+                <div class="learning-timestamp">Added: June 2, 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Content Security Policy Debugging</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Status widget disappeared due to CSP violations blocking inline event handlers and eval() usage</p>
-              <p class="learning-solution"><strong>Solution:</strong> Systematically replaced all onclick attributes with addEventListener calls, learning proper CSP-compliant JavaScript patterns</p>
-              <div class="learning-timestamp">Added: January 2025</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Infrastructure Monitoring</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Needed to showcase DevOps monitoring skills and provide real-time status</p>
-              <p class="learning-solution"><strong>Solution:</strong> Built custom uptime monitoring with Azure Functions, displaying live status widget with 99.9% uptime tracking</p>
-              <div class="learning-timestamp">Added: January 2025</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Breaking CSS Debugging Loops with Systematic Analysis</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Got stuck in debugging loop with navbar positioning - each fix created new visual problems (black bars, gaps, layering conflicts)</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned to stop, analyze current CSS state first, explain root cause, then make minimal changes with before/after comparisons instead of adding complexity</p>
+                <div class="learning-timestamp">Added: June 2, 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Git SSH Authentication & Workflow</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> GitHub deprecated password auth - needed to handle SSH key authentication in automated workflows</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned proper SSH key management and why manual pushing is sometimes necessary for security</p>
-              <div class="learning-timestamp">Added: January 2025</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>M365 Group Migration - Stage & Scale Strategy</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Enterprise needed to migrate legacy M365 groups from .onmicrosoft.com to production domain without service disruption - Microsoft Support couldn't provide safe migration path</p>
-              <p class="learning-solution"><strong>Solution:</strong> Engineered PowerShell-based "stage and scale" approach: create parallel groups with temp aliases, migrate members/settings via Graph API, validate Outlook functionality, then swap aliases atomically. Combined certificate auth troubleshooting, Graph SDK permissions management, and Exchange Online cmdlets for zero-downtime migration</p>
-              <div class="learning-timestamp">Added: January 2025</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Azure Functions API Integration</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Needed real-time status monitoring but API deployment kept failing with 404 errors</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned proper Azure Functions zip deployment with full function app structure and CORS configuration</p>
+                <div class="learning-timestamp">Added: June 2, 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Enterprise Network Architecture</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Need to demonstrate advanced networking skills beyond basic web hosting</p>
-              <p class="learning-solution"><strong>Solution:</strong> Built enterprise VNet with proper subnet segmentation, NSGs, and documented topology using Hava.io for visualization</p>
-              <div class="learning-timestamp">Added: December 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Interactive Documentation Strategy</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Wanted to showcase code and documentation without cluttering the main site</p>
-              <p class="learning-solution"><strong>Solution:</strong> Created interactive README viewer with formatted/raw/preview tabs for users to explore implementation</p>
-              <div class="learning-timestamp">Added: December 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Content Security Policy Debugging</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Status widget disappeared due to CSP violations blocking inline event handlers and eval() usage</p>
+                <p class="learning-solution"><strong>Solution:</strong> Systematically replaced all onclick attributes with addEventListener calls, learning proper CSP-compliant JavaScript patterns</p>
+                <div class="learning-timestamp">Added: January 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Azure Static Web Apps Deployment Issues</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Staging deployment claimed success but served stale content - cache busting didn't help</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned about Azure SWA deployment delays and CDN propagation - sometimes takes 15+ minutes</p>
-              <div class="learning-timestamp">Added: December 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Chatbot UX Enhancement</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Users had to click send button - Enter key wasn't working for chat submission</p>
-              <p class="learning-solution"><strong>Solution:</strong> Added keyboard event listener to trigger send on Enter key, improving user experience</p>
-              <div class="learning-timestamp">Added: November 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Infrastructure Monitoring</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Needed to showcase DevOps monitoring skills and provide real-time status</p>
+                <p class="learning-solution"><strong>Solution:</strong> Built custom uptime monitoring with Azure Functions, displaying live status widget with 99.9% uptime tracking</p>
+                <div class="learning-timestamp">Added: January 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>GitHub Stats Integration</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Stats showed zeros because repository was private - GitHub API only shows public data</p>
-              <p class="learning-solution"><strong>Solution:</strong> Made repository public to showcase real contribution data and demonstrate transparency</p>
-              <div class="learning-timestamp">Added: November 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Production-Ready CI/CD Pipeline</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Basic deployment workflow lacked error handling, verification, and rollback capabilities</p>
-              <p class="learning-solution"><strong>Solution:</strong> Built comprehensive pipeline with pre/post deployment tests, automated rollback scripts, and detailed logging</p>
-              <div class="learning-timestamp">Added: November 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Git SSH Authentication & Workflow</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> GitHub deprecated password auth - needed to handle SSH key authentication in automated workflows</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned proper SSH key management and why manual pushing is sometimes necessary for security</p>
+                <div class="learning-timestamp">Added: January 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>DNS & SSL with Azure</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Getting slater.cloud to validate via TXT records and CNAMEs in Cloudflare</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned how Azure expects _dnsauth for root validation, and how SSL certs propagate</p>
-              <div class="learning-timestamp">Added: October 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Blob → Static Site Migration</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Azure Blob Storage didn't support proper routing or custom domains cleanly</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned the benefits of Static Web Apps: built-in routing, custom domains, staging</p>
-              <div class="learning-timestamp">Added: September 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>M365 Group Migration - Stage & Scale Strategy</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Enterprise needed to migrate legacy M365 groups from .onmicrosoft.com to production domain without service disruption - Microsoft Support couldn't provide safe migration path</p>
+                <p class="learning-solution"><strong>Solution:</strong> Engineered PowerShell-based "stage and scale" approach: create parallel groups with temp aliases, migrate members/settings via Graph API, validate Outlook functionality, then swap aliases atomically. Combined certificate auth troubleshooting, Graph SDK permissions management, and Exchange Online cmdlets for zero-downtime migration</p>
+                <div class="learning-timestamp">Added: January 2025</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Azure CDN</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Cached files (like chatbot.js) wouldn't update even after upload</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned to use purge commands and max-age cache headers properly</p>
-              <div class="learning-timestamp">Added: August 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>GitHub Actions</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Zip deploys failed silently at first</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned how to use config-zip with az functionapp deployment for clarity</p>
-              <div class="learning-timestamp">Added: August 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Enterprise Network Architecture</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Need to demonstrate advanced networking skills beyond basic web hosting</p>
+                <p class="learning-solution"><strong>Solution:</strong> Built enterprise VNet with proper subnet segmentation, NSGs, and documented topology using Hava.io for visualization</p>
+                <div class="learning-timestamp">Added: December 2024</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>OpenAI Chatbot</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> CORS errors + context handling on resume bot</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned how to proxy via Azure Functions and tune prompts to stay on-topic</p>
-              <div class="learning-timestamp">Added: July 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Staging + Dev Environments</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Needed a way to test changes without breaking prod</p>
-              <p class="learning-solution"><strong>Solution:</strong> Learned how to spin up staging Static Web Apps and configure clean CI/CD</p>
-              <div class="learning-timestamp">Added: September 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Interactive Documentation Strategy</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Wanted to showcase code and documentation without cluttering the main site</p>
+                <p class="learning-solution"><strong>Solution:</strong> Created interactive README viewer with formatted/raw/preview tabs for users to explore implementation</p>
+                <div class="learning-timestamp">Added: December 2024</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Interactive Learning Timeline</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Creating an engaging way to showcase technical learnings without cluttering the resume</p>
-              <p class="learning-solution"><strong>Solution:</strong> Built expandable timeline with smooth animations, matching site aesthetics perfectly</p>
-              <div class="learning-timestamp">Added: October 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>GitHub Stats Integration</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Stats showed zeros because repository was private - GitHub API only shows public data</p>
-              <p class="learning-solution"><strong>Solution:</strong> Made repository public to showcase real contribution data and demonstrate transparency</p>
-              <div class="learning-timestamp">Added: November 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Azure Static Web Apps Deployment Issues</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Staging deployment claimed success but served stale content - cache busting didn't help</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned about Azure SWA deployment delays and CDN propagation - sometimes takes 15+ minutes</p>
+                <div class="learning-timestamp">Added: December 2024</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Chatbot UX Enhancement</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Users had to click send button - Enter key wasn't working for chat submission</p>
-              <p class="learning-solution"><strong>Solution:</strong> Added keyboard event listener to trigger send on Enter key, improving user experience</p>
-              <div class="learning-timestamp">Added: November 2024</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Enterprise Network Architecture</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Need to demonstrate advanced networking skills beyond basic web hosting</p>
-              <p class="learning-solution"><strong>Solution:</strong> Built enterprise VNet with proper subnet segmentation, NSGs, and documented topology using Hava.io for visualization</p>
-              <div class="learning-timestamp">Added: December 2024</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Production-Ready CI/CD Pipeline</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Basic deployment workflow lacked error handling, verification, and rollback capabilities</p>
+                <p class="learning-solution"><strong>Solution:</strong> Built comprehensive pipeline with pre/post deployment tests, automated rollback scripts, and detailed logging</p>
+                <div class="learning-timestamp">Added: November 2024</div>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Infrastructure Monitoring</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Needed to showcase DevOps monitoring skills and provide real-time status</p>
-              <p class="learning-solution"><strong>Solution:</strong> Built custom uptime monitoring with Azure Functions, displaying live status widget with 99.9% uptime tracking</p>
-              <div class="learning-timestamp">Added: January 2025</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="learning-item" data-expanded="false">
-          <div class="learning-dot"></div>
-          <div class="learning-card">
-            <div class="learning-header">
-              <h3>Content Security Policy Debugging</h3>
-              <span class="learning-expand">+</span>
-            </div>
-            <div class="learning-content">
-              <p class="learning-challenge"><strong>Challenge:</strong> Status widget disappeared due to CSP violations blocking inline event handlers and eval() usage</p>
-              <p class="learning-solution"><strong>Solution:</strong> Systematically replaced all onclick attributes with addEventListener calls, learning proper CSP-compliant JavaScript patterns</p>
-              <div class="learning-timestamp">Added: January 2025</div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>GitHub Stats Integration</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Stats showed zeros because repository was private - GitHub API only shows public data</p>
+                <p class="learning-solution"><strong>Solution:</strong> Made repository public to showcase real contribution data and demonstrate transparency</p>
+                <div class="learning-timestamp">Added: November 2024</div>
+              </div>
             </div>
           </div>
-        </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Chatbot UX Enhancement</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Users had to click send button - Enter key wasn't working for chat submission</p>
+                <p class="learning-solution"><strong>Solution:</strong> Added keyboard event listener to trigger send on Enter key, improving user experience</p>
+                <div class="learning-timestamp">Added: November 2024</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>DNS & SSL with Azure</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Getting slater.cloud to validate via TXT records and CNAMEs in Cloudflare</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned how Azure expects _dnsauth for root validation, and how SSL certs propagate</p>
+                <div class="learning-timestamp">Added: October 2024</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Interactive Learning Timeline</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Creating an engaging way to showcase technical learnings without cluttering the resume</p>
+                <p class="learning-solution"><strong>Solution:</strong> Built expandable timeline with smooth animations, matching site aesthetics perfectly</p>
+                <div class="learning-timestamp">Added: October 2024</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Staging + Dev Environments</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Needed a way to test changes without breaking prod</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned how to spin up staging Static Web Apps and configure clean CI/CD</p>
+                <div class="learning-timestamp">Added: September 2024</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Blob → Static Site Migration</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Azure Blob Storage didn't support proper routing or custom domains cleanly</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned the benefits of Static Web Apps: built-in routing, custom domains, staging</p>
+                <div class="learning-timestamp">Added: September 2024</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>Azure CDN</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Cached files (like chatbot.js) wouldn't update even after upload</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned to use purge commands and max-age cache headers properly</p>
+                <div class="learning-timestamp">Added: August 2024</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>GitHub Actions</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> Zip deploys failed silently at first</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned how to use config-zip with az functionapp deployment for clarity</p>
+                <div class="learning-timestamp">Added: August 2024</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="learning-item" data-expanded="false">
+            <div class="learning-dot"></div>
+            <div class="learning-card">
+              <div class="learning-header">
+                <h3>OpenAI Chatbot</h3>
+                <span class="learning-expand">+</span>
+              </div>
+              <div class="learning-content">
+                <p class="learning-challenge"><strong>Challenge:</strong> CORS errors + context handling on resume bot</p>
+                <p class="learning-solution"><strong>Solution:</strong> Learned how to proxy via Azure Functions and tune prompts to stay on-topic</p>
+                <div class="learning-timestamp">Added: July 2024</div>
+              </div>
+            </div>
+          </div>
         </div>
         
         <!-- Show/Hide toggle for older items -->
         <div class="learning-toggle-container" style="text-align: center; margin-top: 30px;">
           <button id="toggle-older-items" class="hacker-cli-button">
             <span id="toggle-icon">▼</span>
-            <span id="toggle-text">$ ./show_older_logs.sh --count=13</span>
+            <span id="toggle-text">$ ./show_older_logs.sh --count=22</span>
           </button>
         </div>
       </div>
@@ -1238,7 +1180,7 @@
           } else {
             olderItems.style.display = 'none';
             toggleIcon.textContent = '▼';
-            toggleText.textContent = '$ ./show_older_logs.sh --count=13';
+            toggleText.textContent = '$ ./show_older_logs.sh --count=22';
           }
         });
       }

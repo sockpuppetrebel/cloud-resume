@@ -1356,3 +1356,148 @@ body {
 .hacker-cli-button:hover #toggle-icon {
   transform: scale(1.2) !important;
 }
+
+/* Enhanced CLI Terminal for Documentation Link */
+.cli-terminal-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.cli-terminal {
+  background: #000000;
+  border: 2px solid #00ff41;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  font-family: 'Space Mono', monospace;
+  transition: all 0.3s ease;
+}
+
+.cli-terminal:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+  transform: translateY(-2px);
+}
+
+.cli-header {
+  background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #00ff41;
+}
+
+.cli-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.cli-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+}
+
+.cli-dot.red {
+  background: #ff5f56;
+}
+
+.cli-dot.yellow {
+  background: #ffbd2e;
+}
+
+.cli-dot.green {
+  background: #27ca3f;
+}
+
+.cli-title {
+  color: #00ff41;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.cli-body {
+  padding: 16px;
+  background: #000000;
+}
+
+.cli-prompt {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.cli-user {
+  color: #39ff14;
+  font-weight: 600;
+}
+
+.cli-path {
+  color: #00d4aa;
+  font-weight: 600;
+}
+
+.cli-command {
+  color: #ffffff;
+  text-decoration: none;
+  background: rgba(0, 255, 65, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cli-command:hover {
+  background: rgba(0, 255, 65, 0.2);
+  border-color: #00ff41;
+  color: #00ff41;
+  text-shadow: 0 0 5px #00ff41;
+}
+
+.cli-output {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.cli-comment {
+  color: #666666;
+  font-style: italic;
+}
+
+.cli-success {
+  color: #00ff41;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cli-terminal-container {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+  
+  .cli-header {
+    padding: 6px 12px;
+  }
+  
+  .cli-title {
+    font-size: 10px;
+  }
+  
+  .cli-body {
+    padding: 12px;
+  }
+  
+  .cli-prompt {
+    font-size: 12px;
+  }
+  
+  .cli-output {
+    font-size: 11px;
+  }
+}
