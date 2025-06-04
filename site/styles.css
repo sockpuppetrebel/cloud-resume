@@ -1204,8 +1204,10 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  padding: 30px;
+  padding: 25px;
   backdrop-filter: blur(10px);
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .archive-api-info h4 {
@@ -1221,17 +1223,24 @@ body {
 
 .api-endpoints {
   margin: 20px 0;
+  display: grid;
+  gap: 8px;
 }
 
 .endpoint {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 15px;
+  padding: 10px 15px;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  margin-bottom: 10px;
+  border-radius: 6px;
   border-left: 3px solid var(--accent-blue);
+  transition: all 0.2s ease;
+}
+
+.endpoint:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--accent-green);
 }
 
 .endpoint code {
@@ -1268,4 +1277,27 @@ body {
 .error-card {
   border-color: #ff6b6b;
   background: rgba(255, 107, 107, 0.1);
+}
+
+/* Responsive API Info Section */
+@media (max-width: 768px) {
+  .archive-api-info {
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .endpoint {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 12px;
+  }
+  
+  .endpoint code {
+    font-size: 0.8rem;
+  }
+  
+  .endpoint span {
+    font-size: 0.8rem;
+  }
 }
