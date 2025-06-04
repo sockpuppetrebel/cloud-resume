@@ -250,14 +250,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📚 Learning Section Documentation</h1>
+            <h1>Learning Section Documentation</h1>
             <p>How I built and maintain the interactive learning timeline</p>
         </div>
 
         <div class="tabs">
-            <div class="tab active" onclick="switchTab('rendered')">📖 Formatted View</div>
-            <div class="tab" onclick="switchTab('raw')">📝 Raw Markdown</div>
-            <div class="tab" onclick="switchTab('preview')">👁️ Live Preview</div>
+            <div class="tab active" onclick="switchTab('rendered')">Formatted View</div>
+            <div class="tab" onclick="switchTab('raw')">Raw Markdown</div>
+            <div class="tab" onclick="switchTab('preview')">Live Preview</div>
         </div>
 
         <div class="content">
@@ -290,18 +290,18 @@
 
 This section of my site is inspired by a great post I saw on Reddit (shoutout to whoever made that clean visual of their cloud project learnings). I wanted to take the idea and build something similar — but interactive, scroll-reveal, and mobile-friendly — to document what I *really* learned while building my cloud resume, bot, and deployment flow.
 
-## 🧱 How It's Built
+## How It's Built
 
 - It's just straight HTML, CSS, and a small \`<script>\` using click handlers for the expand/collapse effect
 - Each "lesson" is a div with a title, challenge, and what I learned
 - It's responsive, works on mobile, and light enough to drop into any static site
 - The timeline visual gives it a nice flow and makes it easy to scan
 
-## 📍 Where to Find It
+## Where to Find It
 
 The learning timeline is embedded directly in \`/site/index.html\` in the "Learning Timeline Section" (look for \`<section id="learning">\`). The styles are in the same file within the \`<style>\` tag.
 
-## ✍️ How to Update It
+## How to Update It
 
 When I learn something new (or survive some stupid Azure bug), I'll:
 
@@ -324,7 +324,7 @@ When I learn something new (or survive some stupid Azure bug), I'll:
    </div>
    \`\`\`
 
-## 🎨 Styling
+## Styling
 
 The section uses:
 - A gradient background for visual interest
@@ -333,7 +333,7 @@ The section uses:
 - Smooth transitions for the expand/collapse effect
 - Mobile-responsive design that stacks nicely
 
-## 🔧 JavaScript
+## JavaScript
 
 The interactivity is simple:
 - Click handlers on each card
@@ -341,7 +341,7 @@ The interactivity is simple:
 - CSS transitions handle the animation
 - No dependencies or frameworks needed
 
-## 💡 Ideas for Future Updates
+## Ideas for Future Updates
 
 - Add dates to each learning item
 - Include code snippets in some lessons
@@ -349,7 +349,7 @@ The interactivity is simple:
 - Create a filter to show only certain types of lessons
 - Add a "copy link" button to share specific lessons
 
-## 📝 Example Lessons Currently Included
+## Example Lessons Currently Included
 
 1. **DNS & SSL Setup** - Fighting with Azure DNS zones and SSL certificates
 2. **Blob Storage Migration** - Moving from basic blob to proper static site hosting
@@ -430,5 +430,44 @@ This section is my favorite part of the site because it's honest about the strug
             });
         }
     </script>
+
+  <!-- Chatbot -->
+  <div class="floating-chat" id="chatContainer">
+    <button class="chat-toggle-btn" id="chatToggleBtn">Chat</button>
+    <div class="gpt-mini">
+      <div class="header" id="chatHeader">
+        <div class="drag-handle" id="chatDragHandle">⋮⋮</div>
+        <span class="header-title">Resume AI by Jason</span>
+        <div class="header-controls">
+          <button class="close-btn" id="chatCloseBtn">×</button>
+        </div>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="history" id="history"></div>
+        <div class="input-area">
+          <input id="mini-prompt" type="text" placeholder="Ask me anything…">
+          <button id="mini-send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chatbot Reopen Button -->
+  <div class="reopen-btn" id="chatReopenBtn" style="display: none;">
+    <span class="reopen-icon">Chat</span>
+    <div class="reopen-tooltip">Open Chat</div>
+  </div>
+
+  <!-- Status Widget Reopen Button -->
+  <div class="status-reopen-btn" id="statusReopenBtn" style="display: none;">
+    <span class="reopen-icon">Status</span>
+    <div class="reopen-tooltip">Open Status</div>
+  </div>
+
+  <link rel="stylesheet" href="chatbot.css">
+  <link rel="stylesheet" href="simple-widget.css">
+  <script src="chatbot.js" defer></script>
+  <script src="simple-widget.js" defer></script>
+
 </body>
 </html>
