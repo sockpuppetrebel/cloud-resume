@@ -12,27 +12,29 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
             min-height: 100vh;
-            color: #333;
+            color: #00ff00;
             padding: 20px;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid #00ff00;
+            border-radius: 0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: #0f0f0f;
+            color: #00ff00;
             padding: 40px;
             text-align: center;
+            border-bottom: 1px solid #00ff00;
         }
 
         .header h1 {
@@ -47,8 +49,8 @@
 
         .tabs {
             display: flex;
-            background: #f0f0f0;
-            border-bottom: 2px solid #ddd;
+            background: #1a1a1a;
+            border-bottom: 1px solid #00ff00;
         }
 
         .tab {
@@ -59,29 +61,35 @@
             transition: all 0.3s ease;
             font-weight: 600;
             position: relative;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
         }
 
         .tab:hover {
-            background: #e0e0e0;
+            background: #0f0f0f;
+            text-shadow: 0 0 10px #00ff00;
         }
 
         .tab.active {
-            background: white;
-            color: #667eea;
+            background: #0a0a0a;
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
         }
 
         .tab.active::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -1px;
             left: 0;
             right: 0;
-            height: 2px;
-            background: #667eea;
+            height: 1px;
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
         }
 
         .content {
             padding: 40px;
+            background: #0a0a0a;
         }
 
         .view {
@@ -104,33 +112,36 @@
         }
 
         .markdown-content h1 {
-            color: #2d3748;
+            color: #00ff00;
             font-size: 2.5rem;
             margin: 30px 0 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
+            border-bottom: 1px solid #00ff00;
+            text-shadow: 0 0 10px #00ff00;
         }
 
         .markdown-content h2 {
-            color: #4a5568;
+            color: #00ff00;
             font-size: 1.8rem;
             margin: 25px 0 15px;
+            text-shadow: 0 0 5px #00ff00;
         }
 
         .markdown-content h3 {
-            color: #667eea;
+            color: #00ff00;
             font-size: 1.4rem;
             margin: 20px 0 10px;
         }
 
         .markdown-content p {
             margin: 15px 0;
-            color: #4a5568;
+            color: #00cc00;
+            font-family: 'Courier New', monospace;
         }
 
         .markdown-content ul, .markdown-content ol {
             margin: 15px 0 15px 30px;
-            color: #4a5568;
+            color: #00cc00;
         }
 
         .markdown-content li {
@@ -138,18 +149,19 @@
         }
 
         .markdown-content code {
-            background: #f0f0f0;
+            background: #1a1a1a;
+            color: #00ff00;
             padding: 2px 6px;
-            border-radius: 3px;
+            border: 1px solid #00ff00;
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 0.9em;
         }
 
         .markdown-content pre {
-            background: #2d3748;
-            color: #e2e8f0;
+            background: #0f0f0f;
+            color: #00ff00;
             padding: 20px;
-            border-radius: 8px;
+            border: 1px solid #00ff00;
             overflow-x: auto;
             margin: 20px 0;
         }
@@ -161,16 +173,17 @@
         }
 
         .markdown-content strong {
-            color: #2d3748;
+            color: #00ff00;
             font-weight: 600;
+            text-shadow: 0 0 3px #00ff00;
         }
 
         /* Raw code view */
         .code-content {
-            background: #2d3748;
-            color: #e2e8f0;
+            background: #0f0f0f;
+            color: #00ff00;
             padding: 30px;
-            border-radius: 8px;
+            border: 1px solid #00ff00;
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 14px;
             line-height: 1.6;
@@ -183,15 +196,16 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #667eea;
+            color: #00ff00;
             text-decoration: none;
             font-weight: 600;
             margin-bottom: 20px;
             transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
         }
 
         .back-link:hover {
-            color: #764ba2;
+            text-shadow: 0 0 10px #00ff00;
             transform: translateX(-3px);
         }
 
@@ -199,24 +213,26 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: #667eea;
-            color: white;
-            border: none;
+            background: #0f0f0f;
+            color: #00ff00;
+            border: 1px solid #00ff00;
             padding: 10px 20px;
-            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
         }
 
         .copy-button:hover {
-            background: #764ba2;
+            background: #00ff00;
+            color: #0a0a0a;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
 
         .copy-button.copied {
-            background: #48bb78;
+            background: #00ff00;
+            color: #0a0a0a;
         }
 
         .highlight {
@@ -262,7 +278,7 @@
 
         <div class="content">
             <a href="index.html#learning" class="back-link">
-                ← Back to Learning Section
+                &lt; Back to Learning Section
             </a>
 
             <div id="rendered" class="view active">
@@ -288,7 +304,7 @@
         // README content
         const readmeContent = `# What I Actually Learned — Interactive Changelog Section
 
-This section of my site is inspired by a great post I saw on Reddit (shoutout to whoever made that clean visual of their cloud project learnings). I wanted to take the idea and build something similar — but interactive, scroll-reveal, and mobile-friendly — to document what I *really* learned while building my cloud resume, bot, and deployment flow.
+This section of my site is inspired by a great post I saw on Reddit (shoutout to whoever made that clean visual of their cloud project learnings). I wanted to take the idea and build something similar but interactive, scroll-reveal, and mobile-friendly to document what I *really* learned while building my cloud resume, bot, and deployment flow.
 
 ## How It's Built
 
@@ -436,16 +452,16 @@ This section is my favorite part of the site because it's honest about the strug
     <button class="chat-toggle-btn" id="chatToggleBtn">Chat</button>
     <div class="gpt-mini">
       <div class="header" id="chatHeader">
-        <div class="drag-handle" id="chatDragHandle">⋮⋮</div>
+        <div class="drag-handle" id="chatDragHandle">::</div>
         <span class="header-title">Resume AI by Jason</span>
         <div class="header-controls">
-          <button class="close-btn" id="chatCloseBtn">×</button>
+          <button class="close-btn" id="chatCloseBtn">X</button>
         </div>
       </div>
       <div class="chat-body" id="chatBody">
         <div class="history" id="history"></div>
         <div class="input-area">
-          <input id="mini-prompt" type="text" placeholder="Ask me anything…">
+          <input id="mini-prompt" type="text" placeholder="Ask me anything...">
           <button id="mini-send">Send</button>
         </div>
       </div>
