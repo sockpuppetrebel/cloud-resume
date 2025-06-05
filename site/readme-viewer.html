@@ -380,6 +380,16 @@ This section is my favorite part of the site because it's honest about the strug
         function parseMarkdown(markdown) {
             let html = markdown;
             
+            // Escape HTML entities first
+            html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Code blocks (do this first to protect content)
+            html = html.replace(/```html([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            
+            // Inline code
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
             // Headers
             html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
             html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
@@ -388,31 +398,44 @@ This section is my favorite part of the site because it's honest about the strug
             // Bold
             html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
             
-            // Code blocks
-            html = html.replace(/```html([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            // Lists - improved to handle multiline
+            html = html.replace(/^(\d+\. .+)$/gim, '<li>$1</li>');
+            html = html.replace(/^(\* .+)$/gim, '<li>$1</li>');
+            html = html.replace(/(\d+\. )/gim, ''); // Remove list numbers
+            html = html.replace(/(\* )/gim, ''); // Remove bullet points
             
-            // Inline code
-            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            // Wrap consecutive list items in ul tags
+            html = html.replace(/(<li>.*?<\/li>(\n<li>.*?<\/li>)*)/gims, '<ul>$1</ul>');
             
-            // Lists
-            html = html.replace(/^\* (.+)$/gim, '<li>$1</li>');
-            html = html.replace(/^\d+\. (.+)$/gim, '<li>$1</li>');
-            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            // Split into paragraphs
+            const lines = html.split('\n');
+            const paragraphs = [];
+            let currentParagraph = '';
             
-            // Paragraphs
-            html = html.replace(/\n\n/g, '</p><p>');
-            html = '<p>' + html + '</p>';
+            for (const line of lines) {
+                const trimmedLine = line.trim();
+                
+                if (trimmedLine === '') {
+                    if (currentParagraph.trim()) {
+                        paragraphs.push(currentParagraph.trim());
+                        currentParagraph = '';
+                    }
+                } else if (trimmedLine.startsWith('<h') || trimmedLine.startsWith('<ul') || trimmedLine.startsWith('<pre')) {
+                    if (currentParagraph.trim()) {
+                        paragraphs.push(`<p>${currentParagraph.trim()}</p>`);
+                        currentParagraph = '';
+                    }
+                    paragraphs.push(trimmedLine);
+                } else {
+                    currentParagraph += (currentParagraph ? ' ' : '') + trimmedLine;
+                }
+            }
             
-            // Clean up
-            html = html.replace(/<p><h/g, '<h');
-            html = html.replace(/<\/h(\d)><\/p>/g, '</h$1>');
-            html = html.replace(/<p><ul>/g, '<ul>');
-            html = html.replace(/<\/ul><\/p>/g, '</ul>');
-            html = html.replace(/<p><pre>/g, '<pre>');
-            html = html.replace(/<\/pre><\/p>/g, '</pre>');
+            if (currentParagraph.trim()) {
+                paragraphs.push(`<p>${currentParagraph.trim()}</p>`);
+            }
             
-            return html;
+            return paragraphs.join('\n');
         }
 
         // Load content
