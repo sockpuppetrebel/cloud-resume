@@ -23,6 +23,8 @@ jobs:
   fast-deploy:
     runs-on: ubuntu-latest
     name: Fast Deploy to Staging
+    # Skip if this is just a learning timeline update
+    if: "!contains(github.event.head_commit.message, 'learning')"
     
     steps:
       - name: Checkout (shallow clone for speed)
@@ -45,7 +47,7 @@ jobs:
   quick-tests:
     runs-on: ubuntu-latest
     name: Quick Tests
-    if: github.event.inputs.skip_tests != 'true' && github.event_name == 'pull_request'
+    if: github.event.inputs.skip_tests != 'true' && github.event_name == 'pull_request' && !contains(github.event.head_commit.message, 'learning')
     
     steps:
       - uses: actions/checkout@v4
