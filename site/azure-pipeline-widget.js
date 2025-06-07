@@ -62,17 +62,17 @@ class AzurePipelineWidget {
                         <div class="flow-step">
                             <div class="step-icon">[JSON]</div>
                             <div class="step-label">learning-timeline.json</div>
-                            <div class="step-arrow">→</div>
+                            <div class="step-arrow">➜</div>
                         </div>
                         <div class="flow-step">
                             <div class="step-icon">&lt;PS&gt;</div>
                             <div class="step-label">PowerShell Script</div>
-                            <div class="step-arrow">→</div>
+                            <div class="step-arrow">➜</div>
                         </div>
                         <div class="flow-step">
                             <div class="step-icon">☁</div>
                             <div class="step-label">Azure Blob Storage</div>
-                            <div class="step-arrow">→</div>
+                            <div class="step-arrow">➜</div>
                         </div>
                         <div class="flow-step">
                             <div class="step-icon">{API}</div>
