@@ -1,17 +1,17 @@
 /* Azure Pipeline Widget - Hacker Terminal Style */
 .azure-pipeline-demo {
-    margin-top: 40px;
+    margin-top: 80px;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .azure-pipeline-demo h4 {
-    color: #00ff41;
-    font-size: 1.8rem;
+    color: #00d4aa;
+    font-size: 1.5rem;
     margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
     font-weight: 600;
+    font-family: 'Inter', sans-serif;
 }
 
 .azure-pipeline-demo p {
