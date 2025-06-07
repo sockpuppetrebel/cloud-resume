@@ -20,6 +20,21 @@ jobs:
           submodules: true
           lfs: false
 
+      - name: Sync Learning Timeline to Azure
+        if: contains(github.event.head_commit.message, 'learning') || contains(github.event.head_commit.modified, 'site/data/learning-timeline.json')
+        shell: pwsh
+        run: |
+          # Install Az.Storage module
+          Install-Module -Name Az.Storage -Force -Scope CurrentUser
+          
+          # Authenticate with Azure using service principal
+          $securePassword = ConvertTo-SecureString -String "${{ secrets.AZURE_CLIENT_SECRET }}" -AsPlainText -Force
+          $credential = New-Object System.Management.Automation.PSCredential("${{ secrets.AZURE_CLIENT_ID }}", $securePassword)
+          Connect-AzAccount -ServicePrincipal -Credential $credential -TenantId "${{ secrets.AZURE_TENANT_ID }}"
+          
+          # Run the sync script
+          ./scripts/Update-CloudResumeLearning.ps1 -UpdateMainIndex
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
