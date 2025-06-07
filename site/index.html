@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="hacker-theme.css">
   <link rel="stylesheet" href="chatbot-modern.css">
   <link rel="stylesheet" href="mobile-hacker.css">
+  <link rel="stylesheet" href="azure-pipeline-widget.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
@@ -403,6 +404,13 @@
           </div>
           <a href="https://jslaterdevjournal.blob.core.windows.net/claude-development-journal/index.json" 
              class="btn btn-primary" target="_blank">View Live API</a>
+        </div>
+        
+        <!-- Azure Pipeline Live Demo Widget -->
+        <div class="azure-pipeline-demo">
+          <h4>Live Pipeline Demo</h4>
+          <p>Real-time Azure PowerShell automation pipeline</p>
+          <div id="azure-pipeline-widget"></div>
         </div>
       </div>
     </div>
@@ -860,6 +868,7 @@
       });
     }
   </script>
+  <script src="azure-pipeline-widget.js" defer></script>
   
 </body>
 </html><!-- trigger redeploy -->

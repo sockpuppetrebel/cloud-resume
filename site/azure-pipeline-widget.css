@@ -1,0 +1,330 @@
+/* Azure Pipeline Widget - Hacker Terminal Style */
+.azure-pipeline-widget {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    font-family: 'Courier New', 'Monaco', monospace;
+    color: #00ff00;
+    margin: 20px 0;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.3),
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.azure-pipeline-widget::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 0, 0.03) 2px,
+        rgba(0, 255, 0, 0.03) 4px
+    );
+    pointer-events: none;
+}
+
+.widget-header {
+    background: #111;
+    padding: 8px 16px;
+    border-bottom: 1px solid #00ff00;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.terminal-bar {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-button.red {
+    background: #ff5f56;
+}
+
+.terminal-button.yellow {
+    background: #ffbd2e;
+}
+
+.terminal-button.green {
+    background: #27ca3f;
+}
+
+.widget-title {
+    font-size: 14px;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.prompt {
+    color: #00ccff;
+    text-shadow: 0 0 5px #00ccff;
+}
+
+.widget-content {
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.ascii-header {
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00ff00;
+    text-shadow: 0 0 3px #00ff00;
+    white-space: pre;
+}
+
+.status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 255, 0, 0.05);
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 4px;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.status-label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 5px currentColor;
+}
+
+.status-value.loading {
+    color: #ffff00;
+}
+
+.status-value.online {
+    color: #00ff00;
+}
+
+.status-value.offline {
+    color: #ff0000;
+}
+
+.status-online, .status-offline {
+    font-size: 8px;
+    margin-right: 5px;
+}
+
+.status-online {
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    animation: pulse 2s infinite;
+}
+
+.status-offline {
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.pipeline-flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 80px;
+}
+
+.step-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    filter: grayscale(1) brightness(0) contrast(1);
+    color: #00ff00;
+}
+
+.step-label {
+    font-size: 10px;
+    color: #888;
+    line-height: 1.2;
+    max-width: 70px;
+}
+
+.step-arrow {
+    position: absolute;
+    color: #00ff00;
+    font-size: 16px;
+    margin-top: -25px;
+    margin-left: 60px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.terminal-btn {
+    background: transparent;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.terminal-btn:hover {
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.terminal-btn:active {
+    transform: scale(0.95);
+}
+
+.btn-icon {
+    font-size: 12px;
+}
+
+.terminal-output {
+    background: #000;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 3px;
+    padding: 10px;
+    height: 120px;
+    overflow-y: auto;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.output-line {
+    margin-bottom: 2px;
+    word-wrap: break-word;
+}
+
+.timestamp {
+    color: #666;
+    margin-right: 5px;
+}
+
+.log-info {
+    color: #00ccff;
+    margin-right: 5px;
+}
+
+.log-success {
+    color: #00ff00;
+    margin-right: 5px;
+}
+
+.log-warn {
+    color: #ffff00;
+    margin-right: 5px;
+}
+
+.log-error {
+    color: #ff0000;
+    margin-right: 5px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pipeline-flow {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .step-arrow {
+        transform: rotate(90deg);
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .ascii-header {
+        font-size: 10px;
+    }
+}
+
+/* Terminal scrollbar styling */
+.terminal-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+}
+
+.terminal-output::-webkit-scrollbar-thumb:hover {
+    background: #00cc00;
+}
