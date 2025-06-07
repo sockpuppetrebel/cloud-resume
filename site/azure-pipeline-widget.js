@@ -60,34 +60,34 @@ class AzurePipelineWidget {
                     </div>
                     <div class="pipeline-flow">
                         <div class="flow-step">
-                            <div class="step-icon">📝</div>
+                            <div class="step-icon">[JSON]</div>
                             <div class="step-label">learning-timeline.json</div>
                             <div class="step-arrow">→</div>
                         </div>
                         <div class="flow-step">
-                            <div class="step-icon">⚡</div>
+                            <div class="step-icon">&lt;PS&gt;</div>
                             <div class="step-label">PowerShell Script</div>
                             <div class="step-arrow">→</div>
                         </div>
                         <div class="flow-step">
-                            <div class="step-icon">☁️</div>
+                            <div class="step-icon">☁</div>
                             <div class="step-label">Azure Blob Storage</div>
                             <div class="step-arrow">→</div>
                         </div>
                         <div class="flow-step">
-                            <div class="step-icon">🌐</div>
+                            <div class="step-icon">{API}</div>
                             <div class="step-label">Public API</div>
                         </div>
                     </div>
                     <div class="action-buttons">
                         <button id="refresh-btn" class="terminal-btn">
-                            <span class="btn-icon">🔄</span> REFRESH STATUS
+                            <span class="btn-icon">↻</span> REFRESH STATUS
                         </button>
                         <button id="view-api-btn" class="terminal-btn">
-                            <span class="btn-icon">🔗</span> VIEW LIVE API
+                            <span class="btn-icon">→</span> VIEW LIVE API
                         </button>
                         <button id="view-scripts-btn" class="terminal-btn">
-                            <span class="btn-icon">📜</span> VIEW SCRIPTS
+                            <span class="btn-icon">&lt;/&gt;</span> VIEW SCRIPTS
                         </button>
                     </div>
                     <div class="terminal-output" id="terminal-output">
