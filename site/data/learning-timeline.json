@@ -1,0 +1,198 @@
+{
+  "visible": [
+    {
+      "title": "Frontend Performance Optimization: Dynamic Content Loading",
+      "challenge": "Index.html file was growing indefinitely with hardcoded learning items, causing slower page loads and harder maintenance as content accumulated over time",
+      "solution": "Extracted all learning items to external JSON file with dynamic JavaScript loading. Maintains 7-item pagination while keeping HTML file lightweight and fast",
+      "date": "June 6, 2025"
+    },
+    {
+      "title": "PowerShell Azure Integration with CI/CD Pipeline Automation",
+      "challenge": "Needed to create a seamless sync between frontend learning timeline and Azure Blob Storage without manual intervention, while showcasing both PowerShell skills and DevOps automation",
+      "solution": "Built PowerShell scripts with HTML parsing, Azure Storage integration, and GitHub Actions workflow. Created dual-trigger system: manual PowerShell execution and automatic CI/CD on commits containing 'learning'",
+      "date": "June 5, 2025"
+    },
+    {
+      "title": "Full-Stack Thinking: Frontend UI to Backend API Architecture",
+      "challenge": "Portfolio had duplicate content between visual learning timeline and development journal archive, needed to demonstrate system integration rather than just isolated features",
+      "solution": "Designed data flow where single source (HTML) feeds multiple consumers (visual timeline + structured JSON API). Shows progression from static content to live API, demonstrating full-stack architectural thinking",
+      "date": "June 5, 2025"
+    },
+    {
+      "title": "Complex Git Merge Conflict Resolution with Archive Integration",
+      "challenge": "Deployment blocked by divergent git histories and unrelated merge conflicts after force push occurred. Archive integration conflicted with remote changes across multiple files",
+      "solution": "Systematically resolved conflicts using git checkout --ours strategy, preserved archive functionality while integrating remote changes, switched between SSH/HTTPS remotes to handle authentication issues",
+      "date": "June 4, 2025"
+    },
+    {
+      "title": "Live API Integration with Error Handling & CORS",
+      "challenge": "Portfolio needed to display real-time data from Azure Blob Storage API, handle loading states, network failures, and provide fallback options for visitors",
+      "solution": "Built JavaScript class with async/await patterns, proper error boundaries, loading indicators, and graceful degradation. Implemented CORS-enabled public API access with metadata parsing",
+      "date": "June 4, 2025"
+    },
+    {
+      "title": "AI Development Journal Archive System - Complete Implementation",
+      "challenge": "Needed to showcase AI-backed development process while removing sensitive CLAUDE.md files from git history without losing valuable documentation, plus integrate into existing portfolio",
+      "solution": "Built end-to-end solution: git filter-branch for history cleanup, Azure Blob Storage with public API, automated upload scripts, portfolio integration with live browser, and comprehensive documentation architecture",
+      "date": "June 4, 2025"
+    },
+    {
+      "title": "Status Widget CSP & Positioning Debugging Marathon",
+      "challenge": "Status widget worked perfectly, then broke due to Azure SWA CSP policy changes. Multiple debugging approaches failed, widget flashed and repositioned randomly",
+      "solution": "Moved from JavaScript-created DOM to inline HTML, fixed z-index conflicts with chatbot, removed duplicate scripts, learned CSP debugging techniques",
+      "date": "June 2, 2025"
+    },
+    {
+      "title": "GitHub Integration with Live Code Display",
+      "challenge": "Empty space in GitHub section - wanted to showcase actual recent code changes dynamically",
+      "solution": "Built terminal-style widget using GitHub API to display recent commits with real code snippets and diff highlighting",
+      "date": "June 2, 2025"
+    }
+  ],
+  "hidden": [
+    {
+      "title": "Learning Timeline Timestamp Enhancement",
+      "challenge": "Learning entries lacked context about when each discovery was made, making progress tracking difficult",
+      "solution": "Added timestamps to track changes to learning section with custom CSS styling for consistent visual presentation",
+      "date": "June 2, 2025"
+    },
+    {
+      "title": "Chatbot API Performance & Deployment Workflow",
+      "challenge": "Chatbot was slow and hallucinating, plus confusion with git merge direction and deployment delays",
+      "solution": "Added system prompts with factual resume data, implemented keep-warm function, learned staging→main merge flow (not reverse!)",
+      "date": "June 2, 2025"
+    },
+    {
+      "title": "Fullstack Staging Environment Fix",
+      "challenge": "Staging was only deploying static files - API wasn't updating, blocking fullstack development testing",
+      "solution": "Added ONE line (api_location: \"/api\") to staging workflow - Azure Static Web Apps needs explicit API config",
+      "date": "June 2, 2025"
+    },
+    {
+      "title": "UI Design Iteration with Theme Switching Architecture",
+      "challenge": "Hard to visualize different design aesthetics without building multiple versions - needed efficient way to compare UI themes",
+      "solution": "Built single widget with switchable theme system - one variable change switches between minimal, hacker, and modern aesthetics for rapid design testing",
+      "date": "June 2, 2025"
+    },
+    {
+      "title": "Breaking CSS Debugging Loops with Systematic Analysis",
+      "challenge": "Got stuck in debugging loop with navbar positioning - each fix created new visual problems (black bars, gaps, layering conflicts)",
+      "solution": "Learned to stop, analyze current CSS state first, explain root cause, then make minimal changes with before/after comparisons instead of adding complexity",
+      "date": "June 2, 2025"
+    },
+    {
+      "title": "Azure Functions API Integration",
+      "challenge": "Needed real-time status monitoring but API deployment kept failing with 404 errors",
+      "solution": "Learned proper Azure Functions zip deployment with full function app structure and CORS configuration",
+      "date": "June 2, 2025"
+    },
+    {
+      "title": "Content Security Policy Debugging",
+      "challenge": "Status widget disappeared due to CSP violations blocking inline event handlers and eval() usage",
+      "solution": "Systematically replaced all onclick attributes with addEventListener calls, learning proper CSP-compliant JavaScript patterns",
+      "date": "January 2025"
+    },
+    {
+      "title": "Infrastructure Monitoring",
+      "challenge": "Needed to showcase DevOps monitoring skills and provide real-time status",
+      "solution": "Built custom uptime monitoring with Azure Functions, displaying live status widget with 99.9% uptime tracking",
+      "date": "January 2025"
+    },
+    {
+      "title": "Git SSH Authentication & Workflow",
+      "challenge": "GitHub deprecated password auth - needed to handle SSH key authentication in automated workflows",
+      "solution": "Learned proper SSH key management and why manual pushing is sometimes necessary for security",
+      "date": "January 2025"
+    },
+    {
+      "title": "M365 Group Migration - Stage & Scale Strategy",
+      "challenge": "Enterprise needed to migrate legacy M365 groups from .onmicrosoft.com to production domain without service disruption - Microsoft Support couldn't provide safe migration path",
+      "solution": "Engineered PowerShell-based \"stage and scale\" approach: create parallel groups with temp aliases, migrate members/settings via Graph API, validate Outlook functionality, then swap aliases atomically. Combined certificate auth troubleshooting, Graph SDK permissions management, and Exchange Online cmdlets for zero-downtime migration",
+      "date": "January 2025"
+    },
+    {
+      "title": "Enterprise Network Architecture",
+      "challenge": "Need to demonstrate advanced networking skills beyond basic web hosting",
+      "solution": "Built enterprise VNet with proper subnet segmentation, NSGs, and documented topology using Hava.io for visualization",
+      "date": "December 2024"
+    },
+    {
+      "title": "Interactive Documentation Strategy",
+      "challenge": "Wanted to showcase code and documentation without cluttering the main site",
+      "solution": "Created interactive README viewer with formatted/raw/preview tabs for users to explore implementation",
+      "date": "December 2024"
+    },
+    {
+      "title": "Azure Static Web Apps Deployment Issues",
+      "challenge": "Staging deployment claimed success but served stale content - cache busting didn't help",
+      "solution": "Learned about Azure SWA deployment delays and CDN propagation - sometimes takes 15+ minutes",
+      "date": "December 2024"
+    },
+    {
+      "title": "Production-Ready CI/CD Pipeline",
+      "challenge": "Basic deployment workflow lacked error handling, verification, and rollback capabilities",
+      "solution": "Built comprehensive pipeline with pre/post deployment tests, automated rollback scripts, and detailed logging",
+      "date": "November 2024"
+    },
+    {
+      "title": "GitHub Stats Integration",
+      "challenge": "Stats showed zeros because repository was private - GitHub API only shows public data",
+      "solution": "Made repository public to showcase real contribution data and demonstrate transparency",
+      "date": "November 2024"
+    },
+    {
+      "title": "Chatbot UX Enhancement",
+      "challenge": "Users had to click send button - Enter key wasn't working for chat submission",
+      "solution": "Added keyboard event listener to trigger send on Enter key, improving user experience",
+      "date": "November 2024"
+    },
+    {
+      "title": "DNS & SSL with Azure",
+      "challenge": "Getting slater.cloud to validate via TXT records and CNAMEs in Cloudflare",
+      "solution": "Learned how Azure expects _dnsauth for root validation, and how SSL certs propagate",
+      "date": "October 2024"
+    },
+    {
+      "title": "Interactive Learning Timeline",
+      "challenge": "Creating an engaging way to showcase technical learnings without cluttering the resume",
+      "solution": "Built expandable timeline with smooth animations, matching site aesthetics perfectly",
+      "date": "October 2024"
+    },
+    {
+      "title": "Staging + Dev Environments",
+      "challenge": "Needed a way to test changes without breaking prod",
+      "solution": "Learned how to spin up staging Static Web Apps and configure clean CI/CD",
+      "date": "September 2024"
+    },
+    {
+      "title": "Blob → Static Site Migration",
+      "challenge": "Azure Blob Storage didn't support proper routing or custom domains cleanly",
+      "solution": "Learned the benefits of Static Web Apps: built-in routing, custom domains, staging",
+      "date": "September 2024"
+    },
+    {
+      "title": "Azure CDN",
+      "challenge": "Cached files (like chatbot.js) wouldn't update even after upload",
+      "solution": "Learned to use purge commands and max-age cache headers properly",
+      "date": "August 2024"
+    },
+    {
+      "title": "GitHub Actions",
+      "challenge": "Zip deploys failed silently at first",
+      "solution": "Learned how to use config-zip with az functionapp deployment for clarity",
+      "date": "August 2024"
+    },
+    {
+      "title": "OpenAI Chatbot",
+      "challenge": "CORS errors + context handling on resume bot",
+      "solution": "Learned how to proxy via Azure Functions and tune prompts to stay on-topic",
+      "date": "July 2024"
+    }
+  ],
+  "metadata": {
+    "total_items": 30,
+    "visible_count": 7,
+    "hidden_count": 23,
+    "last_updated": "June 5, 2025"
+  }
+}
