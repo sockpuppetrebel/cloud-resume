@@ -1,13 +1,13 @@
 {
-  "LastUpdated": "2025-06-09 13:03:51",
-  "TotalItems": 31,
+  "LastUpdated": "2025-06-09 13:06:36",
+  "TotalItems": 32,
   "Items": [
     {
       "Title": "Staging + Dev Environments",
       "Challenge": "Needed a way to test changes without breaking prod",
       "Solution": "Learned how to spin up staging Static Web Apps and configure clean CI/CD",
       "DateAdded": "September 2024",
-      "Id": "9ccd25d9-c3cc-4c81-a3c9-afd3442207ab",
+      "Id": "b1e6e0b9-fd55-4e79-b79c-47659c5a9467",
       "Visibility": "hidden"
     },
     {
@@ -15,7 +15,7 @@
       "Challenge": "Azure Blob Storage didn't support proper routing or custom domains cleanly",
       "Solution": "Learned the benefits of Static Web Apps: built-in routing, custom domains, staging",
       "DateAdded": "September 2024",
-      "Id": "be9e1202-8f2f-44ef-b8a7-b0ebbfbc4f07",
+      "Id": "44a2f0bd-64cc-49ae-be49-c6a52f30b2c9",
       "Visibility": "hidden"
     },
     {
@@ -23,7 +23,7 @@
       "Challenge": "Getting slater.cloud to validate via TXT records and CNAMEs in Cloudflare",
       "Solution": "Learned how Azure expects _dnsauth for root validation, and how SSL certs propagate",
       "DateAdded": "October 2024",
-      "Id": "c1d1917f-a818-4b71-ba00-219b756d161e",
+      "Id": "e5718cda-f59e-401b-a40f-8226b3e22bcf",
       "Visibility": "hidden"
     },
     {
@@ -31,7 +31,7 @@
       "Challenge": "Creating an engaging way to showcase technical learnings without cluttering the resume",
       "Solution": "Built expandable timeline with smooth animations, matching site aesthetics perfectly",
       "DateAdded": "October 2024",
-      "Id": "00c1a467-c2c8-44cf-835b-dd7638526059",
+      "Id": "b0ac01d4-c2bf-4bcd-b1f3-9f0f7ed6d50c",
       "Visibility": "hidden"
     },
     {
@@ -39,7 +39,7 @@
       "Challenge": "Basic deployment workflow lacked error handling, verification, and rollback capabilities",
       "Solution": "Built comprehensive pipeline with pre/post deployment tests, automated rollback scripts, and detailed logging",
       "DateAdded": "November 2024",
-      "Id": "830e50a1-69a7-4816-9fe6-a00da506b7db",
+      "Id": "fda260a6-f7b0-457a-84f6-820e7ba24c5f",
       "Visibility": "hidden"
     },
     {
@@ -47,7 +47,7 @@
       "Challenge": "Users had to click send button - Enter key wasn't working for chat submission",
       "Solution": "Added keyboard event listener to trigger send on Enter key, improving user experience",
       "DateAdded": "November 2024",
-      "Id": "6ce92d57-2462-4c91-b1e3-c4e2b2a15e9b",
+      "Id": "1dd08ea7-a592-4490-a5d9-4c99a0e570d1",
       "Visibility": "hidden"
     },
     {
@@ -55,15 +55,23 @@
       "Challenge": "Stats showed zeros because repository was private - GitHub API only shows public data",
       "Solution": "Made repository public to showcase real contribution data and demonstrate transparency",
       "DateAdded": "November 2024",
-      "Id": "380a2a18-99d8-4a4b-b468-ee21a0327974",
+      "Id": "f4581cd1-b2fe-4ff1-8fdf-16d38e18d8db",
       "Visibility": "hidden"
+    },
+    {
+      "Title": "Header Styling Consistency Fix",
+      "Challenge": "The \"Live Pipeline Demo\" section header wasn't matching the styling of other major sections like \"Professional Experience\" and \"Technical Skills\" - it had the wrong size, weight, and spacing.",
+      "Solution": "Fixed by changing from <h4> to <h2 class=\"section-title\"> to match all other section headers. This ensures visual consistency across the entire site by applying the same CSS class.",
+      "DateAdded": "June 9, 2025",
+      "Id": "84738d53-cab5-461b-8b92-ffe3228269fe",
+      "Visibility": "visible"
     },
     {
       "Title": "Frontend Performance Optimization: Dynamic Content Loading",
       "Challenge": "Index.html file was growing indefinitely with hardcoded learning items, causing slower page loads and harder maintenance as content accumulated over time",
       "Solution": "Extracted all learning items to external JSON file with dynamic JavaScript loading. Maintains 7-item pagination while keeping HTML file lightweight and fast",
       "DateAdded": "June 6, 2025",
-      "Id": "515b6aec-0720-4451-9b5d-87e3c5550c87",
+      "Id": "ad7c1efc-4459-4455-8440-6a01f55a708d",
       "Visibility": "visible"
     },
     {
@@ -71,7 +79,7 @@
       "Challenge": "Portfolio had duplicate content between visual learning timeline and development journal archive, needed to demonstrate system integration rather than just isolated features",
       "Solution": "Designed data flow where single source (HTML) feeds multiple consumers (visual timeline + structured JSON API). Shows progression from static content to live API, demonstrating full-stack architectural thinking",
       "DateAdded": "June 5, 2025",
-      "Id": "d7f8ff10-d46b-41f9-b770-9975f2f6dda2",
+      "Id": "fa4267b9-eaa2-4463-88a8-a369d1ca062e",
       "Visibility": "visible"
     },
     {
@@ -79,7 +87,7 @@
       "Challenge": "Needed to create a seamless sync between frontend learning timeline and Azure Blob Storage without manual intervention, while showcasing both PowerShell skills and DevOps automation",
       "Solution": "Built PowerShell scripts with HTML parsing, Azure Storage integration, and GitHub Actions workflow. Created dual-trigger system: manual PowerShell execution and automatic CI/CD on commits containing 'learning'",
       "DateAdded": "June 5, 2025",
-      "Id": "7c4adc1d-9b97-4acf-959a-9f92df78a366",
+      "Id": "82491cb9-e007-432b-be8f-ec541c278c57",
       "Visibility": "visible"
     },
     {
@@ -87,7 +95,7 @@
       "Challenge": "Needed to showcase AI-backed development process while removing sensitive CLAUDE.md files from git history without losing valuable documentation, plus integrate into existing portfolio",
       "Solution": "Built end-to-end solution: git filter-branch for history cleanup, Azure Blob Storage with public API, automated upload scripts, portfolio integration with live browser, and comprehensive documentation architecture",
       "DateAdded": "June 4, 2025",
-      "Id": "c58f8481-d5f1-4894-9861-94042d073cd5",
+      "Id": "a6fce580-84cd-4e1f-b7fa-05057fe4daf4",
       "Visibility": "visible"
     },
     {
@@ -95,7 +103,7 @@
       "Challenge": "Portfolio needed to display real-time data from Azure Blob Storage API, handle loading states, network failures, and provide fallback options for visitors",
       "Solution": "Built JavaScript class with async/await patterns, proper error boundaries, loading indicators, and graceful degradation. Implemented CORS-enabled public API access with metadata parsing",
       "DateAdded": "June 4, 2025",
-      "Id": "9ff8d648-f865-486e-9038-d2bc52d3f4ca",
+      "Id": "dc1afcb8-6b40-4c44-8b84-0dfd8010a309",
       "Visibility": "visible"
     },
     {
@@ -103,7 +111,15 @@
       "Challenge": "Deployment blocked by divergent git histories and unrelated merge conflicts after force push occurred. Archive integration conflicted with remote changes across multiple files",
       "Solution": "Systematically resolved conflicts using git checkout --ours strategy, preserved archive functionality while integrating remote changes, switched between SSH/HTTPS remotes to handle authentication issues",
       "DateAdded": "June 4, 2025",
-      "Id": "3daf8529-05b4-4773-8d91-cc2475c87732",
+      "Id": "6e191f62-3c22-4cca-9fcf-27f8396c7726",
+      "Visibility": "visible"
+    },
+    {
+      "Title": "GitHub Integration with Live Code Display",
+      "Challenge": "Empty space in GitHub section - wanted to showcase actual recent code changes dynamically",
+      "Solution": "Built terminal-style widget using GitHub API to display recent commits with real code snippets and diff highlighting",
+      "DateAdded": "June 2, 2025",
+      "Id": "8c2fbffd-b5b5-46f8-bde6-c8c5dffb857a",
       "Visibility": "visible"
     },
     {
@@ -111,31 +127,23 @@
       "Challenge": "Learning entries lacked context about when each discovery was made, making progress tracking difficult",
       "Solution": "Added timestamps to track changes to learning section with custom CSS styling for consistent visual presentation",
       "DateAdded": "June 2, 2025",
-      "Id": "9dea9659-2de9-467d-aba7-76c7a62c170f",
+      "Id": "89ff051d-85a0-46d9-a2d1-c149f55a236a",
       "Visibility": "hidden"
     },
     {
-      "Title": "Chatbot API Performance & Deployment Workflow",
-      "Challenge": "Chatbot was slow and hallucinating, plus confusion with git merge direction and deployment delays",
-      "Solution": "Added system prompts with factual resume data, implemented keep-warm function, learned staging→main merge flow (not reverse!)",
+      "Title": "Fullstack Staging Environment Fix",
+      "Challenge": "Staging was only deploying static files - API wasn't updating, blocking fullstack development testing",
+      "Solution": "Added ONE line (api_location: \"/api\") to staging workflow - Azure Static Web Apps needs explicit API config",
       "DateAdded": "June 2, 2025",
-      "Id": "891ac3fe-be94-42e5-9061-cbfec2dd8703",
+      "Id": "5bdf5054-765e-4c04-944f-76bca5d92f9a",
       "Visibility": "hidden"
-    },
-    {
-      "Title": "Status Widget CSP & Positioning Debugging Marathon",
-      "Challenge": "Status widget worked perfectly, then broke due to Azure SWA CSP policy changes. Multiple debugging approaches failed, widget flashed and repositioned randomly",
-      "Solution": "Moved from JavaScript-created DOM to inline HTML, fixed z-index conflicts with chatbot, removed duplicate scripts, learned CSP debugging techniques",
-      "DateAdded": "June 2, 2025",
-      "Id": "3b0eb904-8307-4c41-8003-fd337da6dc0a",
-      "Visibility": "visible"
     },
     {
       "Title": "UI Design Iteration with Theme Switching Architecture",
       "Challenge": "Hard to visualize different design aesthetics without building multiple versions - needed efficient way to compare UI themes",
       "Solution": "Built single widget with switchable theme system - one variable change switches between minimal, hacker, and modern aesthetics for rapid design testing",
       "DateAdded": "June 2, 2025",
-      "Id": "820d899c-84eb-47ba-96bc-38c93fc64ede",
+      "Id": "e6628694-4d3a-45dd-921e-f446e4a27874",
       "Visibility": "hidden"
     },
     {
@@ -143,7 +151,7 @@
       "Challenge": "Got stuck in debugging loop with navbar positioning - each fix created new visual problems (black bars, gaps, layering conflicts)",
       "Solution": "Learned to stop, analyze current CSS state first, explain root cause, then make minimal changes with before/after comparisons instead of adding complexity",
       "DateAdded": "June 2, 2025",
-      "Id": "a5a7b242-e1a1-44b2-8bb1-c45b1a6b3bb9",
+      "Id": "32b65af1-b943-491d-aa65-f52321800b8d",
       "Visibility": "hidden"
     },
     {
@@ -151,23 +159,23 @@
       "Challenge": "Needed real-time status monitoring but API deployment kept failing with 404 errors",
       "Solution": "Learned proper Azure Functions zip deployment with full function app structure and CORS configuration",
       "DateAdded": "June 2, 2025",
-      "Id": "c27d95ad-4d95-4de0-b006-ba8d4a2c19ea",
+      "Id": "d4c442cc-1c68-4ad4-9e4d-eb4efb665da4",
       "Visibility": "hidden"
     },
     {
-      "Title": "GitHub Integration with Live Code Display",
-      "Challenge": "Empty space in GitHub section - wanted to showcase actual recent code changes dynamically",
-      "Solution": "Built terminal-style widget using GitHub API to display recent commits with real code snippets and diff highlighting",
+      "Title": "Status Widget CSP & Positioning Debugging Marathon",
+      "Challenge": "Status widget worked perfectly, then broke due to Azure SWA CSP policy changes. Multiple debugging approaches failed, widget flashed and repositioned randomly",
+      "Solution": "Moved from JavaScript-created DOM to inline HTML, fixed z-index conflicts with chatbot, removed duplicate scripts, learned CSP debugging techniques",
       "DateAdded": "June 2, 2025",
-      "Id": "8a8d2ee2-cd05-455d-bb76-d4137a1dac86",
+      "Id": "272c1c61-0254-4204-a871-7dfcb9dc7b43",
       "Visibility": "visible"
     },
     {
-      "Title": "Fullstack Staging Environment Fix",
-      "Challenge": "Staging was only deploying static files - API wasn't updating, blocking fullstack development testing",
-      "Solution": "Added ONE line (api_location: \"/api\") to staging workflow - Azure Static Web Apps needs explicit API config",
+      "Title": "Chatbot API Performance & Deployment Workflow",
+      "Challenge": "Chatbot was slow and hallucinating, plus confusion with git merge direction and deployment delays",
+      "Solution": "Added system prompts with factual resume data, implemented keep-warm function, learned staging→main merge flow (not reverse!)",
       "DateAdded": "June 2, 2025",
-      "Id": "8d418883-d25b-4cd1-8544-e1af2f5cb008",
+      "Id": "6814c4bf-012d-4b66-b568-9810b316e9fd",
       "Visibility": "hidden"
     },
     {
@@ -175,7 +183,7 @@
       "Challenge": "CORS errors + context handling on resume bot",
       "Solution": "Learned how to proxy via Azure Functions and tune prompts to stay on-topic",
       "DateAdded": "July 2024",
-      "Id": "ac8827b1-9184-4246-be4c-1b9320f4c79a",
+      "Id": "7c416d55-4d0e-4dde-8610-c7687fd70af8",
       "Visibility": "hidden"
     },
     {
@@ -183,7 +191,7 @@
       "Challenge": "Enterprise needed to migrate legacy M365 groups from .onmicrosoft.com to production domain without service disruption - Microsoft Support couldn't provide safe migration path",
       "Solution": "Engineered PowerShell-based \"stage and scale\" approach: create parallel groups with temp aliases, migrate members/settings via Graph API, validate Outlook functionality, then swap aliases atomically. Combined certificate auth troubleshooting, Graph SDK permissions management, and Exchange Online cmdlets for zero-downtime migration",
       "DateAdded": "January 2025",
-      "Id": "d2a4378d-b230-46ca-9366-29681a3d60af",
+      "Id": "8dfbdf02-6bad-4c58-81a4-4aae2ebb894a",
       "Visibility": "hidden"
     },
     {
@@ -191,15 +199,7 @@
       "Challenge": "GitHub deprecated password auth - needed to handle SSH key authentication in automated workflows",
       "Solution": "Learned proper SSH key management and why manual pushing is sometimes necessary for security",
       "DateAdded": "January 2025",
-      "Id": "00754c08-82e6-4a92-96ed-bd0ef1669493",
-      "Visibility": "hidden"
-    },
-    {
-      "Title": "Content Security Policy Debugging",
-      "Challenge": "Status widget disappeared due to CSP violations blocking inline event handlers and eval() usage",
-      "Solution": "Systematically replaced all onclick attributes with addEventListener calls, learning proper CSP-compliant JavaScript patterns",
-      "DateAdded": "January 2025",
-      "Id": "3d34ba46-1843-409f-9a77-94406733cf5f",
+      "Id": "8734e273-81f1-470c-ab2f-91f3b7765f52",
       "Visibility": "hidden"
     },
     {
@@ -207,7 +207,15 @@
       "Challenge": "Needed to showcase DevOps monitoring skills and provide real-time status",
       "Solution": "Built custom uptime monitoring with Azure Functions, displaying live status widget with 99.9% uptime tracking",
       "DateAdded": "January 2025",
-      "Id": "d072ffd1-0ad9-4ba9-86e9-f97c897d9373",
+      "Id": "f20eb78a-8fdb-42e1-b2a0-0f236bfc6c13",
+      "Visibility": "hidden"
+    },
+    {
+      "Title": "Content Security Policy Debugging",
+      "Challenge": "Status widget disappeared due to CSP violations blocking inline event handlers and eval() usage",
+      "Solution": "Systematically replaced all onclick attributes with addEventListener calls, learning proper CSP-compliant JavaScript patterns",
+      "DateAdded": "January 2025",
+      "Id": "bbbf2713-3595-45f8-90a8-0c5055974ad7",
       "Visibility": "hidden"
     },
     {
@@ -215,7 +223,7 @@
       "Challenge": "Wanted to showcase code and documentation without cluttering the main site",
       "Solution": "Created interactive README viewer with formatted/raw/preview tabs for users to explore implementation",
       "DateAdded": "December 2024",
-      "Id": "af840a9e-a3b5-4303-a99e-3a6ceeeb55da",
+      "Id": "3ab8c5a8-704d-44de-8e8b-51f28a6151e9",
       "Visibility": "hidden"
     },
     {
@@ -223,7 +231,7 @@
       "Challenge": "Need to demonstrate advanced networking skills beyond basic web hosting",
       "Solution": "Built enterprise VNet with proper subnet segmentation, NSGs, and documented topology using Hava.io for visualization",
       "DateAdded": "December 2024",
-      "Id": "82042e47-cf15-4739-b701-fa893710182e",
+      "Id": "c37e57d5-7f74-434c-a237-c3b1a95251cc",
       "Visibility": "hidden"
     },
     {
@@ -231,7 +239,7 @@
       "Challenge": "Staging deployment claimed success but served stale content - cache busting didn't help",
       "Solution": "Learned about Azure SWA deployment delays and CDN propagation - sometimes takes 15+ minutes",
       "DateAdded": "December 2024",
-      "Id": "236cba29-6713-46f3-b439-555334fbe58e",
+      "Id": "a61ba410-05ff-4f9f-8b2b-1439c413315f",
       "Visibility": "hidden"
     },
     {
@@ -239,7 +247,7 @@
       "Challenge": "Zip deploys failed silently at first",
       "Solution": "Learned how to use config-zip with az functionapp deployment for clarity",
       "DateAdded": "August 2024",
-      "Id": "5c55ece5-e422-4397-9032-4d664629f83c",
+      "Id": "31dcddc2-f5cc-4933-ab1d-8f985ff7e9af",
       "Visibility": "hidden"
     },
     {
@@ -247,13 +255,13 @@
       "Challenge": "Cached files (like chatbot.js) wouldn't update even after upload",
       "Solution": "Learned to use purge commands and max-age cache headers properly",
       "DateAdded": "August 2024",
-      "Id": "3dad65ca-53dc-4d2b-84b7-f4962c6cd0ad",
+      "Id": "a1081ce5-7c71-4f9a-a051-656e6d191354",
       "Visibility": "hidden"
     }
   ],
   "Metadata": {
-    "SyncMethod": "PowerShell Azure Integration",
+    "Source": "slater.cloud learning section",
     "Version": "1.0",
-    "Source": "slater.cloud learning section"
+    "SyncMethod": "PowerShell Azure Integration"
   }
 }
