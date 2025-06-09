@@ -98,19 +98,23 @@
 ## Website Learning Section Updates - CRITICAL SYNC REQUIREMENT
 - The "What I Learned Building This" section is managed via JSON: `site/data/learning-timeline.json`
 - **7-ITEM DISPLAY RULE**: Only the first 7 items in the "visible" array are shown on the website
-  - When adding new items that would exceed 7, move older items to the "hidden" array
-  - The JavaScript enforces this limit, but keep the JSON organized for clarity
-- **ADDING NEW ITEMS**: 
-  1. Add to the beginning of the "visible" array in JSON
-  2. If this makes more than 7 visible items, move the oldest ones to "hidden"
-  3. Each item MUST have these fields:
+- **CRITICAL**: NEVER add learning items directly to HTML - they are dynamically loaded from JSON
+- **WORKFLOW FOR ADDING NEW ITEMS**: 
+  1. Open `site/data/learning-timeline.json`
+  2. Add new item at the beginning of the "visible" array
+  3. Count items in "visible" - if more than 7, move the last items to beginning of "hidden" array
+  4. Verify exactly 7 items remain in "visible" using: `jq '.visible | length' site/data/learning-timeline.json`
+  5. Each item MUST have these fields:
      - title: Brief descriptive title (5-10 words)
      - challenge: The problem encountered (1-2 sentences)
      - solution: How it was resolved (1-2 sentences)  
      - date: Format as "Month D, YYYY" (e.g., "June 9, 2025")
+- **DEBUGGING**: If more than 7 items show on screen:
+  - Check for hardcoded items in HTML (there should be none)
+  - Verify JSON has exactly 7 items in "visible" array
+  - The display containers should ONLY be: `<div id="visible-learning-items"></div>` and `<div id="older-learning-items"></div>`
 - **IMPORTANT**: The Azure pipeline script reads from the JSON file
 - After updating, remind user to run the Azure sync script
-- HTML is dynamically generated from JSON - do NOT manually edit learning items in HTML
 
 ## Learning Timeline Azure Sync
 - The learning timeline in `site/index.html` is automatically synced to Azure Blob Storage
