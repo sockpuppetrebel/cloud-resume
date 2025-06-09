@@ -1,6 +1,12 @@
 {
   "visible": [
     {
+      "title": "Header Styling Consistency Fix",
+      "challenge": "The \"Live Pipeline Demo\" section header wasn't matching the styling of other major sections like \"Professional Experience\" and \"Technical Skills\" - it had the wrong size, weight, and spacing.",
+      "solution": "Fixed by changing from <h4> to <h2 class=\"section-title\"> to match all other section headers. This ensures visual consistency across the entire site by applying the same CSS class.",
+      "date": "June 9, 2025"
+    },
+    {
       "title": "Frontend Performance Optimization: Dynamic Content Loading",
       "challenge": "Index.html file was growing indefinitely with hardcoded learning items, causing slower page loads and harder maintenance as content accumulated over time",
       "solution": "Extracted all learning items to external JSON file with dynamic JavaScript loading. Maintains 7-item pagination while keeping HTML file lightweight and fast",
