@@ -90,44 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
   headerTitle.style.fontWeight = '600';
   headerTitle.style.fontSize = '14px';
 
-  const controls = document.createElement('div');
-  controls.style.display = 'flex';
-  controls.style.gap = '4px';
-
-  const minimizeBtn = document.createElement('button');
-  minimizeBtn.id = 'statusMinimizeBtn';
-  minimizeBtn.innerHTML = '−';
-  minimizeBtn.style.background = 'rgba(0, 255, 65, 0.2)';
-  minimizeBtn.style.border = 'none';
-  minimizeBtn.style.color = theme.color;
-  minimizeBtn.style.width = '20px';
-  minimizeBtn.style.height = '20px';
-  minimizeBtn.style.borderRadius = '50%';
-  minimizeBtn.style.cursor = 'pointer';
-  minimizeBtn.style.fontSize = '14px';
-  minimizeBtn.style.fontWeight = 'bold';
-  minimizeBtn.style.transition = 'all 0.2s ease';
-
-  const closeBtn = document.createElement('button');
-  closeBtn.id = 'statusCloseBtn';
-  closeBtn.innerHTML = '×';
-  closeBtn.style.background = 'rgba(255, 0, 0, 0.2)';
-  closeBtn.style.border = 'none';
-  closeBtn.style.color = theme.color;
-  closeBtn.style.width = '20px';
-  closeBtn.style.height = '20px';
-  closeBtn.style.borderRadius = '50%';
-  closeBtn.style.cursor = 'pointer';
-  closeBtn.style.fontSize = '16px';
-  closeBtn.style.fontWeight = 'bold';
-  closeBtn.style.transition = 'all 0.2s ease';
-
-  controls.appendChild(minimizeBtn);
-  controls.appendChild(closeBtn);
-
   header.appendChild(dragHandle);
   header.appendChild(headerTitle);
-  header.appendChild(controls);
 
   // Create body container
   const body = document.createElement('div');
@@ -176,9 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Enhanced state management
   const statusState = {
-    position: JSON.parse(localStorage.getItem('statusPosition') || 'null'),
-    isMinimized: localStorage.getItem('statusMinimized') === 'true',
-    isClosed: localStorage.getItem('statusClosed') === 'true'
+    position: JSON.parse(localStorage.getItem('statusPosition') || 'null')
   };
 
   // Function to validate and apply position
@@ -217,100 +179,14 @@ document.addEventListener('DOMContentLoaded', function() {
     widget.style.transition = 'all 0.3s ease';
   }, 100);
 
-  // Load saved states on startup - but ensure widget defaults to OPEN
-  if (statusState.isClosed === true) {  // Explicit check for true
-    widget.style.display = 'none';
-    statusReopenBtn.style.display = 'flex';
-  } else {
-    // Default to open state
-    widget.style.display = 'block';
+  // Default to open state
+  widget.style.display = 'block';
+  if (statusReopenBtn) {
     statusReopenBtn.style.display = 'none';
-    
-    if (statusState.isMinimized) {
-      body.style.height = '0';
-      body.style.padding = '0 16px';
-      minimizeBtn.innerHTML = '+';
-    }
   }
 
-  // Minimize/Maximize functionality
-  minimizeBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    const isCurrentlyMinimized = body.style.height === '0px';
-    
-    if (isCurrentlyMinimized) {
-      body.style.height = 'auto';
-      body.style.padding = '16px';
-      minimizeBtn.innerHTML = '−';
-      statusState.isMinimized = false;
-      localStorage.setItem('statusMinimized', 'false');
-    } else {
-      body.style.height = '0';
-      body.style.padding = '0 16px';
-      minimizeBtn.innerHTML = '+';
-      statusState.isMinimized = true;
-      localStorage.setItem('statusMinimized', 'true');
-    }
-  });
 
-  // Close functionality
-  closeBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    
-    // Add subtle flash effect for confirmation
-    widget.style.border = '2px solid rgba(255, 0, 0, 0.6)';
-    setTimeout(() => {
-      widget.style.border = theme.border;
-    }, 200);
-    
-    // Close with smooth animation
-    setTimeout(() => {
-      widget.style.opacity = '0';
-      widget.style.transform = 'scale(0.8) translateY(20px)';
-      setTimeout(() => {
-        widget.style.display = 'none';
-        statusReopenBtn.style.display = 'flex';
-        statusState.isClosed = true;
-        localStorage.setItem('statusClosed', 'true');
-      }, 400);
-    }, 200);
-  });
-
-  // Reopen functionality
-  statusReopenBtn.addEventListener('click', function() {
-    statusReopenBtn.style.display = 'none';
-    widget.style.display = 'block';
-    
-    // Force reset all widget styles
-    setTimeout(() => {
-      widget.style.opacity = '1';
-      widget.style.transform = 'scale(1) translateY(0)';
-      widget.style.transition = 'all 0.3s ease';
-      
-      // Always restore to full open state
-      body.style.height = 'auto';
-      body.style.padding = '16px';
-      body.style.overflow = 'visible';
-      body.style.transition = 'all 0.3s ease';
-      
-      // Restore minimize state after ensuring body is visible
-      if (statusState.isMinimized) {
-        setTimeout(() => {
-          body.style.height = '0';
-          body.style.padding = '0 16px';
-          body.style.overflow = 'hidden';
-          minimizeBtn.innerHTML = '+';
-        }, 100);
-      } else {
-        minimizeBtn.innerHTML = '−';
-      }
-    }, 10);
-    
-    statusState.isClosed = false;
-    localStorage.setItem('statusClosed', 'false');
-  });
-
-  // Hover effects for drag handle and minimize button
+  // Hover effects for drag handle
   dragHandle.addEventListener('mouseenter', function() {
     this.style.opacity = '1';
     this.style.background = 'rgba(0, 255, 65, 0.1)';
@@ -319,26 +195,6 @@ document.addEventListener('DOMContentLoaded', function() {
   dragHandle.addEventListener('mouseleave', function() {
     this.style.opacity = '0.7';
     this.style.background = 'transparent';
-  });
-
-  minimizeBtn.addEventListener('mouseenter', function() {
-    this.style.background = 'rgba(0, 255, 65, 0.3)';
-    this.style.transform = 'scale(1.1)';
-  });
-
-  minimizeBtn.addEventListener('mouseleave', function() {
-    this.style.background = 'rgba(0, 255, 65, 0.2)';
-    this.style.transform = 'scale(1)';
-  });
-
-  closeBtn.addEventListener('mouseenter', function() {
-    this.style.background = 'rgba(255, 0, 0, 0.4)';
-    this.style.transform = 'scale(1.1)';
-  });
-
-  closeBtn.addEventListener('mouseleave', function() {
-    this.style.background = 'rgba(255, 0, 0, 0.2)';
-    this.style.transform = 'scale(1)';
   });
 
   // Collision detection function
@@ -367,11 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let dragOffset = { x: 0, y: 0 };
 
     header.addEventListener('mousedown', function(e) {
-      // Only start drag if not clicking on control buttons
-      if (e.target === minimizeBtn || e.target === closeBtn) {
-        return;
-      }
-      
       isDragging = true;
       const rect = widget.getBoundingClientRect();
       dragOffset.x = e.clientX - rect.left;
