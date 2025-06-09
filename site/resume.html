@@ -33,7 +33,7 @@
 
     body {
       font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, var(--primary-dark) 0%, #0f0f0f 100%);
+      background: linear-gradient(135deg, #0a0f1c 0%, #0c1017 50%, #0a0a0a 100%);
       color: var(--text-primary);
       line-height: 1.7;
       padding: 3rem 1.5rem;
@@ -44,14 +44,28 @@
     .resume-container {
       max-width: 950px;
       margin: 0 auto;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, #141a23 0%, #1a1f2e 50%, #131b2e 100%);
+      border: 2px solid var(--card-border);
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 
-        var(--shadow-card),
-        var(--glow-soft);
-      backdrop-filter: blur(10px);
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(74, 222, 128, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      position: relative;
+    }
+
+    .resume-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(74, 222, 128, 0.05) 50%, transparent 100%);
+      pointer-events: none;
+      border-radius: 14px;
     }
 
     .resume-header {
@@ -353,100 +367,284 @@
       }
     }
 
+    /* Print/PDF optimized styles */
     @media print {
+      @page {
+        size: A4;
+        margin: 0.75in 0.5in;
+      }
+      
+      * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
       body {
-        background: white;
-        color: black;
-        padding: 0;
+        background: var(--primary-dark) !important;
+        color: var(--text-primary) !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 11pt !important;
+        line-height: 1.4 !important;
       }
       
       .resume-container {
-        box-shadow: none;
-        background: white;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: var(--secondary-dark) !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
       }
       
-      .section, .sidebar {
-        background: white;
-        border: 1px solid #ddd;
-      }
-      
-      .download-section {
-        display: none;
-      }
-      
-      .section h2, .skill-category h3, .experience-title {
-        color: #2c3e50;
+      .resume-container::before {
+        display: none !important;
       }
       
       .resume-header {
-        background: white;
-        border-bottom: 2px solid #2c3e50;
+        background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--primary-dark) 100%) !important;
+        padding: 1.5rem 2rem !important;
+        border-bottom: 2px solid var(--accent-mint) !important;
+        page-break-after: avoid !important;
       }
       
       .resume-header h1 {
-        color: #2c3e50;
-        text-shadow: none;
+        font-size: 2.5rem !important;
+        margin-bottom: 0.5rem !important;
+        text-shadow: none !important;
+      }
+      
+      .resume-header h1::after {
+        display: none !important;
+      }
+      
+      .resume-header .subtitle {
+        font-size: 1.1rem !important;
+        margin-bottom: 1rem !important;
+      }
+      
+      .contact-info {
+        gap: 1rem !important;
+      }
+      
+      .contact-info a {
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.8rem !important;
+      }
+      
+      .resume-body {
+        padding: 1.5rem !important;
+        gap: 1.5rem !important;
+        grid-template-columns: 1fr 2fr !important;
+      }
+      
+      .sidebar {
+        padding: 1.5rem !important;
+        background: var(--card-bg) !important;
+        border: 1px solid var(--card-border) !important;
+      }
+      
+      .section {
+        padding: 1.5rem !important;
+        margin-bottom: 1rem !important;
+        background: var(--card-bg) !important;
+        border: 1px solid var(--card-border) !important;
+        border-radius: 8px !important;
+        page-break-inside: avoid !important;
+      }
+      
+      .section h2 {
+        font-size: 1.3rem !important;
+        margin-bottom: 1rem !important;
+        color: var(--text-primary) !important;
+        padding-bottom: 0.5rem !important;
+      }
+      
+      .skill-category {
+        margin-bottom: 1rem !important;
+      }
+      
+      .skill-category h3 {
+        font-size: 0.8rem !important;
+        margin-bottom: 0.5rem !important;
+        color: var(--accent-mint) !important;
+      }
+      
+      .skill-tags {
+        gap: 0.4rem !important;
+      }
+      
+      .skill-tag {
+        padding: 0.3rem 0.6rem !important;
+        font-size: 0.7rem !important;
+        background: rgba(74, 222, 128, 0.1) !important;
+        color: var(--text-accent) !important;
+        border: 1px solid var(--border-subtle) !important;
+      }
+      
+      .experience-item {
+        margin-bottom: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+        page-break-inside: avoid !important;
+      }
+      
+      .experience-header {
+        margin-bottom: 0.75rem !important;
+      }
+      
+      .experience-title {
+        font-size: 1rem !important;
+        color: var(--accent-mint) !important;
+      }
+      
+      .experience-date {
+        font-size: 0.8rem !important;
+        color: var(--text-secondary) !important;
+      }
+      
+      .experience-company {
+        margin-bottom: 1rem !important;
+        color: var(--text-secondary) !important;
+      }
+      
+      ul li {
+        margin-bottom: 0.4rem !important;
+        font-size: 0.9rem !important;
+        line-height: 1.3 !important;
+      }
+      
+      ul li::before {
+        color: var(--accent-mint) !important;
+      }
+      
+      .download-section {
+        display: none !important;
+      }
+      
+      /* Page break controls */
+      .main-content > .section:first-child {
+        page-break-before: auto !important;
+      }
+      
+      /* Footer for page numbering */
+      @page {
+        @bottom-center {
+          content: "Page " counter(page) " of " counter(pages);
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 9pt;
+          color: var(--text-secondary);
+        }
       }
     }
-  </style>
-  
-  <!-- Print styles for PDF generation -->
-  <style media="print">
-    body {
-      background: white;
-      color: black;
-      padding: 0;
+
+    /* View Controls */
+    .view-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
     }
-    
-    .resume-container {
-      box-shadow: none;
-      max-width: 100%;
-      background: white;
+
+    .view-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(74, 222, 128, 0.05);
+      color: var(--accent-mint);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
-    
-    .resume-header {
-      background: white;
-      color: black;
-      border-bottom: 2px solid #333;
-      padding: 2rem;
+
+    .view-toggle-btn:hover {
+      background: rgba(74, 222, 128, 0.1);
+      border-color: var(--accent-mint);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(74, 222, 128, 0.2);
     }
-    
-    .resume-header h1 {
-      color: black;
+
+    .view-toggle-btn svg {
+      transition: transform 0.3s ease;
     }
-    
-    .section {
-      background: white;
-      page-break-inside: avoid;
+
+    .view-toggle-btn:hover svg {
+      transform: scale(1.1);
     }
-    
-    .section-title {
-      color: black;
-      border-bottom: 2px solid #333;
+
+    /* Compact View Styles */
+    body.compact-view .resume-header {
+      padding: 2rem 2rem !important;
     }
-    
-    .job-header h3, .project-name {
-      color: black;
+
+    body.compact-view .resume-header h1 {
+      font-size: 3rem !important;
+      margin-bottom: 0.75rem !important;
     }
-    
-    .tech-tag {
-      background: #f0f0f0;
-      color: black;
-      border: 1px solid #333;
+
+    body.compact-view .resume-header .subtitle {
+      font-size: 1.1rem !important;
+      margin-bottom: 1rem !important;
     }
-    
-    .download-section {
-      display: none;
+
+    body.compact-view .resume-body {
+      padding: 2rem !important;
+      gap: 1.5rem !important;
     }
-    
-    a {
-      color: black;
-      text-decoration: underline;
+
+    body.compact-view .section {
+      padding: 1.5rem !important;
+      margin-bottom: 1rem !important;
     }
-    
-    /* Ensure good page breaks */
-    .experience-item, .project-item {
-      page-break-inside: avoid;
+
+    body.compact-view .section h2 {
+      font-size: 1.3rem !important;
+      margin-bottom: 1rem !important;
+    }
+
+    body.compact-view .skill-category {
+      margin-bottom: 1rem !important;
+    }
+
+    body.compact-view .skill-tag {
+      padding: 0.3rem 0.6rem !important;
+      font-size: 0.75rem !important;
+    }
+
+    body.compact-view .experience-item {
+      margin-bottom: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+
+    body.compact-view ul li {
+      margin-bottom: 0.5rem !important;
+      font-size: 0.9rem !important;
+      line-height: 1.4 !important;
+    }
+
+    body.compact-view .contact-info a {
+      padding: 0.5rem 1rem !important;
+      font-size: 0.85rem !important;
+    }
+
+    @media (max-width: 768px) {
+      .view-controls {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      .view-toggle-btn {
+        font-size: 0.8rem;
+        padding: 0.6rem 1.2rem;
+      }
     }
   </style>
 </head>
@@ -597,18 +795,54 @@
     </div>
 
     <div class="download-section">
-      <button class="download-btn" onclick="window.print()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        Download PDF
-      </button>
+      <div class="view-controls">
+        <button class="view-toggle-btn" onclick="toggleCompactView()" id="view-toggle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+          </svg>
+          <span id="toggle-text">Compact Export View</span>
+        </button>
+        <button class="download-btn" onclick="window.print()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download PDF
+        </button>
+      </div>
       <p style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">
-        Uses your browser's built-in print-to-PDF functionality
+        Toggle compact view before downloading for optimized PDF layout
       </p>
     </div>
   </div>
+
+  <script>
+    function toggleCompactView() {
+      const body = document.body;
+      const toggleText = document.getElementById('toggle-text');
+      const toggleBtn = document.getElementById('view-toggle');
+      
+      body.classList.toggle('compact-view');
+      
+      if (body.classList.contains('compact-view')) {
+        toggleText.textContent = 'Standard View';
+        toggleBtn.querySelector('svg').innerHTML = `
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <path d="M8 12h8"></path>
+          <path d="M12 8v8"></path>
+        `;
+      } else {
+        toggleText.textContent = 'Compact Export View';
+        toggleBtn.querySelector('svg').innerHTML = `
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+        `;
+      }
+    }
+  </script>
 </body>
 </html>
