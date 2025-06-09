@@ -832,7 +832,10 @@
       const container = document.getElementById(containerId);
       if (!container || !items) return;
 
-      container.innerHTML = items.map(item => `
+      // Limit visible items to 7
+      const itemsToRender = containerId === 'visible-learning-items' ? items.slice(0, 7) : items;
+
+      container.innerHTML = itemsToRender.map(item => `
         <div class="learning-item" data-expanded="false">
           <div class="learning-dot"></div>
           <div class="learning-card">

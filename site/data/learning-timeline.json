@@ -1,6 +1,12 @@
 {
   "visible": [
     {
+      "title": "7-Item Display Rule Enforcement",
+      "challenge": "Learning timeline was showing 11 items instead of the intended 7, breaking the visual design and making the section too long.",
+      "solution": "Added JavaScript safeguard to limit display to 7 items and reorganized JSON to properly separate visible and hidden items. Updated documentation to clarify the 7-item rule.",
+      "date": "June 9, 2025"
+    },
+    {
       "title": "Learning Timeline Content Cutoff Fix",
       "challenge": "Learning items with longer content were being cut off before the timestamp could display due to CSS max-height limitation of 200px on expanded items.",
       "solution": "Increased max-height from 200px to 500px (600px on mobile) to accommodate longer learning entries and ensure timestamps are always visible.",
@@ -35,7 +41,9 @@
       "challenge": "Deployment blocked by divergent git histories and unrelated merge conflicts after force push occurred. Archive integration conflicted with remote changes across multiple files",
       "solution": "Systematically resolved conflicts using git checkout --ours strategy, preserved archive functionality while integrating remote changes, switched between SSH/HTTPS remotes to handle authentication issues",
       "date": "June 4, 2025"
-    },
+    }
+  ],
+  "hidden": [
     {
       "title": "Live API Integration with Error Handling & CORS",
       "challenge": "Portfolio needed to display real-time data from Azure Blob Storage API, handle loading states, network failures, and provide fallback options for visitors",
@@ -59,9 +67,7 @@
       "challenge": "Empty space in GitHub section - wanted to showcase actual recent code changes dynamically",
       "solution": "Built terminal-style widget using GitHub API to display recent commits with real code snippets and diff highlighting",
       "date": "June 2, 2025"
-    }
-  ],
-  "hidden": [
+    },
     {
       "title": "Learning Timeline Timestamp Enhancement",
       "challenge": "Learning entries lacked context about when each discovery was made, making progress tracking difficult",
@@ -71,7 +77,7 @@
     {
       "title": "Chatbot API Performance & Deployment Workflow",
       "challenge": "Chatbot was slow and hallucinating, plus confusion with git merge direction and deployment delays",
-      "solution": "Added system prompts with factual resume data, implemented keep-warm function, learned staging→main merge flow (not reverse!)",
+      "solution": "Added system prompts with factual resume data, implemented keep-warm function, learned staging\u2192main merge flow (not reverse!)",
       "date": "June 2, 2025"
     },
     {
@@ -177,7 +183,7 @@
       "date": "September 2024"
     },
     {
-      "title": "Blob → Static Site Migration",
+      "title": "Blob \u2192 Static Site Migration",
       "challenge": "Azure Blob Storage didn't support proper routing or custom domains cleanly",
       "solution": "Learned the benefits of Static Web Apps: built-in routing, custom domains, staging",
       "date": "September 2024"
