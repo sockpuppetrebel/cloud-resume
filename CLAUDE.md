@@ -71,14 +71,17 @@
 ## Debugging and Testing Workflow - CRITICAL
 - **ALWAYS start debugging and fixes on staging branch first**
 - **NEVER commit experimental or debugging code directly to main branch**
-- Proper workflow for fixes and debugging:
+- **NEVER COMMIT LARGE CHANGES TO MAIN** - this includes new features, theme changes, major refactors
+- **ALL CHANGES MUST GO THROUGH STAGING FIRST** - no exceptions, even for "small" changes
+- Proper workflow for ALL changes:
   1. Switch to staging branch: `git checkout staging`
-  2. Make debugging changes and test
+  2. Make changes and test
   3. Commit and push to staging: `git push origin staging`
   4. Test on staging environment thoroughly
-  5. Only after confirming fix works, merge to main: `git checkout main && git merge staging && git push origin main`
-- This prevents breaking production with untested fixes
-- Always use staging as the testing ground for debugging iterations
+  5. Only after confirming everything works, merge to main: `git checkout main && git merge staging && git push origin main`
+- This prevents breaking production with untested changes
+- Always use staging as the testing ground for all iterations
+- **REMINDER**: Even resume changes, theme updates, or "quick fixes" must go through staging
 
 ## Git Push Rules - CRITICAL REMINDERS
 - **NEVER** attempt to push to GitHub directly due to SSH authentication requirements
