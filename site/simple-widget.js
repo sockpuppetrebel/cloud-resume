@@ -90,8 +90,29 @@ document.addEventListener('DOMContentLoaded', function() {
   headerTitle.style.fontWeight = '600';
   headerTitle.style.fontSize = '14px';
 
+  const controls = document.createElement('div');
+  controls.style.display = 'flex';
+  controls.style.gap = '4px';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.id = 'statusCloseBtn';
+  closeBtn.innerHTML = '×';
+  closeBtn.style.background = 'rgba(255, 0, 0, 0.2)';
+  closeBtn.style.border = 'none';
+  closeBtn.style.color = theme.color;
+  closeBtn.style.width = '20px';
+  closeBtn.style.height = '20px';
+  closeBtn.style.borderRadius = '50%';
+  closeBtn.style.cursor = 'pointer';
+  closeBtn.style.fontSize = '16px';
+  closeBtn.style.fontWeight = 'bold';
+  closeBtn.style.transition = 'all 0.2s ease';
+
+  controls.appendChild(closeBtn);
+
   header.appendChild(dragHandle);
   header.appendChild(headerTitle);
+  header.appendChild(controls);
 
   // Create body container
   const body = document.createElement('div');
@@ -140,7 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Enhanced state management
   const statusState = {
-    position: JSON.parse(localStorage.getItem('statusPosition') || 'null')
+    position: JSON.parse(localStorage.getItem('statusPosition') || 'null'),
+    isClosed: localStorage.getItem('statusClosed') === 'true'
   };
 
   // Function to validate and apply position
@@ -179,12 +201,62 @@ document.addEventListener('DOMContentLoaded', function() {
     widget.style.transition = 'all 0.3s ease';
   }, 100);
 
-  // Default to open state
-  widget.style.display = 'block';
-  if (statusReopenBtn) {
-    statusReopenBtn.style.display = 'none';
+  // Load saved states on startup
+  if (statusState.isClosed === true) {  // Explicit check for true
+    widget.style.display = 'none';
+    if (statusReopenBtn) {
+      statusReopenBtn.style.display = 'flex';
+    }
+  } else {
+    // Default to open state
+    widget.style.display = 'block';
+    if (statusReopenBtn) {
+      statusReopenBtn.style.display = 'none';
+    }
   }
 
+  // Close functionality
+  closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    
+    // Add subtle flash effect for confirmation
+    widget.style.border = '2px solid rgba(255, 0, 0, 0.6)';
+    setTimeout(() => {
+      widget.style.border = theme.border;
+    }, 200);
+    
+    // Close with smooth animation
+    setTimeout(() => {
+      widget.style.opacity = '0';
+      widget.style.transform = 'scale(0.8) translateY(20px)';
+      setTimeout(() => {
+        widget.style.display = 'none';
+        if (statusReopenBtn) {
+          statusReopenBtn.style.display = 'flex';
+        }
+        statusState.isClosed = true;
+        localStorage.setItem('statusClosed', 'true');
+      }, 400);
+    }, 200);
+  });
+
+  // Reopen functionality
+  if (statusReopenBtn) {
+    statusReopenBtn.addEventListener('click', function() {
+      statusReopenBtn.style.display = 'none';
+      widget.style.display = 'block';
+      
+      // Force reset all widget styles
+      setTimeout(() => {
+        widget.style.opacity = '1';
+        widget.style.transform = 'scale(1) translateY(0)';
+        widget.style.transition = 'all 0.3s ease';
+      }, 10);
+      
+      statusState.isClosed = false;
+      localStorage.setItem('statusClosed', 'false');
+    });
+  }
 
   // Hover effects for drag handle
   dragHandle.addEventListener('mouseenter', function() {
@@ -195,6 +267,16 @@ document.addEventListener('DOMContentLoaded', function() {
   dragHandle.addEventListener('mouseleave', function() {
     this.style.opacity = '0.7';
     this.style.background = 'transparent';
+  });
+
+  closeBtn.addEventListener('mouseenter', function() {
+    this.style.background = 'rgba(255, 0, 0, 0.4)';
+    this.style.transform = 'scale(1.1)';
+  });
+
+  closeBtn.addEventListener('mouseleave', function() {
+    this.style.background = 'rgba(255, 0, 0, 0.2)';
+    this.style.transform = 'scale(1)';
   });
 
   // Collision detection function
@@ -223,6 +305,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let dragOffset = { x: 0, y: 0 };
 
     header.addEventListener('mousedown', function(e) {
+      // Only start drag if not clicking on close button
+      if (e.target === closeBtn) {
+        return;
+      }
+      
       isDragging = true;
       const rect = widget.getBoundingClientRect();
       dragOffset.x = e.clientX - rect.left;
