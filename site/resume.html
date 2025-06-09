@@ -6,7 +6,7 @@
   <title>Jason Slater - Resume</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-dark: #0a0a0a;
@@ -75,18 +75,40 @@
     }
 
     .resume-header h1 {
-      font-size: 3rem;
-      font-weight: 600;
+      font-size: 4rem;
+      font-weight: 800;
+      font-family: 'DM Sans', 'JetBrains Mono', monospace;
       margin-bottom: 1rem;
       color: var(--text-primary);
       letter-spacing: -0.02em;
+      text-shadow: 
+        0 0 30px rgba(74, 222, 128, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    
+    .resume-header h1::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(74, 222, 128, 0.1) 50%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .resume-header h1:hover::after {
+      opacity: 1;
     }
 
     .resume-header .subtitle {
       color: var(--accent-mint);
       font-size: 1.3rem;
       font-weight: 400;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       opacity: 0.9;
     }
 
@@ -451,7 +473,7 @@
               <span class="skill-tag">AWS (SA-C02)</span>
               <span class="skill-tag">Azure</span>
               <span class="skill-tag">Static Web Apps</span>
-              <span class="skill-tag">VNet Architecture</span>
+              <span class="skill-tag">Azure Networking (Lab)</span>
             </div>
           </div>
 
@@ -478,6 +500,7 @@
             <h3>AI Integration</h3>
             <div class="skill-tags">
               <span class="skill-tag">OpenAI GPT</span>
+              <span class="skill-tag">Claude Code</span>
               <span class="skill-tag">Azure Functions</span>
               <span class="skill-tag">Chatbot Dev</span>
             </div>
@@ -574,17 +597,16 @@
     </div>
 
     <div class="download-section">
-      <a href="jason-slater-resume.pdf" class="download-btn" download="Jason_Slater_Resume.pdf" 
-         onclick="if(!this.href.includes('.pdf')) { window.print(); return false; }">
+      <button class="download-btn" onclick="window.print()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
         Download PDF
-      </a>
+      </button>
       <p style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">
-        Or press Ctrl+P (Cmd+P on Mac) to print/save as PDF
+        Uses your browser's built-in print-to-PDF functionality
       </p>
     </div>
   </div>
