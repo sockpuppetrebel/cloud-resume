@@ -1,6 +1,12 @@
 {
   "visible": [
     {
+      "title": "Learning Timeline Content Cutoff Fix",
+      "challenge": "Learning items with longer content were being cut off before the timestamp could display due to CSS max-height limitation of 200px on expanded items.",
+      "solution": "Increased max-height from 200px to 500px (600px on mobile) to accommodate longer learning entries and ensure timestamps are always visible.",
+      "date": "June 9, 2025"
+    },
+    {
       "title": "Header Styling Consistency Fix",
       "challenge": "The \"Live Pipeline Demo\" section header wasn't matching the styling of other major sections like \"Professional Experience\" and \"Technical Skills\" - it had the wrong size, weight, and spacing.",
       "solution": "Fixed by changing from h4 tag to h2 tag with section-title class to match all other section headers. This ensures visual consistency across the entire site by applying the same CSS class.",
