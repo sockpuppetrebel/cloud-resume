@@ -50,3 +50,6 @@ temp/
 secrets.json
 credentials.json
 notes
+
+# Development configuration - keep private
+CLAUDE.md
