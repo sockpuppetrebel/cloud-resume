@@ -1,6 +1,12 @@
 {
   "visible": [
     {
+      "title": "Enterprise-Grade Azure Security Monitoring with Real-Time Alerting",
+      "challenge": "Infrastructure lacked comprehensive security monitoring and incident response capabilities, creating blind spots for potential threats and making it difficult to demonstrate professional-level cloud security skills",
+      "solution": "Implemented full security monitoring stack with Log Analytics workspace, multi-channel alerting (email + SMS), KQL security queries, and diagnostic logging across all Azure resources. Created enterprise-grade incident response documentation and real-time threat detection covering privilege escalation, resource deletion, and security events",
+      "date": "June 14, 2025"
+    },
+    {
       "title": "7-Item Display Rule Enforcement",
       "challenge": "Learning timeline was showing 11 items instead of the intended 7, breaking the visual design and making the section too long.",
       "solution": "Added JavaScript safeguard to limit display to 7 items and reorganized JSON to properly separate visible and hidden items. Updated documentation to clarify the 7-item rule.",
@@ -35,15 +41,15 @@
       "challenge": "Portfolio had duplicate content between visual learning timeline and development journal archive, needed to demonstrate system integration rather than just isolated features",
       "solution": "Designed data flow where single source (HTML) feeds multiple consumers (visual timeline + structured JSON API). Shows progression from static content to live API, demonstrating full-stack architectural thinking",
       "date": "June 5, 2025"
-    },
+    }
+  ],
+  "hidden": [
     {
       "title": "Complex Git Merge Conflict Resolution with Archive Integration",
       "challenge": "Deployment blocked by divergent git histories and unrelated merge conflicts after force push occurred. Archive integration conflicted with remote changes across multiple files",
       "solution": "Systematically resolved conflicts using git checkout --ours strategy, preserved archive functionality while integrating remote changes, switched between SSH/HTTPS remotes to handle authentication issues",
       "date": "June 4, 2025"
-    }
-  ],
-  "hidden": [
+    },
     {
       "title": "Live API Integration with Error Handling & CORS",
       "challenge": "Portfolio needed to display real-time data from Azure Blob Storage API, handle loading states, network failures, and provide fallback options for visitors",
