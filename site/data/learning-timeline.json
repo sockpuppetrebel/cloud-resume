@@ -1,6 +1,30 @@
 {
   "visible": [
     {
+      "title": "Azure Security Audit & Infrastructure Hardening",
+      "challenge": "Multiple critical security vulnerabilities discovered across cloud-resume infrastructure: Function App allowing HTTP traffic and 'Any' IP access, exposed storage keys, and SCM endpoints open to internet.",
+      "solution": "Implemented comprehensive security controls: HTTPS-only enforcement, IP restrictions to admin + Azure services, new secure storage account with deny-by-default network access, and secured deployment endpoints.",
+      "date": "June 18, 2025"
+    },
+    {
+      "title": "Cross-Project Security Pattern Development",
+      "challenge": "Needed consistent security approach across IT-Bot VM and cloud-resume PaaS services with different Azure service types requiring different security models.",
+      "solution": "Developed unified security patterns: network segmentation (NSGs + IP restrictions), transport security (HTTPS/TLS enforcement), storage security (deny-by-default), and access control (admin IP + service-to-service).",
+      "date": "June 18, 2025"
+    },
+    {
+      "title": "Azure Cost Optimization & Resource Cleanup",
+      "challenge": "Azure costs projected at $40/month due to oversized VM (Standard_B2ms), unused Function Apps with zero executions, duplicate Cosmos DBs, and orphaned storage accounts.",
+      "solution": "Achieved 80% cost reduction to $6-11/month through systematic resource audit: VM rightsizing to Standard_B1s, deletion of unused services, storage cleanup, and manual start/stop strategy implementation.",
+      "date": "June 18, 2025"
+    },
+    {
+      "title": "Enterprise Identity Integration & Automation",
+      "challenge": "Building IT automation bot requiring password reset capabilities across both Okta and Azure AD platforms with different complexity requirements and permission models.",
+      "solution": "Implemented domain-based routing logic, created compliant password generation algorithm, configured comprehensive Graph API permissions, and built systematic testing approach for enterprise identity platforms.",
+      "date": "June 18, 2025"
+    },
+    {
       "title": "7-Item Display Rule Enforcement",
       "challenge": "Learning timeline was showing 11 items instead of the intended 7, breaking the visual design and making the section too long.",
       "solution": "Added JavaScript safeguard to limit display to 7 items and reorganized JSON to properly separate visible and hidden items. Updated documentation to clarify the 7-item rule.",
